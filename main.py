@@ -6,6 +6,6 @@ args = parser.GetArgs()
 
 spoiler = SpoilerFile()
 spoiler.Read(args.file)
-items = spoiler.GetItems()
+items = spoiler.GetSeedDetails()
 
-print(items['info']['presets'][0]["game"])
+print(items['permalink'])

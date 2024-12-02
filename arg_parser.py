@@ -10,6 +10,5 @@ class ArgParser:
         self.parser.add_argument('file')
         return self.parser
         
-    
     def GetArgs(self):
         return self.args
