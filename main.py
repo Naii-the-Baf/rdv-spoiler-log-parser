@@ -10,7 +10,7 @@ if __name__ == "__main__":
     args = parser.GetArgs()
 
     widget = MainWindow(args.file)
-    widget.resize(800, 600)
+    widget.resize(600, 600)
     widget.show()
 
     sys.exit(app.exec())
