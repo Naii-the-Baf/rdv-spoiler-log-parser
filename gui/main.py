@@ -1,11 +1,12 @@
 from PySide6 import QtCore, QtWidgets, QtGui
 import random
 from spoiler_file import SpoilerFile
-from arg_parser import ArgParser
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, file = None):
         super().__init__()
+        
+        self.setWindowTitle("Spoiler Log Parser")
         
         toolbar = QtWidgets.QToolBar()
         toolbar.setAllowedAreas(QtCore.Qt.ToolBarArea.TopToolBarArea)
