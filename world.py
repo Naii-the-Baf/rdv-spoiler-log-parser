@@ -1,4 +1,5 @@
 import game
+import re
 
 class World:
     def __init__(self, world):
@@ -26,7 +27,7 @@ class World:
         if self.game.has_regions:
             for region, locations in self.items.items():
                 for location, pickup in locations.items():
-                    room, ref_item = location.split("/Pickup ")
+                    room, ref_item = re.split(r"\/Pickup \d?", location)
                     if room is None or ref_item is None:
                         raise ValueError("Error while reading spoiler: Invalid item location: " + location + " " + pickup)
                     if pickup in minor_items:
