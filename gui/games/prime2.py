@@ -7,8 +7,9 @@ class Prime2(QtWidgets.QWidget):
         self.layout = QtWidgets.QVBoxLayout(self)
         
         for item_category in item_locations:
-            
             for item, locations in item_category.items():
+                if len(locations) == 0:
+                    continue
                 text = QtWidgets.QLabel(item)
                 self.layout.addWidget(text,
                                       alignment=QtCore.Qt.AlignCenter)
