@@ -27,11 +27,11 @@ class SpoilerFile:
             return
         self.world_names = names
     
-    def GetItems(self):
+    def GetWorlds(self):
         if (self.world_names is None):
             self.SetWorldNames()
         
-        item_locations = list()
+        worlds = list()
         for world in self.json['game_modifications']:
-            item_locations.append(World(world))
-        return
+            worlds.append(World(world))
+        return worlds

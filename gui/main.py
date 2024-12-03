@@ -1,6 +1,6 @@
 from PySide6 import QtCore, QtWidgets, QtGui
-import random
 from spoiler_file import SpoilerFile
+from gui.games.prime2 import Prime2
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, file = None):
@@ -8,12 +8,14 @@ class MainWindow(QtWidgets.QMainWindow):
         
         self.setWindowTitle("Spoiler Log Parser")
         
-        toolbar = QtWidgets.QToolBar()
-        toolbar.setAllowedAreas(QtCore.Qt.ToolBarArea.TopToolBarArea)
-        toolbar.setFloatable(False)
-        self.addToolBar(toolbar)
-        
-        self.setCentralWidget(MyWidget())
+        self.scroll_area = QtWidgets.QScrollArea()
+        self.scroll_area.setGeometry(QtCore.QRect(0, 0, 800, 600))
+        self.scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.scroll_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.scroll_area.setWidgetResizable(True)
+        self.scroll_area.setObjectName("scrollArea")
+        self.scroll_area.setEnabled(True)
+        self.setCentralWidget(self.scroll_area)
         
         button_action = QtGui.QAction("Load", self)
         button_action.setStatusTip("")
@@ -37,24 +39,10 @@ class MainWindow(QtWidgets.QMainWindow):
         spoiler.Read(file)
         seed_details = spoiler.GetSeedDetails()
         print(seed_details)
-
         
-class MyWidget(QtWidgets.QWidget):
-    def __init__(self):
-        super().__init__()
-
-        self.hello = ["This", "is", "a", "test"]
-
-        self.button = QtWidgets.QPushButton("Click me!")
-        self.text = QtWidgets.QLabel("Hello World",
-                                     alignment=QtCore.Qt.AlignCenter)
-
-        self.layout = QtWidgets.QVBoxLayout(self)
-        self.layout.addWidget(self.text)
-        self.layout.addWidget(self.button)
-
-        self.button.clicked.connect(self.magic)
-
-    @QtCore.Slot()
-    def magic(self):
-        self.text.setText(random.choice(self.hello))
+        worlds = spoiler.GetWorlds()
+        
+        if worlds[0].game_id == 'prime2':
+            self.scroll_area.setWidget(Prime2(worlds[0].GetItemLocations()))
+        else:
+            print("Invalid game")
