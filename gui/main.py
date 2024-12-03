@@ -1,9 +1,10 @@
 from PySide6 import QtCore, QtWidgets, QtGui
 import random
 from spoiler_file import SpoilerFile
+from arg_parser import ArgParser
 
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self):
+    def __init__(self, file = None):
         super().__init__()
         
         toolbar = QtWidgets.QToolBar()
@@ -15,18 +16,24 @@ class MainWindow(QtWidgets.QMainWindow):
         
         button_action = QtGui.QAction("Load", self)
         button_action.setStatusTip("")
-        button_action.triggered.connect(self.LoadFile)
+        button_action.triggered.connect(self.LoadFileDialog)
         
         menu = self.menuBar()
         file_menu = menu.addMenu("File")
         file_menu.addAction(button_action)
         
-    def LoadFile(self):
+        if file != None:
+            self.LoadFile(file)
+        
+    def LoadFileDialog(self):
         file = QtWidgets.QFileDialog.getOpenFileName(self, "Load file...", filter="Randovania Game (*.rdvgame)")
         if file[0] == '':
             return
+        self.LoadFile(file[0])
+        
+    def LoadFile(self, file):
         spoiler = SpoilerFile()
-        spoiler.Read(file[0])
+        spoiler.Read(file)
         seed_details = spoiler.GetSeedDetails()
         print(seed_details)
 
@@ -50,4 +57,3 @@ class MyWidget(QtWidgets.QWidget):
     @QtCore.Slot()
     def magic(self):
         self.text.setText(random.choice(self.hello))
-        
