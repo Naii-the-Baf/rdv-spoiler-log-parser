@@ -1,4 +1,6 @@
 # Randovania Spoiler Log Parser
+NOTE: This is still a work in progress; it may or may not work.
+___
 
 Reads a spoiler file produced by [Randovania](https://github.com/randovania/randovania), and returns a view of items. The purpose of this tool is to make spoiler logs easily and quickly readable, primarily for spoiler log races.
 
