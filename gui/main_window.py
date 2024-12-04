@@ -36,15 +36,10 @@ class MainWindow(QtWidgets.QMainWindow):
         dark_mode_action.triggered.connect(self.toggle_mode)
         preferences_menu.addAction(dark_mode_action)
         
-        bigger_text_action = QtGui.QAction("Increase Text Size", self)
-        bigger_text_action.setStatusTip("Makes the text bigger.")
-        bigger_text_action.triggered.connect(self.increase_text_size)
-        preferences_menu.addAction(bigger_text_action)
-        
-        smaller_text_action = QtGui.QAction("Decrease Text Size", self)
-        smaller_text_action.setStatusTip("Makes the text smaller.")
-        smaller_text_action.triggered.connect(self.decrease_text_size)
-        preferences_menu.addAction(smaller_text_action)
+        text_action = QtGui.QAction("Change Text Size", self)
+        text_action.setStatusTip("Change the text size.")
+        text_action.triggered.connect(self.change_text_size_dialog)
+        preferences_menu.addAction(text_action)
         
         if file != None:
             self.load_file(file)
@@ -82,17 +77,41 @@ class MainWindow(QtWidgets.QMainWindow):
         self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace("background:#DDDDDD;color:black;", "background:#333333;color:white;"))
         self.dark_mode = True
         
-    def increase_text_size(self):
-        if self.text_size <= 10:
-            return
-        self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace("font-size:"+str(self.text_size)+"px;", "font-size:"+str(self.text_size + 1)+"px;"))
-        self.text_size += 1
+    def change_text_size_dialog(self):
+        dialog = QtWidgets.QDialog(self)
+        dialog.setWindowTitle("Text Size")
+        dialog_layout = QtWidgets.QVBoxLayout()
         
-    def decrease_text_size(self):
-        if self.text_size <= 24:
+        label = QtWidgets.QLabel("Insert a font size value between 10px and 24px.")
+        dialog_layout.addWidget(label)
+        
+        text_edit_area = QtWidgets.QLineEdit(str(self.text_size), dialog)
+        text_edit_area.setValidator(QtGui.QIntValidator(10, 24, text_edit_area))
+        dialog_layout.addWidget(text_edit_area)
+        
+        button_values = QtWidgets.QDialogButtonBox.Apply
+        button_box = QtWidgets.QDialogButtonBox(button_values)
+        button_box.clicked.connect(lambda: self.change_text_size(text_edit_area.text(), dialog))
+        dialog_layout.addWidget(button_box)
+        
+        dialog.setLayout(dialog_layout)
+        dialog.exec()
+
+    def change_text_size(self, value, parent):
+        value = int(value)
+        if value < 10 or value > 24:
+            dialog = QtWidgets.QDialog(parent)
+            dialog.setWindowTitle("Error")
+            
+            dialog_layout = QtWidgets.QVBoxLayout()
+            message = QtWidgets.QLabel("Invalid text size; only allowed sizes are between 10px and 24px.")
+            dialog_layout.addWidget(message)
+            
+            dialog.setLayout(dialog_layout)
+            dialog.exec()
             return
-        self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace("font-size:"+str(self.text_size)+"px;", "font-size:"+str(self.text_size - 1)+"px;"))
-        self.text_size -= 1
+        self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace("font-size:"+str(self.text_size)+"px;", "font-size:"+str(value)+"px;"))
+        self.text_size = value
 
     def show_race_spoiler_dialog(self):
         dialog = QtWidgets.QDialog(self)
