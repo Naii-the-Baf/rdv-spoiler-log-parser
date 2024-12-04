@@ -1,12 +1,15 @@
+from collections import defaultdict
+
 import game
 import re
+
 
 class World:
     def __init__(self, world):
         self.game_id = world['game']
-        self.game : game.Game = None
-        self.items : dict = world['locations']
-        
+        self.game: game.Game = game.NotSupportedGame()
+        self.items: dict = world['locations']
+
         match self.game_id:
             case 'prime1':
                 self.game = game.Prime1()
@@ -18,31 +21,49 @@ class World:
                 self.game = game.Fusion()
             case _:
                 pass
-        
-    def GetItemLocations(self):
-        major_items = dict() #Name: [(region, room, reference)]
+
+    def get_item_locations(self):
+        major_items = dict()  # Name: [(region, room, reference)]
         minor_items = dict()
+
+        # if we're on a not supported game, handle things extra
+        if isinstance(self.game, game.NotSupportedGame):
+            return self.get_non_supported_game_locations()
+
         for category in self.game.major_items:
             for item in category:
                 major_items[item] = []
-        
+
         for item in self.game.minor_items:
             minor_items[item] = []
-        
+
         if self.game.has_regions:
             for region, locations in self.items.items():
                 for location, pickup in locations.items():
                     room, ref_item = re.split(r"\/Pickup \d?", location)
                     if room is None or ref_item is None:
-                        raise ValueError("Error while reading spoiler: Invalid item location: " + location + " " + pickup)
+                        raise ValueError(
+                            "Error while reading spoiler: Invalid item location: " + location + " " + pickup)
                     if pickup in minor_items:
-                        #Minor
+                        # Minor
                         minor_items[pickup].append((region, room, ref_item))
                     elif pickup in major_items:
-                        #Major
+                        # Major
                         major_items[pickup].append((region, room, ref_item))
                     else:
                         raise ValueError("Error while reading spoiler: Invalid pickup: " + location + " " + pickup)
         else:
             pass
         return (major_items, minor_items)
+
+    def get_non_supported_game_locations(self):
+        # Treat everything as major
+        major_items = defaultdict(list)
+        for region, locations in self.items.items():
+            for location, pickup in locations.items():
+                room, ref_item = re.split(r"\/Pickup \d?", location)
+                if room is None or ref_item is None:
+                    raise ValueError("Error while reading spoiler: Invalid item location: " + location + " " + pickup)
+                major_items[pickup].append((region, room, ref_item))
+
+        return (major_items, {})
