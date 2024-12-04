@@ -5,6 +5,7 @@ from gui.game_layout import GameLayout
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, file = None):
         super().__init__()
+        self.dark_mode = True
         
         self.setWindowTitle("Spoiler Log Parser")
         
@@ -16,14 +17,22 @@ class MainWindow(QtWidgets.QMainWindow):
         self.scroll_area.setObjectName("scrollArea")
         self.scroll_area.setEnabled(True)
         self.setCentralWidget(self.scroll_area)
-        
-        button_action = QtGui.QAction("Load", self)
-        button_action.setStatusTip("")
-        button_action.triggered.connect(self.LoadFileDialog)
+        self.SetDarkMode()
         
         menu = self.menuBar()
         file_menu = menu.addMenu("File")
-        file_menu.addAction(button_action)
+        preferences_menu = menu.addMenu("Preferences")
+        
+        load_action = QtGui.QAction("Load", self)
+        load_action.setStatusTip("")
+        load_action.triggered.connect(self.LoadFileDialog)
+        file_menu.addAction(load_action)
+        
+        dark_mode_action = QtGui.QAction("Dark Mode", self)
+        dark_mode_action.setStatusTip("")
+        dark_mode_action.setCheckable(True)
+        dark_mode_action.triggered.connect(self.ToggleMode)
+        preferences_menu.addAction(dark_mode_action)
         
         if file != None:
             self.LoadFile(file)
@@ -42,3 +51,17 @@ class MainWindow(QtWidgets.QMainWindow):
         
         worlds = spoiler.GetWorlds()
         self.scroll_area.setWidget(GameLayout(worlds[0]))
+        
+    def ToggleMode(self):
+        if self.dark_mode:
+            self.SetLightMode()
+            return
+        self.SetDarkMode()
+    
+    def SetLightMode(self):
+        self.scroll_area.setStyleSheet("background:#DDDDDD;color:black;")
+        self.dark_mode = False
+        
+    def SetDarkMode(self):
+        self.scroll_area.setStyleSheet("background:#333333;color:white;")
+        self.dark_mode = True

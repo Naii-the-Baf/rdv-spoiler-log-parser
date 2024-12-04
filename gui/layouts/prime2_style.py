@@ -5,15 +5,15 @@ class Prime2Style(BaseLayout):
         super().__init__()
         
         self.background = {
-            'Agon Wastes': '#fff2cc',
+            'Agon Wastes': '#d8cead',
             'Dark Agon Wastes': '#783f04',
             'Dark Torvus Bog': '#38761d',
             'Ing Hive': '#1155cc',
             'Great Temple': '#d5a6bd',
-            'Sanctuary Fortress': '#9fc5e8',
+            'Sanctuary Fortress': '#8eafce',
             'Sky Temple Grounds': '#351c75',
             'Temple Grounds': '#b4a7d6',
-            'Torvus Bog': '#b6d7a8',
+            'Torvus Bog': '#9fbc93',
         }
         
         self.foreground = {
