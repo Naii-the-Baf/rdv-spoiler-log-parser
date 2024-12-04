@@ -31,6 +31,7 @@ class MainWindow(QtWidgets.QMainWindow):
         dark_mode_action = QtGui.QAction("Dark Mode", self)
         dark_mode_action.setStatusTip("")
         dark_mode_action.setCheckable(True)
+        dark_mode_action.setChecked(True)
         dark_mode_action.triggered.connect(self.ToggleMode)
         preferences_menu.addAction(dark_mode_action)
         
