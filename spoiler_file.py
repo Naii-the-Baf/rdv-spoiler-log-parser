@@ -17,6 +17,7 @@ class SpoilerFile:
         details['permalink']    = self.json['info']['permalink']
         details['hash']         = self.json['info']['hash']
         details['word_hash']    = self.json['info']['word_hash']
+        details['has_spoiler']  = self.json['info']['has_spoiler']
         return details
     
     def set_world_names(self, names = None):
