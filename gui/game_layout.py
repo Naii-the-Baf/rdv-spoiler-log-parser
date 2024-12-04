@@ -1,4 +1,5 @@
 from PySide6 import QtCore, QtWidgets, QtGui
+from gui.layouts.prime1_style import Prime1Style
 from gui.layouts.prime2_style import Prime2Style
 
 class GameLayout(QtWidgets.QWidget):
@@ -7,6 +8,8 @@ class GameLayout(QtWidgets.QWidget):
         self.game_style = None
 
         match world.game_id:
+            case 'prime1':
+                self.game_style = Prime1Style()
             case 'prime2':
                 self.game_style = Prime2Style()
             case _:
@@ -26,6 +29,8 @@ class GameLayout(QtWidgets.QWidget):
                     continue
                 text = QtWidgets.QLabel(item)
                 text.setStyleSheet("border:1px solid black;")
+                if world.game.victory_key in item:
+                    text.setStyleSheet("border:1px solid black;background:" + self.game_style.victory_background + ";color:black;")
                 text.setAlignment(QtCore.Qt.AlignCenter)
                 self.layout.addWidget(text, row_pos, 0, len(locations), 1)
                 for location in locations:

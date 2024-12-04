@@ -8,9 +8,10 @@ class World:
         self.items : dict = world['locations']
         
         match self.game_id:
+            case 'prime1':
+                self.game = game.Prime1()
             case 'prime2':
                 self.game = game.Prime2()
-                
             case _:
                 pass
         

@@ -27,3 +27,5 @@ class Prime2Style(BaseLayout):
             'Temple Grounds': 'black',
             'Torvus Bog': 'black',
         }
+        
+        self.victory_background = '#93c47d'

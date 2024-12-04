@@ -9,6 +9,68 @@ class Game:
         self.special_configurations = []
         self.victory_key = None
         
+class Prime1(Game):
+    def __init__(self):
+        super().__init__()
+        self.dock_connections = None
+        self.has_hints = False
+        self.has_regions = True
+        self.major_items = [
+            [
+                "Power Beam",
+                "Wave Beam",
+                "Ice Beam",
+                "Plasma Beam",
+                "Charge Beam",
+            ],[
+                "Super Missile",
+                "Wavebuster",
+                "Ice Spreader",
+                "Flamethrower",
+                "Missile Launcher",
+            ],[
+                "Combat Visor",
+                "Scan Visor",
+                "Thermal Visor",
+                "X-Ray Visor",
+            ],[
+                "Morph Ball",
+                "Boost Ball",
+                "Spider Ball",
+                "Morph Ball Bomb",
+                "Power Bomb",
+            ],[
+                "Varia Suit",
+                "Gravity Suit",
+                "Phazon Suit",
+            ],[
+                "Space Jump Boots",
+                "Grapple Beam",
+            ],[
+                "Artifact of Truth",
+                "Artifact of Strength",
+                "Artifact of Elder",
+                "Artifact of Wild",
+                "Artifact of Lifegiver",
+                "Artifact of Warrior",
+                "Artifact of Chozo",
+                "Artifact of Nature",
+                "Artifact of Sun",
+                "Artifact of World",
+                "Artifact of Spirit",
+                "Artifact of Newborn",
+            ],
+        ]
+        self.minor_items = [
+            "Energy Tank",
+            "Missile Expansion",
+            "Power Bomb Expansion",
+            "Energy Transfer Module",
+        ]
+        self.nothing_item = "Energy Transfer Module"
+        self.special_configurations = []
+        self.victory_key = "Artifact of"
+
 class Prime2(Game):
     def __init__(self):
         super().__init__()
@@ -23,8 +85,6 @@ class Prime2(Game):
                 "Annihilator Beam",
                 "Charge Beam",
             ],[
-                "Super Missile",
-                "Darkburst",
                 "Super Missile",
                 "Darkburst",
                 "Sunburst",
@@ -53,6 +113,11 @@ class Prime2(Game):
                 "Screw Attack",
                 "Progressive Grapple",
             ],[
+                "Violet Translator",
+                "Amber Translator",
+                "Emerald Translator",
+                "Cobalt Translator",
+            ],[
                 "Dark Agon Key 1",
                 "Dark Agon Key 2",
                 "Dark Agon Key 3",
@@ -72,11 +137,6 @@ class Prime2(Game):
                 "Sky Temple Key 7",
                 "Sky Temple Key 8",
                 "Sky Temple Key 9",
-            ],[
-                "Violet Translator",
-                "Amber Translator",
-                "Emerald Translator",
-                "Cobalt Translator",
             ],[
                 "Unlimited Missiles",
                 "Unlimited Beam Ammo",
