@@ -24,7 +24,7 @@ class SpoilerFile:
         if names is None:
             self.world_names = list()
             for i in range(len(self.json['info']['presets'])):
-                self.world_names.append("Player " + str(i))
+                self.world_names.append(f"Player {i}")
             return
         self.world_names = names
     

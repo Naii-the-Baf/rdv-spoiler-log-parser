@@ -99,7 +99,6 @@ class MainWindow(QtWidgets.QMainWindow):
         dialog.exec()
 
     def change_text_size(self, value, parent):
-        print("Change!")
         value = int(value)
         if value < 10 or value > 24:
             dialog = QtWidgets.QDialog(parent)
@@ -112,8 +111,11 @@ class MainWindow(QtWidgets.QMainWindow):
             dialog.setLayout(dialog_layout)
             dialog.exec()
             return
-        self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace("font-size:"+str(self.text_size)+"px;", "font-size:"+str(value)+"px;"))
+        self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace(
+            f"font-size:{self.text_size}px;",
+            f"font-size:{value}px;"))
         self.text_size = value
+        print(f"Font size changed: {self.text_size}")
 
     def show_race_spoiler_dialog(self):
         dialog = QtWidgets.QDialog(self)
