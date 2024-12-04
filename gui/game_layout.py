@@ -1,9 +1,16 @@
 from PySide6 import QtCore, QtWidgets, QtGui
+from gui.layouts.prime2_style import Prime2Style
 
 class GameLayout(QtWidgets.QWidget):
     def __init__(self, world):
-        
         super().__init__()
+        self.game_style = None
+
+        match world.game_id:
+            case 'prime2':
+                self.game_style = Prime2Style()
+            case _:
+                self.game_style = None
 
         item_locations = world.GetItemLocations()
         
@@ -23,8 +30,10 @@ class GameLayout(QtWidgets.QWidget):
                 self.layout.addWidget(text, row_pos, 0, len(locations), 1)
                 for location in locations:
                     text = QtWidgets.QLabel(location[0])
+                    text.setStyleSheet("background:" + self.game_style.background[location[0]] + ";color:" + self.game_style.foreground[location[0]] + ";")
                     self.layout.addWidget(text, row_pos, 1, 1, 1)
                     text = QtWidgets.QLabel(" ".join([location[1], location[2]]))
+                    text.setStyleSheet("background:" + self.game_style.background[location[0]] + ";color:" + self.game_style.foreground[location[0]] + ";")
                     self.layout.addWidget(text, row_pos, 2, 1, 1)
                     row_pos += 1
 
