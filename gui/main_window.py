@@ -6,6 +6,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, file = None):
         super().__init__()
         self.dark_mode = True
+        self.bigger_text = False
         
         self.setWindowTitle("Spoiler Log Parser")
         
@@ -17,23 +18,30 @@ class MainWindow(QtWidgets.QMainWindow):
         self.scroll_area.setObjectName("scrollArea")
         self.scroll_area.setEnabled(True)
         self.setCentralWidget(self.scroll_area)
-        self.SetDarkMode()
+        self.scroll_area.setStyleSheet("background:#333333;color:white;")
         
         menu = self.menuBar()
         file_menu = menu.addMenu("File")
         preferences_menu = menu.addMenu("Preferences")
         
         load_action = QtGui.QAction("Load", self)
-        load_action.setStatusTip("")
+        load_action.setStatusTip("Load an rdvgame file")
         load_action.triggered.connect(self.LoadFileDialog)
         file_menu.addAction(load_action)
         
         dark_mode_action = QtGui.QAction("Dark Mode", self)
-        dark_mode_action.setStatusTip("")
+        dark_mode_action.setStatusTip("Enables or disables dark mode.")
         dark_mode_action.setCheckable(True)
         dark_mode_action.setChecked(True)
         dark_mode_action.triggered.connect(self.ToggleMode)
         preferences_menu.addAction(dark_mode_action)
+        
+        bigger_text_action = QtGui.QAction("Bigger Text", self)
+        bigger_text_action.setStatusTip("Makes the text bigger.")
+        bigger_text_action.setCheckable(True)
+        bigger_text_action.setChecked(False)
+        bigger_text_action.triggered.connect(self.ToggleBiggerText)
+        preferences_menu.addAction(bigger_text_action)
         
         if file != None:
             self.LoadFile(file)
@@ -64,12 +72,20 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SetDarkMode()
     
     def SetLightMode(self):
-        self.scroll_area.setStyleSheet("background:#DDDDDD;color:black;")
+        self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace("background:#333333;color:white;", "background:#DDDDDD;color:black;"))
         self.dark_mode = False
         
     def SetDarkMode(self):
-        self.scroll_area.setStyleSheet("background:#333333;color:white;")
+        self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace("background:#DDDDDD;color:black;", "background:#333333;color:white;"))
         self.dark_mode = True
+        
+    def ToggleBiggerText(self):
+        if self.bigger_text:
+            self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace("font-size:16px;", ""))
+            self.bigger_text = False
+            return
+        self.scroll_area.setStyleSheet(self.scroll_area.styleSheet() + "font-size:16px;")
+        self.bigger_text = True
 
     def ShowRaceSpoilerDialog(self):
         dialog = QtWidgets.QDialog(self)
