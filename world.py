@@ -6,7 +6,7 @@ class World:
         self.game_id = world['game']
         self.game : game.Game = None
         self.items : dict = world['locations']
-        
+
         match self.game_id:
             case 'prime1':
                 self.game = game.Prime1()
@@ -18,17 +18,17 @@ class World:
                 self.game = game.Fusion()
             case _:
                 pass
-        
+
     def GetItemLocations(self):
         major_items = dict() #Name: [(region, room, reference)]
         minor_items = dict()
         for category in self.game.major_items:
             for item in category:
                 major_items[item] = []
-        
+
         for item in self.game.minor_items:
             minor_items[item] = []
-        
+
         if self.game.has_regions:
             for region, locations in self.items.items():
                 for location, pickup in locations.items():
