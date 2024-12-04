@@ -87,6 +87,7 @@ class MainWindow(QtWidgets.QMainWindow):
         
         text_edit_area = QtWidgets.QLineEdit(str(self.text_size), dialog)
         text_edit_area.setValidator(QtGui.QIntValidator(10, 24, text_edit_area))
+        text_edit_area.returnPressed.connect(lambda: self.change_text_size(text_edit_area.text(), dialog))
         dialog_layout.addWidget(text_edit_area)
         
         button_values = QtWidgets.QDialogButtonBox.Apply
@@ -98,6 +99,7 @@ class MainWindow(QtWidgets.QMainWindow):
         dialog.exec()
 
     def change_text_size(self, value, parent):
+        print("Change!")
         value = int(value)
         if value < 10 or value > 24:
             dialog = QtWidgets.QDialog(parent)
