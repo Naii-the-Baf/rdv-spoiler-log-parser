@@ -7,7 +7,7 @@ class ArgParser:
         
     def DefineArgs(self):
         self.parser = argparse.ArgumentParser(description = "Parses a spoiler log file produced by Randovania, and returns a view of item locations.")
-        self.parser.add_argument('file')
+        self.parser.add_argument('-f', '--file', required=False)
         return self.parser
         
     def GetArgs(self):

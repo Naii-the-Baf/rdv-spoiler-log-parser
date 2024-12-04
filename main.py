@@ -1,11 +1,16 @@
+import sys
+from PySide6 import QtWidgets
+from gui.main_window import MainWindow
 from arg_parser import ArgParser
-from spoiler_file import SpoilerFile
 
-parser = ArgParser()
-args = parser.GetArgs()
+if __name__ == "__main__":
+    app = QtWidgets.QApplication([])
+    
+    parser = ArgParser()
+    args = parser.GetArgs()
 
-spoiler = SpoilerFile()
-spoiler.Read(args.file)
-items = spoiler.GetSeedDetails()
+    widget = MainWindow(args.file)
+    widget.resize(600, 600)
+    widget.show()
 
-print(items['permalink'])
+    sys.exit(app.exec())

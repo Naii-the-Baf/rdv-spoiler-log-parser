@@ -63,6 +63,16 @@ class Prime2(Game):
                 "Ing Hive Key 2",
                 "Ing Hive Key 3",
             ],[
+                "Sky Temple Key 1",
+                "Sky Temple Key 2",
+                "Sky Temple Key 3",
+                "Sky Temple Key 4",
+                "Sky Temple Key 5",
+                "Sky Temple Key 6",
+                "Sky Temple Key 7",
+                "Sky Temple Key 8",
+                "Sky Temple Key 9",
+            ],[
                 "Violet Translator",
                 "Amber Translator",
                 "Emerald Translator",
@@ -81,6 +91,7 @@ class Prime2(Game):
             "Beam Ammo Expansion",
             "Dark Ammo Expansion",
             "Light Ammo Expansion",
+            "Energy Transfer Module",
         ]
         self.nothing_item = "Energy Transfer Module"
         self.special_configurations = []
