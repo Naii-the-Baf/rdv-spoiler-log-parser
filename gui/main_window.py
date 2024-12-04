@@ -62,7 +62,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print(seed_details)
         
         if 'game_modifications' not in spoiler.json:
-            self.show_race_spoiler_log()
+            self.show_race_spoiler_dialog()
             return
         
         worlds = spoiler.get_worlds()
