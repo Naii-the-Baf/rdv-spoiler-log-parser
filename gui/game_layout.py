@@ -1,9 +1,12 @@
 from PySide6 import QtCore, QtWidgets, QtGui
 
-class Prime2(QtWidgets.QWidget):
-    def __init__(self, item_locations):
+class GameLayout(QtWidgets.QWidget):
+    def __init__(self, world):
+        
         super().__init__()
 
+        item_locations = world.GetItemLocations()
+        
         self.layout : QtWidgets.QGridLayout = QtWidgets.QGridLayout(self)
         self.layout.setColumnStretch(0, 20)
         self.layout.setColumnStretch(1, 30)

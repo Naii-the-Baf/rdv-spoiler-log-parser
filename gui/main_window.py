@@ -1,6 +1,6 @@
 from PySide6 import QtCore, QtWidgets, QtGui
 from spoiler_file import SpoilerFile
-from gui.games.prime2 import Prime2
+from gui.game_layout import GameLayout
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, file = None):
@@ -41,8 +41,4 @@ class MainWindow(QtWidgets.QMainWindow):
         print(seed_details)
         
         worlds = spoiler.GetWorlds()
-        
-        if worlds[0].game_id == 'prime2':
-            self.scroll_area.setWidget(Prime2(worlds[0].GetItemLocations()))
-        else:
-            print("Invalid game")
+        self.scroll_area.setWidget(GameLayout(worlds[0]))
