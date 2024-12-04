@@ -222,3 +222,71 @@ class Prime3(Game):
         self.nothing_item = "Energy Transfer Module"
         self.special_configurations = []
         self.victory_key = "Energy Cell"
+
+class Fusion(Game):
+    def __init__(self):
+        super().__init__()
+        self.dock_connections = None
+        self.has_hints = False
+        self.has_regions = True
+        self.major_items = [
+            [
+                "Charge Beam",
+                "Wide Beam",
+                "Plasma Beam",
+                "Wave Beam",
+                "Ice Beam",
+            ],[
+                "Missile Launcher Data",
+                "Super Missile Data",
+                "Ice Missile Data",
+                "Diffusion Missile Data",
+            ],[
+                "Morph Ball",
+                "Morph Ball Bomb Data",
+                "Power Bomb Data",
+            ],[
+                "Varia Suit",
+                "Gravity Suit",
+            ],[
+                "Hi-Jump",
+                "Space Jump",
+                "Speed Booster",
+                "Screw Attack",
+            ],[
+                "Level 1 Locks",
+                "Level 2 Locks",
+                "Level 3 Locks",
+                "Level 4 Locks",
+            ],[
+                "Infant Metroid 1",
+                "Infant Metroid 2",
+                "Infant Metroid 3",
+                "Infant Metroid 4",
+                "Infant Metroid 5",
+                "Infant Metroid 6",
+                "Infant Metroid 7",
+                "Infant Metroid 8",
+                "Infant Metroid 9",
+                "Infant Metroid 10",
+                "Infant Metroid 11",
+                "Infant Metroid 12",
+                "Infant Metroid 13",
+                "Infant Metroid 14",
+                "Infant Metroid 15",
+                "Infant Metroid 16",
+                "Infant Metroid 17",
+                "Infant Metroid 18",
+                "Infant Metroid 19",
+                "Infant Metroid 20",
+            ],
+        ]
+        self.minor_items = [
+            "Energy Tank",
+            "Missile Tank",
+            "Power Bomb Tank",
+            "Energy Transfer Module",
+        ]
+        self.nothing_item = "Energy Transfer Module"
+        self.special_configurations = []
+        self.victory_key = "Infant Metroid"
