@@ -50,6 +50,10 @@ class MainWindow(QtWidgets.QMainWindow):
         seed_details = spoiler.GetSeedDetails()
         print(seed_details)
         
+        if 'game_modifications' not in spoiler.json:
+            self.ShowRaceSpoilerDialog()
+            return
+        
         worlds = spoiler.GetWorlds()
         self.scroll_area.setWidget(GameLayout(worlds[0]))
         
@@ -66,3 +70,18 @@ class MainWindow(QtWidgets.QMainWindow):
     def SetDarkMode(self):
         self.scroll_area.setStyleSheet("background:#333333;color:white;")
         self.dark_mode = True
+
+    def ShowRaceSpoilerDialog(self):
+        dialog = QtWidgets.QDialog(self)
+        dialog.setWindowTitle("Error")
+        dialog_layout = QtWidgets.QVBoxLayout()
+        message = QtWidgets.QLabel("The rdvgame file does not contain a spoiler; did you try loading a race file?")
+        dialog_layout.addWidget(message)
+        
+        button_values = QtWidgets.QDialogButtonBox.Ok
+        button_box = QtWidgets.QDialogButtonBox(button_values)
+        button_box.accepted.connect(dialog.accept)
+        dialog_layout.addWidget(button_box)
+        
+        dialog.setLayout(dialog_layout)
+        dialog.exec()
