@@ -6,7 +6,6 @@ class Prime1Style(BaseLayout):
         
         self.background = {
             'Chozo Ruins': '#d8c4af',
-            'Impact Crater': '#cc4125',
             'Magmoor Caverns': '#dd7e6b',
             'Phazon Mines': '#b4a7d6',
             'Phendrana Drifts': '#bfbfbf',
@@ -15,7 +14,6 @@ class Prime1Style(BaseLayout):
         
         self.foreground = {
             'Chozo Ruins': 'black',
-            'Impact Crater': 'white',
             'Magmoor Caverns': 'black',
             'Phazon Mines': 'black',
             'Phendrana Drifts': 'black',

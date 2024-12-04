@@ -12,6 +12,8 @@ class World:
                 self.game = game.Prime1()
             case 'prime2':
                 self.game = game.Prime2()
+            case 'prime3':
+                self.game = game.Prime3()
             case _:
                 pass
         

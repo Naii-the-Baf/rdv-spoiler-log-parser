@@ -1,7 +1,9 @@
 from PySide6 import QtCore, QtWidgets, QtGui
 import game
+#TODO: Import layouts as a module
 from gui.layouts.prime1_style import Prime1Style
 from gui.layouts.prime2_style import Prime2Style
+from gui.layouts.prime3_style import Prime3Style
 
 class GameLayout(QtWidgets.QWidget):
     def __init__(self, world):
@@ -16,6 +18,9 @@ class GameLayout(QtWidgets.QWidget):
             case 'prime2':
                 self.game_style = Prime2Style()
                 self.game = game.Prime2()
+            case 'prime3':
+                self.game_style = Prime3Style()
+                self.game = game.Prime3()
             case _:
                 self.game_style = None
 

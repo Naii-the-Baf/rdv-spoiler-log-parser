@@ -156,3 +156,69 @@ class Prime2(Game):
         self.nothing_item = "Energy Transfer Module"
         self.special_configurations = []
         self.victory_key = "Sky Temple Key"
+
+class Prime3(Game):
+    def __init__(self):
+        super().__init__()
+        self.dock_connections = None
+        self.has_hints = False
+        self.has_regions = True
+        self.major_items = [
+            [
+                "Power Beam",
+                "Plasma Beam",
+                "Nova Beam",
+                "Progressive Beam",
+                "Charge Beam",
+            ],[
+                "Missile Launcher",
+                "Ice Missile",
+                "Seeker Missile",
+                "Progressive Missile",
+            ],[
+                "Combat Visor",
+                "Scan Visor",
+                "Command Visor",
+                "X-Ray Visor",
+            ],[
+                "Morph Ball",
+                "Boost Ball",
+                "Spider Ball",
+                "Morph Ball Bombs",
+            ],[
+                "Hazard Shield",
+                "Space Jump Boots",
+                "Screw Attack",
+            ],[
+                "Hypermode",
+                "Hyper Ball",
+                "Hyper Missile",
+                "Hyper Grapple",
+            ],[
+                "Grapple Lasso",
+                "Grapple Swing",
+                "Grapple Voltage",
+            ],[
+                "Ship Missile",
+                "Ship Grapple",
+            ],[
+                "Energy Cell 1",
+                "Energy Cell 2",
+                "Energy Cell 3",
+                "Energy Cell 4",
+                "Energy Cell 5",
+                "Energy Cell 6",
+                "Energy Cell 7",
+                "Energy Cell 8",
+                "Energy Cell 9",
+            ],
+        ]
+        self.minor_items = [
+            "Energy Tank",
+            "Missile Expansion",
+            "Ship Missile Expansion",
+            "Energy Transfer Module",
+        ]
+        self.nothing_item = "Energy Transfer Module"
+        self.special_configurations = []
+        self.victory_key = "Energy Cell"
