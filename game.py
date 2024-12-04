@@ -2,7 +2,6 @@ class Game:
     def __init__(self):
         self.dock_connections = None
         self.has_hints = False
-        self.has_regions = True
         self.major_items = []
         self.minor_items = []
         self.nothing_item = "Energy Transfer Module"
@@ -20,7 +19,6 @@ class Prime1(Game):
         super().__init__()
         self.dock_connections = None
         self.has_hints = False
-        self.has_regions = True
         self.major_items = [
             [
                 "Power Beam",
@@ -82,7 +80,6 @@ class Prime2(Game):
         super().__init__()
         self.dock_connections = None
         self.has_hints = True
-        self.has_regions = True
         self.major_items = [
             [
                 "Power Beam",
@@ -168,7 +165,6 @@ class Prime3(Game):
         super().__init__()
         self.dock_connections = None
         self.has_hints = False
-        self.has_regions = True
         self.major_items = [
             [
                 "Power Beam",
@@ -234,7 +230,6 @@ class Fusion(Game):
         super().__init__()
         self.dock_connections = None
         self.has_hints = False
-        self.has_regions = True
         self.major_items = [
             [
                 "Charge Beam",
