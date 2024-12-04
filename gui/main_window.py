@@ -56,7 +56,7 @@ class MainWindow(QtWidgets.QMainWindow):
         seed_details = spoiler.get_seed_details()
         print(seed_details)
         
-        if 'game_modifications' not in spoiler.json:
+        if not seed_details['has_spoiler']:
             self.show_race_spoiler_dialog()
             return
         
