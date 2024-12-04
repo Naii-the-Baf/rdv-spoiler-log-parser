@@ -4,6 +4,7 @@ import game
 from gui.layouts.prime1_style import Prime1Style
 from gui.layouts.prime2_style import Prime2Style
 from gui.layouts.prime3_style import Prime3Style
+from gui.layouts.fusion_style import FusionStyle
 
 class GameLayout(QtWidgets.QWidget):
     def __init__(self, world):
@@ -21,6 +22,9 @@ class GameLayout(QtWidgets.QWidget):
             case 'prime3':
                 self.game_style = Prime3Style()
                 self.game = game.Prime3()
+            case 'fusion':
+                self.game_style = FusionStyle()
+                self.game = game.Fusion()
             case _:
                 self.game_style = None
 
