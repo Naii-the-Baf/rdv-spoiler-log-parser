@@ -1,6 +1,7 @@
 from PySide6 import QtCore, QtWidgets, QtGui
 import game
 #TODO: Import layouts as a module
+from gui.layouts.base_layout import BaseLayout
 from gui.layouts.prime1_style import Prime1Style
 from gui.layouts.prime2_style import Prime2Style
 from gui.layouts.prime3_style import Prime3Style
@@ -9,28 +10,28 @@ from gui.layouts.fusion_style import FusionStyle
 class GameLayout(QtWidgets.QWidget):
     def __init__(self, world):
         super().__init__()
-        self.game_style = None
-        self.game = None
+        self.game_style = BaseLayout()
+        unsupported_game = False
 
         match world.game_id:
             case 'prime1':
                 self.game_style = Prime1Style()
-                self.game = game.Prime1()
             case 'prime2':
                 self.game_style = Prime2Style()
-                self.game = game.Prime2()
             case 'prime3':
                 self.game_style = Prime3Style()
-                self.game = game.Prime3()
             case 'fusion':
                 self.game_style = FusionStyle()
-                self.game = game.Fusion()
             case _:
-                self.game_style = None
+                unsupported_game = True
 
-        item_locations = world.GetItemLocations()
+        if unsupported_game:
+            # TODO: show a dialog or a label somewhere
+            print(f"game {world.game_id} is not supported")
+
+        item_locations = world.get_item_locations()
         
-        self.layout : QtWidgets.QGridLayout = QtWidgets.QGridLayout(self)
+        self.layout: QtWidgets.QGridLayout = QtWidgets.QGridLayout(self)
         self.layout.setColumnStretch(0, 20)
         self.layout.setColumnStretch(1, 30)
         self.layout.setColumnStretch(2, 50)
@@ -41,8 +42,8 @@ class GameLayout(QtWidgets.QWidget):
             for item, locations in item_category.items():
                 if len(locations) == 0:
                     continue
-                
-                while (category < len(self.game.major_items)) and (item not in self.game.major_items[category]):
+
+                while (category < len(world.game.major_items)) and (item not in world.game.major_items[category]):
                     category += 1
                     separator = QtWidgets.QLabel("")
                     self.layout.addWidget(separator, row_pos, 0, 1, 3)
@@ -50,15 +51,18 @@ class GameLayout(QtWidgets.QWidget):
                 
                 text = QtWidgets.QLabel(item)
                 text.setStyleSheet("border:1px solid black;")
+
+                style = self.game_style
                 if world.game.victory_key in item:
-                    text.setStyleSheet("border:1px solid black;background:" + self.game_style.victory_background + ";color:black;")
+                    text.setStyleSheet("border:1px solid black;background:" + style.victory_background + ";color:black;")
                 text.setAlignment(QtCore.Qt.AlignCenter)
                 self.layout.addWidget(text, row_pos, 0, len(locations), 1)
-                for location in locations:
-                    text = QtWidgets.QLabel(location[0])
-                    text.setStyleSheet("background:" + self.game_style.background[location[0]] + ";color:" + self.game_style.foreground[location[0]] + ";")
-                    self.layout.addWidget(text, row_pos, 1, 1, 1)
-                    text = QtWidgets.QLabel(" ".join([location[1], location[2]]))
-                    text.setStyleSheet("background:" + self.game_style.background[location[0]] + ";color:" + self.game_style.foreground[location[0]] + ";")
-                    self.layout.addWidget(text, row_pos, 2, 1, 1)
+
+                for region, area, vanilla_item in locations:
+                    region_label = QtWidgets.QLabel(region)
+                    region_label.setStyleSheet("background:" + style.background.get(region, style.fallback_background) + ";color:" + style.foreground.get(region, style.fallback_foreground) + ";")
+                    self.layout.addWidget(region_label, row_pos, 1, 1, 1)
+                    area_label = QtWidgets.QLabel(" ".join([area, vanilla_item]))
+                    area_label.setStyleSheet("background:" + style.background.get(region, style.fallback_background) + ";color:" + style.foreground.get(region, style.fallback_foreground) + ";")
+                    self.layout.addWidget(area_label, row_pos, 2, 1, 1)
                     row_pos += 1
