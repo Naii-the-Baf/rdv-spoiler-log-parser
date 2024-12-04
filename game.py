@@ -2,12 +2,18 @@ class Game:
     def __init__(self):
         self.dock_connections = None
         self.has_hints = False
-        self.has_regions = False
+        self.has_regions = True
         self.major_items = []
         self.minor_items = []
         self.nothing_item = "Energy Transfer Module"
         self.special_configurations = []
-        self.victory_key = None
+        self.victory_key = "A default victory key"
+
+
+class NotSupportedGame(Game):
+    def __init__(self):
+        super().__init__()
+
         
 class Prime1(Game):
     def __init__(self):
