@@ -7,7 +7,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     
     parser = ArgParser()
-    args = parser.GetArgs()
+    args = parser.get_args()
 
     widget = MainWindow(args.file)
     widget.resize(600, 600)
