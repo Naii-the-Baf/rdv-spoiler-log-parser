@@ -45,7 +45,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.load_file(file)
         
     def load_file_dialog(self):
-        file = QtWidgets.QFileDialog.getOpenFileName(self, "Load file...", filter="Randovania Game (*.rdvgame)")
+        file_dialog = QtWidgets.QFileDialog(self)
+        file_dialog.setFileMode(QtWidgets.QFileDialog.FileMode.ExistingFiles)
+        file_dialog.setNameFilter("Randovania Game (*.rdvgame)")
+        file_dialog.exec()
+        file = file_dialog.selectedFiles()
         if file[0] == '':
             return
         self.load_file(file[0])
