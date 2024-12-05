@@ -28,8 +28,11 @@ class GameLayout(QtWidgets.QWidget):
         if unsupported_game:
             # TODO: show a dialog or a label somewhere
             print(f"game {world.game_id} is not supported")
-
-        item_locations = world.get_item_locations()
+        try:
+            item_locations = world.get_item_locations()
+        except ValueError as e:
+            self.dialog_invalid_game(str(e))
+            return
         
         self.layout: QtWidgets.QGridLayout = QtWidgets.QGridLayout(self)
         self.layout.setColumnStretch(0, 20)
@@ -66,3 +69,14 @@ class GameLayout(QtWidgets.QWidget):
                     area_label.setStyleSheet("background:" + style.background.get(region, style.fallback_background) + ";color:" + style.foreground.get(region, style.fallback_foreground) + ";")
                     self.layout.addWidget(area_label, row_pos, 2, 1, 1)
                     row_pos += 1
+
+    def dialog_invalid_game(self, message):
+        dialog = QtWidgets.QDialog(self)
+        dialog.setWindowTitle("Error")
+        dialog_layout = QtWidgets.QVBoxLayout()
+        label_message = QtWidgets.QLabel("Invalid rdvgame")
+        dialog_layout.addWidget(label_message)
+        label_error = QtWidgets.QLabel(message)
+        dialog_layout.addWidget(label_error)
+        dialog.setLayout(dialog_layout)
+        dialog.exec()
