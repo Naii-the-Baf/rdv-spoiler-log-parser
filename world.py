@@ -1,12 +1,11 @@
 from collections import defaultdict
-
 import game
 import re
 
 
 class World:
-    def __init__(self, world):
-        self.game_id = world['game']
+    def __init__(self, world: dict):
+        self.game_id: str = world['game']
         self.game: game.Game = game.NotSupportedGame()
         self.items: dict = world['locations']
 
@@ -22,11 +21,11 @@ class World:
             case _:
                 pass
 
-    def get_item_locations(self):
+    def get_item_locations(self) -> tuple[dict, dict]:
         major_items = dict()  # Name: [(region, room, reference)]
         minor_items = dict()
 
-        # if we're on a not supported game, handle things extra
+        # If we're on a not supported game, handle things extra
         if isinstance(self.game, game.NotSupportedGame):
             return self.get_non_supported_game_locations()
 
@@ -52,7 +51,7 @@ class World:
                     raise ValueError(f"Error while reading spoiler: Invalid pickup: {location} {pickup}")
         return (major_items, minor_items)
 
-    def get_non_supported_game_locations(self):
+    def get_non_supported_game_locations(self) -> tuple[dict, dict]:
         # Treat everything as major
         major_items = defaultdict(list)
         for region, locations in self.items.items():

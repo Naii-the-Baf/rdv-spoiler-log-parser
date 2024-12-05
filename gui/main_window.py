@@ -3,7 +3,7 @@ from spoiler_file import SpoilerFile
 from gui.game_layout import GameLayout
 
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self, file = None):
+    def __init__(self, file: str | None = None):
         super().__init__()
         self.dark_mode = True
         self.text_size = 12
@@ -50,7 +50,7 @@ class MainWindow(QtWidgets.QMainWindow):
             return
         self.load_file(file[0])
         
-    def load_file(self, file):
+    def load_file(self, file: str):
         spoiler = SpoilerFile()
         spoiler.read(file)
         seed_details = spoiler.get_seed_details()
