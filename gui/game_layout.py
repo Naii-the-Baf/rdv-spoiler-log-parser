@@ -12,9 +12,10 @@ class GameLayout(QtWidgets.QWidget):
     def __init__(self, world: World):
         super().__init__()
         self.game_style: BaseLayout = BaseLayout()
+        self.world: World = world
         unsupported_game = False
 
-        match world.game_id:
+        match self.world.game_id:
             case 'prime1':
                 self.game_style = Prime1Style()
             case 'prime2':
@@ -28,9 +29,9 @@ class GameLayout(QtWidgets.QWidget):
 
         if unsupported_game:
             # TODO: show a dialog or a label somewhere
-            print(f"game {world.game_id} is not supported")
+            print(f"game {self.world.game_id} is not supported")
         try:
-            item_locations = world.get_item_locations()
+            item_locations = self.world.get_item_locations()
         except ValueError as e:
             self.dialog_invalid_game(str(e))
             return
@@ -40,36 +41,42 @@ class GameLayout(QtWidgets.QWidget):
         self.layout.setColumnStretch(1, 30)
         self.layout.setColumnStretch(2, 50)
         row_pos = 0
-        category = 0
         
-        for item_category in item_locations:
-            for item, locations in item_category.items():
-                if len(locations) == 0:
-                    continue
+        for item_category in self.world.game.major_items:
+            row_pos = self.build_items_display(item_category, item_locations[0], row_pos)
+            
+            separator = QtWidgets.QLabel("")
+            self.layout.addWidget(separator, row_pos, 0, 1, 3)
+            row_pos += 1
+            
+        self.build_items_display(self.world.game.minor_items, item_locations[1], row_pos)
+    
+    def build_items_display(self,
+                            item_set: list,
+                            locations: dict,
+                            offset: int) -> int:
+        for item in item_set:
+            if len(locations[item]) == 0:
+                continue
+            
+            text = QtWidgets.QLabel(item)
+            text.setStyleSheet("border:1px solid black;")
 
-                while (category < len(world.game.major_items)) and (item not in world.game.major_items[category]):
-                    category += 1
-                    separator = QtWidgets.QLabel("")
-                    self.layout.addWidget(separator, row_pos, 0, 1, 3)
-                    row_pos += 1
-                
-                text = QtWidgets.QLabel(item)
-                text.setStyleSheet("border:1px solid black;")
+            style = self.game_style
+            if self.world.game.victory_key in item:
+                text.setStyleSheet(f"border:1px solid black;background:{style.victory_background};color:black;")
+            text.setAlignment(QtCore.Qt.AlignCenter)
+            self.layout.addWidget(text, offset, 0, len(locations[item]), 1)
 
-                style = self.game_style
-                if world.game.victory_key in item:
-                    text.setStyleSheet(f"border:1px solid black;background:{style.victory_background};color:black;")
-                text.setAlignment(QtCore.Qt.AlignCenter)
-                self.layout.addWidget(text, row_pos, 0, len(locations), 1)
-
-                for region, area, vanilla_item in locations:
-                    region_label = QtWidgets.QLabel(region)
-                    region_label.setStyleSheet(f"background:{style.background.get(region, style.fallback_background)};color:{style.foreground.get(region, style.fallback_foreground)};")
-                    self.layout.addWidget(region_label, row_pos, 1, 1, 1)
-                    area_label = QtWidgets.QLabel(" ".join([area, vanilla_item]))
-                    area_label.setStyleSheet(f"background:{style.background.get(region, style.fallback_background)};color:{style.foreground.get(region, style.fallback_foreground)};")
-                    self.layout.addWidget(area_label, row_pos, 2, 1, 1)
-                    row_pos += 1
+            for region, area, vanilla_item in locations[item]:
+                region_label = QtWidgets.QLabel(region)
+                region_label.setStyleSheet(f"background:{style.background.get(region, style.fallback_background)};color:{style.foreground.get(region, style.fallback_foreground)};")
+                self.layout.addWidget(region_label, offset, 1, 1, 1)
+                area_label = QtWidgets.QLabel(" ".join([area, vanilla_item]))
+                area_label.setStyleSheet(f"background:{style.background.get(region, style.fallback_background)};color:{style.foreground.get(region, style.fallback_foreground)};")
+                self.layout.addWidget(area_label, offset, 2, 1, 1)
+                offset = offset + 1
+        return offset
 
     def dialog_invalid_game(self, message):
         dialog = QtWidgets.QDialog(self)
