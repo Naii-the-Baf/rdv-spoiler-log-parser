@@ -40,7 +40,10 @@ class GameLayout(QtWidgets.QWidget):
         self.layout.setColumnStretch(0, 20)
         self.layout.setColumnStretch(1, 30)
         self.layout.setColumnStretch(2, 50)
+        
         row_pos = 0
+        if unsupported_game:
+            self.build_items_display(list(item_locations[0].keys()), item_locations[0], row_pos)
         
         for item_category in self.world.game.major_items:
             row_pos = self.build_items_display(item_category, item_locations[0], row_pos)
