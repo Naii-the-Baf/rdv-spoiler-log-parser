@@ -41,8 +41,7 @@ class World:
             for location, pickup in locations.items():
                 room, ref_item = re.split(r"\/Pickup \d?", location)
                 if room is None or ref_item is None:
-                    raise ValueError(
-                        "Error while reading spoiler: Invalid item location: " + location + " " + pickup)
+                    raise ValueError(f"Error while reading spoiler: Invalid item location: {location} {pickup}")
                 if pickup in minor_items:
                     # Minor
                     minor_items[pickup].append((region, room, ref_item))
@@ -50,7 +49,7 @@ class World:
                     # Major
                     major_items[pickup].append((region, room, ref_item))
                 else:
-                    raise ValueError("Error while reading spoiler: Invalid pickup: " + location + " " + pickup)
+                    raise ValueError(f"Error while reading spoiler: Invalid pickup: {location} {pickup}")
         return (major_items, minor_items)
 
     def get_non_supported_game_locations(self):
@@ -60,7 +59,7 @@ class World:
             for location, pickup in locations.items():
                 room, ref_item = re.split(r"\/Pickup \d?", location)
                 if room is None or ref_item is None:
-                    raise ValueError("Error while reading spoiler: Invalid item location: " + location + " " + pickup)
+                    raise ValueError(f"Error while reading spoiler: Invalid item location: {location} {pickup}")
                 major_items[pickup].append((region, room, ref_item))
 
         return (major_items, {})
