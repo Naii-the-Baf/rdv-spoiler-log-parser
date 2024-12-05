@@ -3,9 +3,8 @@ from world import World
 
 class SpoilerFile:
     def __init__(self):
-        self.json = None
-        self.objects = None
-        self.world_names = None
+        self.json: dict = None
+        self.world_names: list | None = None
         
     def read(self, filename):
         with open(filename, "r") as file:

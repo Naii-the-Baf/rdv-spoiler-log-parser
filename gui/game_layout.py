@@ -1,4 +1,5 @@
 from PySide6 import QtCore, QtWidgets, QtGui
+from world import World
 import game
 #TODO: Import layouts as a module
 from gui.layouts.base_layout import BaseLayout
@@ -8,9 +9,9 @@ from gui.layouts.prime3_style import Prime3Style
 from gui.layouts.fusion_style import FusionStyle
 
 class GameLayout(QtWidgets.QWidget):
-    def __init__(self, world):
+    def __init__(self, world: World):
         super().__init__()
-        self.game_style = BaseLayout()
+        self.game_style: BaseLayout = BaseLayout()
         unsupported_game = False
 
         match world.game_id:
@@ -57,16 +58,16 @@ class GameLayout(QtWidgets.QWidget):
 
                 style = self.game_style
                 if world.game.victory_key in item:
-                    text.setStyleSheet("border:1px solid black;background:" + style.victory_background + ";color:black;")
+                    text.setStyleSheet(f"border:1px solid black;background:{style.victory_background};color:black;")
                 text.setAlignment(QtCore.Qt.AlignCenter)
                 self.layout.addWidget(text, row_pos, 0, len(locations), 1)
 
                 for region, area, vanilla_item in locations:
                     region_label = QtWidgets.QLabel(region)
-                    region_label.setStyleSheet("background:" + style.background.get(region, style.fallback_background) + ";color:" + style.foreground.get(region, style.fallback_foreground) + ";")
+                    region_label.setStyleSheet(f"background:{style.background.get(region, style.fallback_background)};color:{style.foreground.get(region, style.fallback_foreground)};")
                     self.layout.addWidget(region_label, row_pos, 1, 1, 1)
                     area_label = QtWidgets.QLabel(" ".join([area, vanilla_item]))
-                    area_label.setStyleSheet("background:" + style.background.get(region, style.fallback_background) + ";color:" + style.foreground.get(region, style.fallback_foreground) + ";")
+                    area_label.setStyleSheet(f"background:{style.background.get(region, style.fallback_background)};color:{style.foreground.get(region, style.fallback_foreground)};")
                     self.layout.addWidget(area_label, row_pos, 2, 1, 1)
                     row_pos += 1
 
