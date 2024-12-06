@@ -8,18 +8,18 @@ class Settings:
         
         self.settings: configparser.ConfigParser = configparser.ConfigParser()
         
-        if not isfile("settings.ini"):
+        if not isfile("rdvslp-settings.ini"):
             # The file doesn't exist, so we create a default one
             self.create_default_settings()
         
-        self.settings.read("settings.ini")
+        self.settings.read("rdvslp-settings.ini")
         
     def create_default_settings(self):
         self.settings.add_section('settings')
         self.settings.set('settings', 'dark_mode', "True")
         self.settings.set('settings', 'text_size', "12")
         
-        with open("settings.ini", 'w') as file:
+        with open("rdvslp-settings.ini", 'w') as file:
             self.settings.write(file)
             file.close()
 
@@ -36,6 +36,6 @@ class Settings:
                      value: str):
         self.settings.set(section, option, value)
         
-        with open("settings.ini", 'w') as file:
+        with open("rdvslp-settings.ini", 'w') as file:
             self.settings.write(file)
             file.close()
