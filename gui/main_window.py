@@ -120,18 +120,3 @@ class MainWindow(QtWidgets.QMainWindow):
             f"font-size:{value}px;"))
         self.text_size = value
         print(f"Font size changed: {self.text_size}")
-
-    def show_race_spoiler_dialog(self):
-        dialog = QtWidgets.QDialog(self)
-        dialog.setWindowTitle("Error")
-        dialog_layout = QtWidgets.QVBoxLayout()
-        message = QtWidgets.QLabel("The rdvgame file does not contain a spoiler; did you try loading a race file?")
-        dialog_layout.addWidget(message)
-        
-        button_values = QtWidgets.QDialogButtonBox.Ok
-        button_box = QtWidgets.QDialogButtonBox(button_values)
-        button_box.accepted.connect(dialog.accept)
-        dialog_layout.addWidget(button_box)
-        
-        dialog.setLayout(dialog_layout)
-        dialog.exec()
