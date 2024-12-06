@@ -19,4 +19,4 @@ Unix: `source .venv/bin/activate`
 `pip install -r requirements.txt`
 
 4. Run the application:
-`python main.py`
+`python src/main.py`

@@ -37,7 +37,7 @@ jobs:
           
       - name: Run pyinstaller
         run: |
-          pyinstaller -n RDVSpoilerLogParser -F main.py
+          pyinstaller RDVSpoilerLogParser.spec
 
       - uses: actions/upload-artifact@v4
         with:
