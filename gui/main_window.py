@@ -1,6 +1,7 @@
 from PySide6 import QtCore, QtWidgets, QtGui
-from spoiler_file import SpoilerFile
+from spoiler_file import SpoilerFile, SpoilerStatusEnum
 from gui.game_layout import GameLayout
+from gui.notification_dialog import NotificationDialog
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, file: str | None = None):
@@ -56,12 +57,15 @@ class MainWindow(QtWidgets.QMainWindow):
         
     def load_file(self, file: str):
         spoiler = SpoilerFile()
-        spoiler.read(file)
+        r = spoiler.read(file)
+        if r != SpoilerStatusEnum.OK:
+            NotificationDialog.show(self, "Error", "Invalid rdvgame")
+            return
         seed_details = spoiler.get_seed_details()
         print(seed_details)
         
         if not seed_details['has_spoiler']:
-            self.show_race_spoiler_dialog()
+            NotificationDialog.show(self, "Error", "The rdvgame file does not contain a spoiler; did you try loading a race file?")
             return
         
         worlds = spoiler.get_worlds()
@@ -105,15 +109,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def change_text_size(self, value, parent):
         value = int(value)
         if value < 10 or value > 24:
-            dialog = QtWidgets.QDialog(parent)
-            dialog.setWindowTitle("Error")
-            
-            dialog_layout = QtWidgets.QVBoxLayout()
-            message = QtWidgets.QLabel("Invalid text size; only allowed sizes are between 10px and 24px.")
-            dialog_layout.addWidget(message)
-            
-            dialog.setLayout(dialog_layout)
-            dialog.exec()
+            NotificationDialog.show(parent, "Error", "Invalid text size; only allowed sizes are between 10px and 24px.")
             return
         self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace(
             f"font-size:{self.text_size}px;",
