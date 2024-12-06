@@ -22,29 +22,22 @@ class World:
                 pass
 
     def get_item_locations(self) -> tuple[dict, dict]:
-        major_items = dict()  # Name: [(region, room, reference)]
-        minor_items = dict()
+        major_items = defaultdict(list)  # Name: [(region, room, reference)]
+        minor_items = defaultdict(list)
 
         # If we're on a not supported game, handle things extra
         if isinstance(self.game, game.NotSupportedGame):
             return self.get_non_supported_game_locations()
-
-        for category in self.game.major_items:
-            for item in category:
-                major_items[item] = []
-
-        for item in self.game.minor_items:
-            minor_items[item] = []
 
         for region, locations in self.items.items():
             for location, pickup in locations.items():
                 room, ref_item = re.split(r"\/Pickup \d?", location)
                 if room is None or ref_item is None:
                     raise ValueError(f"Error while reading spoiler: Invalid item location: {location} {pickup}")
-                if pickup in minor_items:
+                if pickup in self.game.minor_items:
                     # Minor
                     minor_items[pickup].append((region, room, ref_item))
-                elif pickup in major_items:
+                elif any(pickup in category for category in self.game.major_items):
                     # Major
                     major_items[pickup].append((region, room, ref_item))
                 else:
