@@ -57,7 +57,11 @@ class MainWindow(QtWidgets.QMainWindow):
         
     def load_file(self, file: str):
         spoiler = SpoilerFile()
-        r = spoiler.read(file)
+        try:
+            r = spoiler.read(file)
+        except OSError:
+            NotificationDialog.show(self, "Error", "File could not be read")
+            return
         if r != SpoilerStatusEnum.OK:
             NotificationDialog.show(self, "Error", "Invalid rdvgame")
             return
