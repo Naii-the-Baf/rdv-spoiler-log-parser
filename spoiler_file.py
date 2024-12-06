@@ -1,17 +1,23 @@
 import json
 from world import World
+from enum import Enum
 
 class SpoilerFile:
     def __init__(self):
         self.json: dict = None
         self.world_names: list | None = None
         
-    def read(self, filename):
+    def read(self, filename) -> int:
         with open(filename, "r") as file:
-            self.json = json.load(file)
-            file.close()
+            try:
+                self.json = json.load(file)
+            except:
+                return SpoilerStatusEnum.JSON_READ_ERROR
+            finally:
+                file.close()
+        return SpoilerStatusEnum.OK
         
-    def get_seed_details(self):
+    def get_seed_details(self) -> dict:
         details = dict()
         details['permalink']    = self.json['info']['permalink']
         details['hash']         = self.json['info']['hash']
@@ -27,7 +33,7 @@ class SpoilerFile:
             return
         self.world_names = names
     
-    def get_worlds(self):
+    def get_worlds(self) -> list[World]:
         if (self.world_names is None):
             self.set_world_names()
         
@@ -35,3 +41,7 @@ class SpoilerFile:
         for world in self.json['game_modifications']:
             worlds.append(World(world))
         return worlds
+
+class SpoilerStatusEnum(Enum):
+    OK = 0
+    JSON_READ_ERROR = 1

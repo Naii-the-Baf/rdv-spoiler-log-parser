@@ -1,6 +1,7 @@
 from PySide6 import QtCore, QtWidgets, QtGui
 from world import World
 import game
+from gui.notification_dialog import NotificationDialog
 #TODO: Import layouts as a module
 from gui.layouts.base_layout import BaseLayout
 from gui.layouts.prime1_style import Prime1Style
@@ -27,13 +28,10 @@ class GameLayout(QtWidgets.QWidget):
             case _:
                 unsupported_game = True
 
-        if unsupported_game:
-            # TODO: show a dialog or a label somewhere
-            print(f"game {self.world.game_id} is not supported")
         try:
             item_locations = self.world.get_item_locations()
         except ValueError as e:
-            self.dialog_invalid_game(str(e))
+            NotificationDialog.show(self, "Error", str(e))
             return
         
         self.layout: QtWidgets.QGridLayout = QtWidgets.QGridLayout(self)
@@ -43,6 +41,8 @@ class GameLayout(QtWidgets.QWidget):
         
         row_pos = 0
         if unsupported_game:
+            NotificationDialog.show(self, "Warning", f"Game {self.world.game_id} is not supported")
+            print(f"Game {self.world.game_id} is not supported")
             self.build_items_display(list(item_locations[0].keys()), item_locations[0], row_pos)
         
         for item_category in self.world.game.major_items:
@@ -80,14 +80,3 @@ class GameLayout(QtWidgets.QWidget):
                 self.layout.addWidget(area_label, offset, 2, 1, 1)
                 offset = offset + 1
         return offset
-
-    def dialog_invalid_game(self, message):
-        dialog = QtWidgets.QDialog(self)
-        dialog.setWindowTitle("Error")
-        dialog_layout = QtWidgets.QVBoxLayout()
-        label_message = QtWidgets.QLabel("Invalid rdvgame")
-        dialog_layout.addWidget(label_message)
-        label_error = QtWidgets.QLabel(message)
-        dialog_layout.addWidget(label_error)
-        dialog.setLayout(dialog_layout)
-        dialog.exec()
