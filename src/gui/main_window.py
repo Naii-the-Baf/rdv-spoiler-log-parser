@@ -2,6 +2,7 @@ from PySide6 import QtCore, QtWidgets, QtGui
 from spoiler_file import SpoilerFile, SpoilerStatusEnum
 from gui.game_layout import GameLayout
 from gui.notification_dialog import NotificationDialog
+import os
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, file: str | None = None):
@@ -60,7 +61,7 @@ class MainWindow(QtWidgets.QMainWindow):
         try:
             r = spoiler.read(file)
         except OSError:
-            NotificationDialog.show(self, "Error", "File could not be read")
+            NotificationDialog.show(self, "Error", f"File \"{file}\" not be read")
             return
         if r != SpoilerStatusEnum.OK:
             NotificationDialog.show(self, "Error", "Invalid rdvgame")
@@ -120,3 +121,36 @@ class MainWindow(QtWidgets.QMainWindow):
             f"font-size:{value}px;"))
         self.text_size = value
         print(f"Font size changed: {self.text_size}")
+
+    # Override
+    def dragEnterEvent(self, event: QtGui.QDragEnterEvent):
+        if event.mimeData().hasUrls():
+            event.accept()
+            return
+        event.ignore()
+            
+    # Override
+    def dragMoveEvent(self, event: QtGui.QDragMoveEvent):
+        if event.mimeData().hasUrls:
+            event.setDropAction(QtCore.Qt.CopyAction)
+            event.accept()
+            return
+        event.ignore()
+
+    # Override
+    def dropEvent(self, event: QtGui.QDropEvent):
+        if event.mimeData().hasUrls:
+            event.setDropAction(QtCore.Qt.CopyAction)
+            event.accept()
+            
+            # Remove the URI stuff to convert into a path
+            path = event.mimeData().urls()[0].toString()
+            # TODO: Make this cross-platform
+            if os.name == 'nt':
+                # Windows' routes are special
+                path = path[8:]
+            else:
+                path = path[7:]
+            self.load_file(path)
+            return
+        event.ignore()
