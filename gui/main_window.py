@@ -45,10 +45,14 @@ class MainWindow(QtWidgets.QMainWindow):
             self.load_file(file)
         
     def load_file_dialog(self):
-        file = QtWidgets.QFileDialog.getOpenFileName(self, "Load file...", filter="Randovania Game (*.rdvgame)")
-        if file[0] == '':
+        file_dialog = QtWidgets.QFileDialog(self)
+        file_dialog.setFileMode(QtWidgets.QFileDialog.FileMode.ExistingFiles)
+        file_dialog.setNameFilter("Randovania Game (*.rdvgame)")
+        file_dialog.exec()
+        files = file_dialog.selectedFiles()
+        if len(files) == 0:
             return
-        self.load_file(file[0])
+        self.load_file(files[0])
         
     def load_file(self, file: str):
         spoiler = SpoilerFile()
