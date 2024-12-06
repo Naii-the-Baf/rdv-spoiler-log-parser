@@ -2,13 +2,16 @@ from PySide6 import QtCore, QtWidgets, QtGui
 from spoiler_file import SpoilerFile, SpoilerStatusEnum
 from gui.game_layout import GameLayout
 from gui.notification_dialog import NotificationDialog
+from settings import Settings
 import os
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, file: str | None = None):
         super().__init__()
-        self.dark_mode = True
-        self.text_size = 12
+        
+        self.settings = Settings().get_options()
+        self.dark_mode: bool = self.settings['dark_mode']        
+        self.text_size: int = self.settings['text_size']
         
         self.setWindowTitle("Spoiler Log Parser")
         
@@ -34,7 +37,7 @@ class MainWindow(QtWidgets.QMainWindow):
         dark_mode_action = QtGui.QAction("Dark Mode", self)
         dark_mode_action.setStatusTip("Enables or disables dark mode.")
         dark_mode_action.setCheckable(True)
-        dark_mode_action.setChecked(True)
+        dark_mode_action.setChecked(self.dark_mode)
         dark_mode_action.triggered.connect(self.toggle_mode)
         preferences_menu.addAction(dark_mode_action)
         
@@ -42,6 +45,10 @@ class MainWindow(QtWidgets.QMainWindow):
         text_action.setStatusTip("Change the text size.")
         text_action.triggered.connect(self.change_text_size_dialog)
         preferences_menu.addAction(text_action)
+        
+        if not self.dark_mode:
+            self.set_light_mode()
+        self.change_text_size(self.text_size, self)
         
         if file != None:
             self.load_file(file)
@@ -111,11 +118,14 @@ class MainWindow(QtWidgets.QMainWindow):
         dialog.setLayout(dialog_layout)
         dialog.exec()
 
-    def change_text_size(self, value, parent):
+    def change_text_size(self, value: int, parent: QtWidgets.QWidget):
         value = int(value)
         if value < 10 or value > 24:
             NotificationDialog.show(parent, "Error", "Invalid text size; only allowed sizes are between 10px and 24px.")
+            if self.text_size < 10 or self.text_size > 24:
+                self.text_size = 12
             return
+
         self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace(
             f"font-size:{self.text_size}px;",
             f"font-size:{value}px;"))
