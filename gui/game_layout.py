@@ -28,9 +28,6 @@ class GameLayout(QtWidgets.QWidget):
             case _:
                 unsupported_game = True
 
-        if unsupported_game:
-            # TODO: show a dialog or a label somewhere
-            print(f"game {self.world.game_id} is not supported")
         try:
             item_locations = self.world.get_item_locations()
         except ValueError as e:
@@ -44,6 +41,8 @@ class GameLayout(QtWidgets.QWidget):
         
         row_pos = 0
         if unsupported_game:
+            NotificationDialog.show(self, "Warning", f"Game {self.world.game_id} is not supported")
+            print(f"Game {self.world.game_id} is not supported")
             self.build_items_display(list(item_locations[0].keys()), item_locations[0], row_pos)
         
         for item_category in self.world.game.major_items:
