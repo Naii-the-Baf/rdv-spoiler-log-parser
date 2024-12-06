@@ -9,9 +9,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, file: str | None = None):
         super().__init__()
         
-        self.settings = Settings().get_options()
-        self.dark_mode: bool = self.settings['dark_mode']        
-        self.text_size: int = self.settings['text_size']
+        self.settings = Settings()
+        self.options = self.settings.get_options()
+        self.dark_mode: bool = self.options['dark_mode']
+        self.text_size: int = self.options['text_size']
         
         self.setWindowTitle("Spoiler Log Parser")
         
@@ -23,7 +24,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.scroll_area.setObjectName("scrollArea")
         self.scroll_area.setEnabled(True)
         self.setCentralWidget(self.scroll_area)
-        self.scroll_area.setStyleSheet("background:#333333;color:white;font-size:12px;")
+        self.scroll_area.setStyleSheet(f"background:#333333;color:white;font-size:{self.text_size}px;")
         
         menu = self.menuBar()
         file_menu = menu.addMenu("File")
@@ -48,7 +49,6 @@ class MainWindow(QtWidgets.QMainWindow):
         
         if not self.dark_mode:
             self.set_light_mode()
-        self.change_text_size(self.text_size, self)
         
         if file != None:
             self.load_file(file)
@@ -86,8 +86,9 @@ class MainWindow(QtWidgets.QMainWindow):
     def toggle_mode(self):
         if self.dark_mode:
             self.set_light_mode()
-            return
-        self.set_dark_mode()
+        else:
+            self.set_dark_mode()
+        self.settings.write_option('settings', 'dark_mode', str(self.dark_mode))
     
     def set_light_mode(self):
         self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace("background:#333333;color:white;", "background:#DDDDDD;color:black;"))
@@ -131,6 +132,7 @@ class MainWindow(QtWidgets.QMainWindow):
             f"font-size:{value}px;"))
         self.text_size = value
         print(f"Font size changed: {self.text_size}")
+        self.settings.write_option('settings', 'text_size', str(self.text_size))
 
     # Override
     def dragEnterEvent(self, event: QtGui.QDragEnterEvent):
