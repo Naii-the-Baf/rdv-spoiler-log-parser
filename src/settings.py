@@ -7,24 +7,27 @@ from pathlib import Path
 # TODO: Define an schema with default values
 class Settings:
     def __init__(self):
-        self.settings_path: Path = None
+        self.settings_dir: Path = None
         self.settings_filename: str = "rdvslp-settings.json"
+        self.full_path: Path = None
         self.options: dict = dict()
         
         match platform.system():
             case "Windows":
-                self.settings_path = Path(f"{os.environ['LOCALAPPDATA']}\\RDVSpoilerLogParser\\")
+                self.settings_dir = Path(f"{os.environ['LOCALAPPDATA']}/RDVSpoilerLogParser")
             case "Linux":
-                self.settings_path = Path.home().joinpath(".RDVSpoilerLogParser/")
+                self.settings_dir = Path.home().joinpath(".RDVSpoilerLogParser/")
             case "Darwin":
-                self.settings_path = Path.home().joinpath("Library/Application Support/RDVSpoilerLogParser/")
+                self.settings_dir = Path.home().joinpath("Library/Application Support/RDVSpoilerLogParser/")
         
-        if not os.path.isfile(self.settings_filename):
+        self.full_path = self.settings_dir.joinpath(self.settings_filename)
+        
+        if not self.full_path.exists():
             # The file doesn't exist, so we create a default one
             print("Creating default settings")
             self.create_default_settings()
         
-        with open(self.settings_path.joinpath(self.settings_filename)) as file:
+        with self.full_path.open(mode = "r") as file:
             self.options = json.load(file)
             file.close()
         
@@ -43,9 +46,9 @@ class Settings:
         self.options[option] = value
         
     def save_options_to_file(self):
-        if not os.path.isdir(self.settings_path):
-            Path.mkdir(self.settings_path)
+        if not os.path.isdir(self.settings_dir):
+            Path.mkdir(self.settings_dir)
         
-        with open(self.settings_path.joinpath(self.settings_filename), 'w') as file:
+        with self.full_path.open(mode = "w") as file:
             json.dump(self.options, file)
             file.close()
