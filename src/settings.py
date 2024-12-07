@@ -1,26 +1,18 @@
 import json
 import os
-import platform
+import platformdirs
 from pathlib import Path
 
 # TODO: Make copying the settings file unnecessary
 # TODO: Define an schema with default values
 class Settings:
     def __init__(self):
-        self.settings_dir: Path = None
-        self.settings_filename: str = "rdvslp-settings.json"
+        self.settings_dir: Path = Path(platformdirs.user_config_dir(appname='RDVSpoilerLogParser'))
+        self.settings_file_path: Path = Path('rdvslp-settings.json')
         self.full_path: Path = None
         self.options: dict = dict()
         
-        match platform.system():
-            case "Windows":
-                self.settings_dir = Path(f"{os.environ['LOCALAPPDATA']}/RDVSpoilerLogParser")
-            case "Linux":
-                self.settings_dir = Path.home().joinpath(".RDVSpoilerLogParser/")
-            case "Darwin":
-                self.settings_dir = Path.home().joinpath("Library/Application Support/RDVSpoilerLogParser/")
-        
-        self.full_path = self.settings_dir.joinpath(self.settings_filename)
+        self.full_path = self.settings_dir.joinpath(self.settings_file_path)
         
         if not self.full_path.exists():
             # The file doesn't exist, so we create a default one
