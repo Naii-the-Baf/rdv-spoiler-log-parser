@@ -15,16 +15,16 @@ class Settings:
         self.settings.read(self.settings_filename)
         
     def create_default_settings(self):
-        self.settings.add_section('settings')
-        self.settings.set('settings', 'dark_mode', "True")
-        self.settings.set('settings', 'text_size', "12")
+        self.settings.add_section('rdvslp')
+        self.settings.set('rdvslp', 'dark_mode', "True")
+        self.settings.set('rdvslp', 'text_size', "12")
         
         self.save_options_to_file(self)
 
     def get_options(self) -> dict:
         values = {
-            'dark_mode':    self.settings.get('settings', 'dark_mode', fallback="True") == "True",
-            'text_size':    int(self.settings.get('settings', 'text_size', fallback=12)),
+            'dark_mode':    self.settings.get('rdvslp', 'dark_mode', fallback="True") == "True",
+            'text_size':    int(self.settings.get('rdvslp', 'text_size', fallback=12)),
         }
         return values
     

@@ -88,7 +88,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.set_light_mode()
         else:
             self.set_dark_mode()
-        self.settings.write_option('settings', 'dark_mode', str(self.dark_mode))
+        self.settings.write_option('rdvslp', 'dark_mode', str(self.dark_mode))
     
     def set_light_mode(self):
         self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace("background:#333333;color:white;", "background:#DDDDDD;color:black;"))
@@ -132,7 +132,7 @@ class MainWindow(QtWidgets.QMainWindow):
             f"font-size:{value}px;"))
         self.text_size = value
         print(f"Font size changed: {self.text_size}")
-        self.settings.write_option('settings', 'text_size', str(self.text_size))
+        self.settings.write_option('rdvslp', 'text_size', str(self.text_size))
 
     # Override
     def dragEnterEvent(self, event: QtGui.QDragEnterEvent):
