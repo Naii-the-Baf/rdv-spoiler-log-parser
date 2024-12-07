@@ -14,6 +14,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dark_mode: bool = self.options['dark_mode']
         self.text_size: int = self.options['text_size']
         
+        # Validate text size in case it was modified externally
+        if self.text_size < 10 or self.text_size > 24:
+            self.text_size = 12
+            self.settings.write_option('rdvslp', 'text_size', '12')
+        
         self.setWindowTitle("Spoiler Log Parser")
         
         self.scroll_area = QtWidgets.QScrollArea()
