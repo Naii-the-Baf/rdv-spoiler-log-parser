@@ -3,7 +3,6 @@ import os
 import platformdirs
 from pathlib import Path
 
-# TODO: Make copying the settings file unnecessary
 # TODO: Define an schema with default values
 class Settings:
     def __init__(self):
