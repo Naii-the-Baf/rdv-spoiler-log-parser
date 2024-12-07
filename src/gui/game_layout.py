@@ -39,7 +39,12 @@ class GameLayout(QtWidgets.QWidget):
         self.layout.setColumnStretch(1, 30)
         self.layout.setColumnStretch(2, 50)
         
-        row_pos = 0
+        starting = item_locations[2]
+        starting_label = QtWidgets.QLabel(f"Starting items: {", ".join(starting)}")
+        starting_label.setWordWrap(True)
+        self.layout.addWidget(starting_label, 0, 0, 1, 3)
+        
+        row_pos = 1
         if unsupported_game:
             NotificationDialog.show(self, "Warning", f"Game {self.world.game_id} is not supported")
             print(f"Game {self.world.game_id} is not supported")
