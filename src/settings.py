@@ -32,8 +32,10 @@ class Settings:
             file.close()
         
     def create_default_settings(self):
-        self.options['dark_mode'] = True
-        self.options['text_size'] = 12
+        self.options = {
+            'dark_mode': True,
+            'text_size': 12,
+        }
         
         self.save_options_to_file()
 
