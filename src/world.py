@@ -8,7 +8,10 @@ class World:
         self.game_id: str = world['game']
         self.game: game.Game = game.NotSupportedGame()
         self.items: dict = world['locations']
-        self.starting: list[str] = world['starting_equipment']['pickups']
+        self.starting: list[str] = ['Unknown']
+        
+        if 'starting_equipment' in world:
+            self.starting = world['starting_equipment']['pickups']
 
         match self.game_id:
             case 'prime1':
