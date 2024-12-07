@@ -19,7 +19,7 @@ class Settings:
         self.settings.set('rdvslp', 'dark_mode', "True")
         self.settings.set('rdvslp', 'text_size', "12")
         
-        self.save_options_to_file(self)
+        self.save_options_to_file()
 
     def get_options(self) -> dict:
         values = {
