@@ -9,7 +9,7 @@ class Settings:
     def __init__(self):
         self.settings_path: Path = None
         self.settings_filename: str = "rdvslp-settings.json"
-        self.settings: dict = dict()
+        self.options: dict = dict()
         
         match platform.system():
             case "Windows":
@@ -25,27 +25,27 @@ class Settings:
             self.create_default_settings()
         
         with open(self.settings_path.joinpath(self.settings_filename)) as file:
-            self.settings = json.load(file)
+            self.options = json.load(file)
             file.close()
         
     def create_default_settings(self):
-        self.settings['dark_mode'] = True
-        self.settings['text_size'] = 12
+        self.options['dark_mode'] = True
+        self.options['text_size'] = 12
         
         self.save_options_to_file()
 
     def get_options(self) -> dict:
-        return self.settings
+        return self.options
     
     def write_option(self,
                      option: str,
                      value: str):
-        self.settings[option] = value
+        self.options[option] = value
         
     def save_options_to_file(self):
-        print(self.settings_path.joinpath(self.settings_filename))
         if not os.path.isdir(self.settings_path):
             Path.mkdir(self.settings_path)
+        
         with open(self.settings_path.joinpath(self.settings_filename), 'w') as file:
-            json.dump(self.settings, file)
+            json.dump(self.options, file)
             file.close()
