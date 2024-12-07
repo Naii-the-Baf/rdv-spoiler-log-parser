@@ -19,9 +19,7 @@ class Settings:
         self.settings.set('settings', 'dark_mode', "True")
         self.settings.set('settings', 'text_size', "12")
         
-        with open(self.settings_filename, 'w') as file:
-            self.settings.write(file)
-            file.close()
+        self.save_options_to_file(self)
 
     def get_options(self) -> dict:
         values = {
@@ -36,6 +34,7 @@ class Settings:
                      value: str):
         self.settings.set(section, option, value)
         
+    def save_options_to_file(self):
         with open(self.settings_filename, 'w') as file:
             self.settings.write(file)
             file.close()

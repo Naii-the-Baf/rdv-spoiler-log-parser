@@ -166,3 +166,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.load_file(path)
             return
         event.ignore()
+    
+    # Override
+    def closeEvent(self, event: QtGui.QCloseEvent):
+        self.settings.save_options_to_file()
+        return super().closeEvent(event)
