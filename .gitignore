@@ -1,7 +1,9 @@
 .venv/
 venv/
 __pycache__/
-*.rdvgame
 
 build/
 dist/
+
+rdvslp-settings.ini
+*.rdvgame
