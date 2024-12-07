@@ -55,7 +55,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if not self.dark_mode:
             self.set_light_mode()
         
-        if file != None:
+        if file is not None:
             self.load_file(file)
         
     def load_file_dialog(self):
