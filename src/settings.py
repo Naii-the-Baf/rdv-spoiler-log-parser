@@ -19,11 +19,9 @@ class Settings:
             case "Darwin":
                 self.settings_path = Path.home().joinpath("Library/Application Support/RDVSpoilerLogParser/")
         
-        print(self.settings_path)
-        
         if not os.path.isfile(self.settings_filename):
             # The file doesn't exist, so we create a default one
-            print("Creating default")
+            print("Creating default settings")
             self.create_default_settings()
         
         with open(self.settings_path.joinpath(self.settings_filename)) as file:
@@ -47,7 +45,6 @@ class Settings:
     def save_options_to_file(self):
         print(self.settings_path.joinpath(self.settings_filename))
         if not os.path.isdir(self.settings_path):
-            print("Creating directory")
             Path.mkdir(self.settings_path)
         with open(self.settings_path.joinpath(self.settings_filename), 'w') as file:
             json.dump(self.settings, file)
