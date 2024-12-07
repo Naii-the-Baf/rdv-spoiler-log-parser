@@ -3,7 +3,7 @@ from spoiler_file import SpoilerFile, SpoilerStatusEnum
 from gui.game_layout import GameLayout
 from gui.notification_dialog import NotificationDialog
 from settings import Settings
-import os
+import platform
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, file: str | None = None):
@@ -163,7 +163,7 @@ class MainWindow(QtWidgets.QMainWindow):
             # Remove the URI stuff to convert into a path
             path = event.mimeData().urls()[0].toString()
             # TODO: Make this cross-platform
-            if os.name == 'nt':
+            if platform.system() == 'Windows':
                 # Windows' routes are special
                 path = path[8:]
             else:
