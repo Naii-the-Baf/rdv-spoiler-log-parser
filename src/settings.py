@@ -1,42 +1,36 @@
-import configparser
+import json
 from os.path import isfile
 
 # TODO: Make copying the settings file unnecessary
 # TODO: Define an schema with default values
 class Settings:
     def __init__(self):
-        self.settings_filename = "rdvslp-settings.ini"
-        self.settings: configparser.ConfigParser = configparser.ConfigParser()
+        self.settings_filename: str = "rdvslp-settings.json"
+        self.settings: dict = dict()
         
         if not isfile(self.settings_filename):
             # The file doesn't exist, so we create a default one
             self.create_default_settings()
         
-        self.settings.read(self.settings_filename)
+        with open(self.settings_filename) as file:
+            self.settings = json.load(file)
+            file.close()
         
     def create_default_settings(self):
-        self.settings.add_section('rdvslp')
-        self.settings.set('rdvslp', 'dark_mode', "True")
-        self.settings.set('rdvslp', 'text_size', "12")
+        self.settings['dark_mode'] = True
+        self.settings['text_size'] = 12
         
         self.save_options_to_file()
 
     def get_options(self) -> dict:
-        values = {
-            'dark_mode':    self.settings.get('rdvslp', 'dark_mode', fallback="True") == "True",
-            'text_size':    int(self.settings.get('rdvslp', 'text_size', fallback=12)),
-        }
-        return values
+        return self.settings
     
     def write_option(self,
-                     section: str,
                      option: str,
                      value: str):
-        if section not in self.settings.sections():
-            self.settings.add_section(section)
-        self.settings.set(section, option, value)
+        self.settings[option] = value
         
     def save_options_to_file(self):
         with open(self.settings_filename, 'w') as file:
-            self.settings.write(file)
+            json.dump(self.settings, file)
             file.close()
