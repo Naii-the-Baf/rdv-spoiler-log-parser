@@ -32,6 +32,8 @@ class Settings:
                      section: str,
                      option: str,
                      value: str):
+        if section not in self.settings.sections():
+            self.settings.add_section(section)
         self.settings.set(section, option, value)
         
     def save_options_to_file(self):
