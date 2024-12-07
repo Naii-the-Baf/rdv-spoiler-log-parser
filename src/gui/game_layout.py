@@ -39,8 +39,8 @@ class GameLayout(QtWidgets.QWidget):
         self.layout.setColumnStretch(1, 30)
         self.layout.setColumnStretch(2, 50)
         
-        starting = item_locations[2]
-        starting_label = QtWidgets.QLabel(f"Starting items: {", ".join(starting)}")
+        starting = ", ".join(item_locations[2])
+        starting_label = QtWidgets.QLabel(f"Starting items: {starting}")
         starting_label.setWordWrap(True)
         self.layout.addWidget(starting_label, 0, 0, 1, 3)
         
