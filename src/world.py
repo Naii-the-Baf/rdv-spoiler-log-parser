@@ -8,6 +8,10 @@ class World:
         self.game_id: str = world['game']
         self.game: game.Game = game.NotSupportedGame()
         self.items: dict = world['locations']
+        self.starting: list[str] = ['Unknown']
+        
+        if 'starting_equipment' in world:
+            self.starting = world['starting_equipment']['pickups']
 
         match self.game_id:
             case 'prime1':
@@ -21,13 +25,13 @@ class World:
             case _:
                 pass
 
-    def get_item_locations(self) -> tuple[dict, dict]:
-        major_items = defaultdict(list)  # Name: [(region, room, reference)]
-        minor_items = defaultdict(list)
-
+    def get_item_locations(self) -> tuple[dict, dict, list[str]]:
         # If we're on a not supported game, handle things extra
         if isinstance(self.game, game.NotSupportedGame):
             return self.get_non_supported_game_locations()
+        
+        major_items = defaultdict(list)  # Name: [(region, room, reference)]
+        minor_items = defaultdict(list)
 
         for region, locations in self.items.items():
             for location, pickup in locations.items():
@@ -42,9 +46,9 @@ class World:
                     major_items[pickup].append((region, room, ref_item))
                 else:
                     raise ValueError(f"Error while reading spoiler: Invalid pickup: {location} {pickup}")
-        return (major_items, minor_items)
+        return (major_items, minor_items, self.starting)
 
-    def get_non_supported_game_locations(self) -> tuple[dict, dict]:
+    def get_non_supported_game_locations(self) -> tuple[dict, dict, list[str]]:
         # Treat everything as major
         major_items = defaultdict(list)
         for region, locations in self.items.items():
@@ -54,4 +58,4 @@ class World:
                     raise ValueError(f"Error while reading spoiler: Invalid item location: {location} {pickup}")
                 major_items[pickup].append((region, room, ref_item))
 
-        return (major_items, {})
+        return (major_items, {}, self.starting)
