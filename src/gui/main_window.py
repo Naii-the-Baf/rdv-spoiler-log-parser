@@ -3,7 +3,7 @@ from spoiler_file import SpoilerFile, SpoilerStatusEnum
 from gui.game_layout import GameLayout
 from gui.notification_dialog import NotificationDialog
 from settings import Settings
-import os
+import platform
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, file: str | None = None):
@@ -17,7 +17,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Validate text size in case it was modified externally
         if self.text_size < 10 or self.text_size > 24:
             self.text_size = 12
-            self.settings.write_option('rdvslp', 'text_size', '12')
+            self.settings.write_option('text_size', 12)
         
         self.setWindowTitle("Spoiler Log Parser")
         
@@ -93,7 +93,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.set_light_mode()
         else:
             self.set_dark_mode()
-        self.settings.write_option('rdvslp', 'dark_mode', str(self.dark_mode))
+        self.settings.write_option('dark_mode', self.dark_mode)
     
     def set_light_mode(self):
         self.scroll_area.setStyleSheet(self.scroll_area.styleSheet().replace("background:#333333;color:white;", "background:#DDDDDD;color:black;"))
@@ -137,7 +137,7 @@ class MainWindow(QtWidgets.QMainWindow):
             f"font-size:{value}px;"))
         self.text_size = value
         print(f"Font size changed: {self.text_size}")
-        self.settings.write_option('rdvslp', 'text_size', str(self.text_size))
+        self.settings.write_option('text_size', self.text_size)
 
     # Override
     def dragEnterEvent(self, event: QtGui.QDragEnterEvent):
@@ -163,7 +163,7 @@ class MainWindow(QtWidgets.QMainWindow):
             # Remove the URI stuff to convert into a path
             path = event.mimeData().urls()[0].toString()
             # TODO: Make this cross-platform
-            if os.name == 'nt':
+            if platform.system() == 'Windows':
                 # Windows' routes are special
                 path = path[8:]
             else:

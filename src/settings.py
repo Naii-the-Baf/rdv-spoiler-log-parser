@@ -1,42 +1,47 @@
-import configparser
-from os.path import isfile
+import json
+import os
+import platformdirs
+from pathlib import Path
 
-# TODO: Make copying the settings file unnecessary
 # TODO: Define an schema with default values
 class Settings:
     def __init__(self):
-        self.settings_filename = "rdvslp-settings.ini"
-        self.settings: configparser.ConfigParser = configparser.ConfigParser()
+        self.settings_dir: Path = Path(platformdirs.user_config_dir(appname='RDVSpoilerLogParser'))
+        self.settings_file_path: Path = Path('rdvslp-settings.json')
+        self.full_path: Path = None
+        self.options: dict = dict()
         
-        if not isfile(self.settings_filename):
+        self.full_path = self.settings_dir.joinpath(self.settings_file_path)
+        
+        if not self.full_path.exists():
             # The file doesn't exist, so we create a default one
+            print("Creating default settings")
             self.create_default_settings()
         
-        self.settings.read(self.settings_filename)
+        with self.full_path.open(mode = "r") as file:
+            self.options = json.load(file)
+            file.close()
         
     def create_default_settings(self):
-        self.settings.add_section('rdvslp')
-        self.settings.set('rdvslp', 'dark_mode', "True")
-        self.settings.set('rdvslp', 'text_size', "12")
+        self.options = {
+            'dark_mode': True,
+            'text_size': 12,
+        }
         
         self.save_options_to_file()
 
     def get_options(self) -> dict:
-        values = {
-            'dark_mode':    self.settings.get('rdvslp', 'dark_mode', fallback="True") == "True",
-            'text_size':    int(self.settings.get('rdvslp', 'text_size', fallback=12)),
-        }
-        return values
+        return self.options
     
     def write_option(self,
-                     section: str,
                      option: str,
                      value: str):
-        if section not in self.settings.sections():
-            self.settings.add_section(section)
-        self.settings.set(section, option, value)
+        self.options[option] = value
         
     def save_options_to_file(self):
-        with open(self.settings_filename, 'w') as file:
-            self.settings.write(file)
+        if not os.path.isdir(self.settings_dir):
+            Path.mkdir(self.settings_dir)
+        
+        with self.full_path.open(mode = "w") as file:
+            json.dump(self.options, file)
             file.close()
