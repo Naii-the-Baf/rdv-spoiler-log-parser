@@ -5,22 +5,22 @@ import re
 
 class World:
     def __init__(self, world: dict):
-        self.game_id: str = world['game']
+        self.game_id: str = world["game"]
         self.game: game.Game = game.NotSupportedGame()
-        self.items: dict = world['locations']
-        self.starting: list[str] = ['Unknown']
-        
-        if 'starting_equipment' in world:
-            self.starting = world['starting_equipment']['pickups']
+        self.items: dict = world["locations"]
+        self.starting: list[str] = ["Unknown"]
+
+        if "starting_equipment" in world:
+            self.starting = world["starting_equipment"]["pickups"]
 
         match self.game_id:
-            case 'prime1':
+            case "prime1":
                 self.game = game.Prime1()
-            case 'prime2':
+            case "prime2":
                 self.game = game.Prime2()
-            case 'prime3':
+            case "prime3":
                 self.game = game.Prime3()
-            case 'fusion':
+            case "fusion":
                 self.game = game.Fusion()
             case _:
                 pass
@@ -29,7 +29,7 @@ class World:
         # If we're on a not supported game, handle things extra
         if isinstance(self.game, game.NotSupportedGame):
             return self.get_non_supported_game_locations()
-        
+
         major_items = defaultdict(list)  # Name: [(region, room, reference)]
         minor_items = defaultdict(list)
 
@@ -37,7 +37,9 @@ class World:
             for location, pickup in locations.items():
                 room, ref_item = re.split(r"\/Pickup \d?", location)
                 if room is None or ref_item is None:
-                    raise ValueError(f"Error while reading spoiler: Invalid item location: {location} {pickup}")
+                    raise ValueError(
+                        f"Error while reading spoiler: Invalid item location: {location} {pickup}"
+                    )
                 if pickup in self.game.minor_items:
                     # Minor
                     minor_items[pickup].append((region, room, ref_item))
@@ -45,7 +47,9 @@ class World:
                     # Major
                     major_items[pickup].append((region, room, ref_item))
                 else:
-                    raise ValueError(f"Error while reading spoiler: Invalid pickup: {location} {pickup}")
+                    raise ValueError(
+                        f"Error while reading spoiler: Invalid pickup: {location} {pickup}"
+                    )
         return (major_items, minor_items, self.starting)
 
     def get_non_supported_game_locations(self) -> tuple[dict, dict, list[str]]:
@@ -55,7 +59,9 @@ class World:
             for location, pickup in locations.items():
                 room, ref_item = re.split(r"\/Pickup \d?", location)
                 if room is None or ref_item is None:
-                    raise ValueError(f"Error while reading spoiler: Invalid item location: {location} {pickup}")
+                    raise ValueError(
+                        f"Error while reading spoiler: Invalid item location: {location} {pickup}"
+                    )
                 major_items[pickup].append((region, room, ref_item))
 
         return (major_items, {}, self.starting)

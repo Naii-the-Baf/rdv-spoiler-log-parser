@@ -1,6 +1,6 @@
 class Game:
     def __init__(self):
-        self.dock_connections = None # Meant for elevator rando; currently unsupported
+        self.dock_connections = None  # Meant for elevator rando; currently unsupported
         self.has_hints: bool = False
         self.major_items: list = []
         self.minor_items: list = []
@@ -13,7 +13,7 @@ class NotSupportedGame(Game):
     def __init__(self):
         super().__init__()
 
-        
+
 class Prime1(Game):
     def __init__(self):
         super().__init__()
@@ -26,31 +26,37 @@ class Prime1(Game):
                 "Ice Beam",
                 "Plasma Beam",
                 "Charge Beam",
-            ],[
+            ],
+            [
                 "Super Missile",
                 "Wavebuster",
                 "Ice Spreader",
                 "Flamethrower",
                 "Missile Launcher",
-            ],[
+            ],
+            [
                 "Combat Visor",
                 "Scan Visor",
                 "Thermal Visor",
                 "X-Ray Visor",
-            ],[
+            ],
+            [
                 "Morph Ball",
                 "Boost Ball",
                 "Spider Ball",
                 "Morph Ball Bomb",
                 "Power Bomb",
-            ],[
+            ],
+            [
                 "Varia Suit",
                 "Gravity Suit",
                 "Phazon Suit",
-            ],[
+            ],
+            [
                 "Space Jump Boots",
                 "Grapple Beam",
-            ],[
+            ],
+            [
                 "Artifact of Truth",
                 "Artifact of Strength",
                 "Artifact of Elder",
@@ -75,6 +81,7 @@ class Prime1(Game):
         self.special_configurations = []
         self.victory_key = "Artifact of"
 
+
 class Prime2(Game):
     def __init__(self):
         super().__init__()
@@ -87,40 +94,47 @@ class Prime2(Game):
                 "Light Beam",
                 "Annihilator Beam",
                 "Charge Beam",
-            ],[
+            ],
+            [
                 "Super Missile",
                 "Darkburst",
                 "Sunburst",
                 "Sonic Boom",
                 "Missile Launcher",
                 "Seeker Launcher",
-            ],[
+            ],
+            [
                 "Combat Visor",
                 "Scan Visor",
                 "Dark Visor",
                 "Echo Visor",
-            ],[
+            ],
+            [
                 "Morph Ball",
                 "Boost Ball",
                 "Spider Ball",
                 "Morph Ball Bomb",
                 "Power Bomb",
-            ],[
+            ],
+            [
                 "Dark Suit",
                 "Light Suit",
                 "Progressive Suit",
-            ],[
+            ],
+            [
                 "Space Jump Boots",
                 "Gravity Boost",
                 "Grapple Beam",
                 "Screw Attack",
                 "Progressive Grapple",
-            ],[
+            ],
+            [
                 "Violet Translator",
                 "Amber Translator",
                 "Emerald Translator",
                 "Cobalt Translator",
-            ],[
+            ],
+            [
                 "Dark Agon Key 1",
                 "Dark Agon Key 2",
                 "Dark Agon Key 3",
@@ -130,7 +144,8 @@ class Prime2(Game):
                 "Ing Hive Key 1",
                 "Ing Hive Key 2",
                 "Ing Hive Key 3",
-            ],[
+            ],
+            [
                 "Sky Temple Key 1",
                 "Sky Temple Key 2",
                 "Sky Temple Key 3",
@@ -140,7 +155,8 @@ class Prime2(Game):
                 "Sky Temple Key 7",
                 "Sky Temple Key 8",
                 "Sky Temple Key 9",
-            ],[
+            ],
+            [
                 "Unlimited Missiles",
                 "Unlimited Beam Ammo",
                 "Double Damage",
@@ -160,6 +176,7 @@ class Prime2(Game):
         self.special_configurations = []
         self.victory_key = "Sky Temple Key"
 
+
 class Prime3(Game):
     def __init__(self):
         super().__init__()
@@ -172,38 +189,46 @@ class Prime3(Game):
                 "Nova Beam",
                 "Progressive Beam",
                 "Charge Beam",
-            ],[
+            ],
+            [
                 "Missile Launcher",
                 "Ice Missile",
                 "Seeker Missile",
                 "Progressive Missile",
-            ],[
+            ],
+            [
                 "Combat Visor",
                 "Scan Visor",
                 "Command Visor",
                 "X-Ray Visor",
-            ],[
+            ],
+            [
                 "Morph Ball",
                 "Boost Ball",
                 "Spider Ball",
                 "Morph Ball Bombs",
-            ],[
+            ],
+            [
                 "Hazard Shield",
                 "Space Jump Boots",
                 "Screw Attack",
-            ],[
+            ],
+            [
                 "Hypermode",
                 "Hyper Ball",
                 "Hyper Missile",
                 "Hyper Grapple",
-            ],[
+            ],
+            [
                 "Grapple Lasso",
                 "Grapple Swing",
                 "Grapple Voltage",
-            ],[
+            ],
+            [
                 "Ship Missile",
                 "Ship Grapple",
-            ],[
+            ],
+            [
                 "Energy Cell 1",
                 "Energy Cell 2",
                 "Energy Cell 3",
@@ -225,6 +250,7 @@ class Prime3(Game):
         self.special_configurations = []
         self.victory_key = "Energy Cell"
 
+
 class Fusion(Game):
     def __init__(self):
         super().__init__()
@@ -237,29 +263,35 @@ class Fusion(Game):
                 "Plasma Beam",
                 "Wave Beam",
                 "Ice Beam",
-            ],[
+            ],
+            [
                 "Missile Launcher Data",
                 "Super Missile Data",
                 "Ice Missile Data",
                 "Diffusion Missile Data",
-            ],[
+            ],
+            [
                 "Morph Ball",
                 "Morph Ball Bomb Data",
                 "Power Bomb Data",
-            ],[
+            ],
+            [
                 "Varia Suit",
                 "Gravity Suit",
-            ],[
+            ],
+            [
                 "Hi-Jump",
                 "Space Jump",
                 "Speed Booster",
                 "Screw Attack",
-            ],[
+            ],
+            [
                 "Level 1 Locks",
                 "Level 2 Locks",
                 "Level 3 Locks",
                 "Level 4 Locks",
-            ],[
+            ],
+            [
                 "Infant Metroid 1",
                 "Infant Metroid 2",
                 "Infant Metroid 3",
