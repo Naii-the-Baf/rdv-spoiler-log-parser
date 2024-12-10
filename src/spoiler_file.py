@@ -1,3 +1,4 @@
+from __future__ import annotations
 import json
 from world import World
 from enum import Enum
@@ -8,14 +9,15 @@ class SpoilerFile:
         self.json: dict = None
         self.world_names: list | None = None
 
-    def read(self, filename) -> int:
-        with open(filename, "r") as file:
-            try:
+    def read(self, filename) -> SpoilerStatusEnum:
+        try:
+            with open(filename, "r") as file:
                 self.json = json.load(file)
-            except (OSError, json.JSONDecodeError):
-                return SpoilerStatusEnum.JSON_READ_ERROR
-            finally:
                 file.close()
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            return SpoilerStatusEnum.JSON_READ_ERROR
+        except Exception:
+            return SpoilerStatusEnum.FILE_READ_ERROR
         return SpoilerStatusEnum.OK
 
     def get_seed_details(self) -> dict:
@@ -44,6 +46,16 @@ class SpoilerFile:
         return worlds
 
 
-class SpoilerStatusEnum(Enum):
-    OK = 0
-    JSON_READ_ERROR = 1
+class SpoilerStatusEnum(str, Enum):
+    message: str
+
+    def __new__(cls, title: str, message: str = "") -> SpoilerStatusEnum:
+        obj = str.__new__(cls, title)
+        obj._value_ = title
+
+        obj.message = message
+        return obj
+
+    OK = (0, "")
+    JSON_READ_ERROR = (1, "Invalid rdvgame")
+    FILE_READ_ERROR = (2, "File could not be read")
