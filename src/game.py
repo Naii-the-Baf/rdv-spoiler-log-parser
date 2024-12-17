@@ -1,12 +1,20 @@
 class Game:
+    dock_connections: list
+    has_hints: bool
+    major_items: list
+    minor_items: list
+    nothing_item: str
+    special_configurations: list
+    victory_key: str
+
     def __init__(self):
         self.dock_connections = None  # Meant for elevator rando; currently unsupported
-        self.has_hints: bool = False
-        self.major_items: list = []
-        self.minor_items: list = []
-        self.nothing_item: str = "Energy Transfer Module"
-        self.special_configurations: list = []
-        self.victory_key: str = "A default victory key"
+        self.has_hints = False
+        self.major_items = []
+        self.minor_items = []
+        self.nothing_item = "Energy Transfer Module"
+        self.special_configurations = []
+        self.victory_key = "A default victory key"
 
 
 class NotSupportedGame(Game):

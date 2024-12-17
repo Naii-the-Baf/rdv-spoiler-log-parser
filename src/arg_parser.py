@@ -2,6 +2,9 @@ import argparse
 
 
 class ArgParser:
+    parser: argparse.ArgumentParser
+    args: argparse.Namespace
+
     def __init__(self):
         self.parser = self.define_args()
         self.args = self.parser.parse_args()

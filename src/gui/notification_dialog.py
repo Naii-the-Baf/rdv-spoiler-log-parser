@@ -14,7 +14,7 @@ class NotificationDialog:
         message_label = QtWidgets.QLabel(message)
         dialog_layout.addWidget(message_label)
 
-        button_values = QtWidgets.QDialogButtonBox.Close
+        button_values = QtWidgets.QDialogButtonBox.StandardButton.Close
         button_box = QtWidgets.QDialogButtonBox(button_values)
         button_box.rejected.connect(dialog.reject)
         dialog_layout.addWidget(button_box)

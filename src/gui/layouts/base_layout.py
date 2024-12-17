@@ -1,4 +1,10 @@
 class BaseLayout:
+    background: dict[str, str]
+    foreground: dict[str, str]
+    fallback_background: str
+    fallback_foreground: str
+    victory_background: str
+
     def __init__(self):
         self.background = {}
         self.foreground = {}

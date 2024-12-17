@@ -2,17 +2,23 @@ import json
 import os
 import platformdirs
 from pathlib import Path
+from typing import Any
 
 
 # TODO: Define an schema with default values
 class Settings:
+    settings_dir: Path
+    settings_file_path: Path
+    full_path: Path
+    options: dict
+
     def __init__(self):
-        self.settings_dir: Path = Path(
+        self.settings_dir = Path(
             platformdirs.user_config_dir(appname="RDVSpoilerLogParser")
         )
-        self.settings_file_path: Path = Path("rdvslp-settings.json")
-        self.full_path: Path = None
-        self.options: dict = dict()
+        self.settings_file_path = Path("rdvslp-settings.json")
+        self.full_path = None
+        self.options = {}
 
         self.full_path = self.settings_dir.joinpath(self.settings_file_path)
 
@@ -36,7 +42,7 @@ class Settings:
     def get_options(self) -> dict:
         return self.options
 
-    def write_option(self, option: str, value: str):
+    def write_option(self, option: str, value: Any):
         self.options[option] = value
 
     def save_options_to_file(self):
