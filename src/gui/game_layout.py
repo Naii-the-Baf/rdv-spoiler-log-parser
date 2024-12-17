@@ -1,3 +1,4 @@
+from typing import Callable
 from PySide6 import QtCore, QtWidgets
 from world import World
 from gui.notification_dialog import NotificationDialog
@@ -11,10 +12,15 @@ from gui.layouts.fusion_style import FusionStyle
 
 
 class GameLayout(QtWidgets.QWidget):
+    game_style: BaseLayout
+    world: World
+    # We override this with the layout we intend to use
+    layout: Callable[..., QtWidgets.QGridLayout]
+
     def __init__(self, world: World):
         super().__init__()
-        self.game_style: BaseLayout = BaseLayout()
-        self.world: World = world
+        self.game_style = BaseLayout()
+        self.world = world
         unsupported_game = False
 
         match self.world.game_id:
@@ -35,15 +41,15 @@ class GameLayout(QtWidgets.QWidget):
             NotificationDialog.show(self, "Error", str(e))
             return
 
-        self.layout: QtWidgets.QGridLayout = QtWidgets.QGridLayout(self)
-        self.layout.setColumnStretch(0, 20)
-        self.layout.setColumnStretch(1, 30)
-        self.layout.setColumnStretch(2, 50)
+        self.setLayout(QtWidgets.QGridLayout(self))
+        self.layout().setColumnStretch(0, 20)
+        self.layout().setColumnStretch(1, 30)
+        self.layout().setColumnStretch(2, 50)
 
         starting = ", ".join(item_locations[2])
         starting_label = QtWidgets.QLabel(f"Starting items: {starting}")
         starting_label.setWordWrap(True)
-        self.layout.addWidget(starting_label, 0, 0, 1, 3)
+        self.layout().addWidget(starting_label, 0, 0, 1, 3)
 
         row_pos = 1
         if unsupported_game:
@@ -61,7 +67,7 @@ class GameLayout(QtWidgets.QWidget):
             )
 
             separator = QtWidgets.QLabel("")
-            self.layout.addWidget(separator, row_pos, 0, 1, 3)
+            self.layout().addWidget(separator, row_pos, 0, 1, 3)
             row_pos += 1
 
         self.build_items_display(
@@ -81,19 +87,19 @@ class GameLayout(QtWidgets.QWidget):
                 text.setStyleSheet(
                     f"border:1px solid black;background:{style.victory_background};color:black;"
                 )
-            text.setAlignment(QtCore.Qt.AlignCenter)
-            self.layout.addWidget(text, offset, 0, len(locations[item]), 1)
+            text.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+            self.layout().addWidget(text, offset, 0, len(locations[item]), 1)
 
             for region, area, vanilla_item in locations[item]:
                 region_label = QtWidgets.QLabel(region)
                 region_label.setStyleSheet(
                     f"background:{style.background.get(region, style.fallback_background)};color:{style.foreground.get(region, style.fallback_foreground)};"
                 )
-                self.layout.addWidget(region_label, offset, 1, 1, 1)
+                self.layout().addWidget(region_label, offset, 1, 1, 1)
                 area_label = QtWidgets.QLabel(" ".join([area, vanilla_item]))
                 area_label.setStyleSheet(
                     f"background:{style.background.get(region, style.fallback_background)};color:{style.foreground.get(region, style.fallback_foreground)};"
                 )
-                self.layout.addWidget(area_label, offset, 2, 1, 1)
+                self.layout().addWidget(area_label, offset, 2, 1, 1)
                 offset = offset + 1
         return offset

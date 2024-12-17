@@ -7,13 +7,19 @@ import platform
 
 
 class MainWindow(QtWidgets.QMainWindow):
+    settings: Settings
+    options: dict
+    dark_mode: bool
+    text_size: int
+    scroll_area: QtWidgets.QScrollArea
+
     def __init__(self, file: str | None = None):
         super().__init__()
 
         self.settings = Settings()
         self.options = self.settings.get_options()
-        self.dark_mode: bool = self.options["dark_mode"]
-        self.text_size: int = self.options["text_size"]
+        self.dark_mode = self.options["dark_mode"]
+        self.text_size = self.options["text_size"]
 
         # Validate text size in case it was modified externally
         if self.text_size < 10 or self.text_size > 24:
@@ -24,8 +30,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.scroll_area = QtWidgets.QScrollArea()
         self.scroll_area.setGeometry(QtCore.QRect(0, 0, 800, 600))
-        self.scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-        self.scroll_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.scroll_area.setVerticalScrollBarPolicy(
+            QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded
+        )
+        self.scroll_area.setHorizontalScrollBarPolicy(
+            QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded
+        )
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setObjectName("scrollArea")
         self.scroll_area.setEnabled(True)
@@ -169,16 +179,16 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # Override
     def dragMoveEvent(self, event: QtGui.QDragMoveEvent):
-        if event.mimeData().hasUrls:
-            event.setDropAction(QtCore.Qt.CopyAction)
+        if event.mimeData().hasUrls():
+            event.setDropAction(QtCore.Qt.DropAction.CopyAction)
             event.accept()
             return
         event.ignore()
 
     # Override
     def dropEvent(self, event: QtGui.QDropEvent):
-        if event.mimeData().hasUrls:
-            event.setDropAction(QtCore.Qt.CopyAction)
+        if event.mimeData().hasUrls():
+            event.setDropAction(QtCore.Qt.DropAction.CopyAction)
             event.accept()
 
             # Remove the URI stuff to convert into a path

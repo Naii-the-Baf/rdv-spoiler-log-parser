@@ -5,9 +5,12 @@ from enum import Enum
 
 
 class SpoilerFile:
+    json: dict
+    world_names: list | None
+
     def __init__(self):
-        self.json: dict = None
-        self.world_names: list | None = None
+        self.json = {}
+        self.world_names = None
 
     def read(self, filename) -> SpoilerStatusEnum:
         try:
