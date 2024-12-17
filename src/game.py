@@ -96,6 +96,86 @@ class Fusion(Game):
         self.victory_key = "Infant Metroid"
 
 
+class Dread(Game):
+    def __init__(self):
+        self.dock_connections = None
+        self.has_hints = False
+        self.major_items = [
+            [
+                "Charge Beam",
+                "Diffusion Beam",
+                "Progressive Charge Beam",
+            ],
+            [
+                "Wide Beam",
+                "Plasma Beam",
+                "Wave Beam",
+                "Progressive Beam",
+                "Grapple Beam",
+            ],
+            [
+                "Morph Ball",
+                "Bomb",
+                "Cross Bomb",
+                "Progressive Bomb",
+                "Power Bomb",
+            ],
+            [
+                "Slide",
+                "Spider Magnet",
+                "Speed Booster",
+                "Spin Boost",
+                "Space Jump",
+                "Progressive Spin",
+                "Screw Attack",
+            ],
+            [
+                "Missile Launcher",
+                "Super Missile",
+                "Ice Missile",
+                "Progressive Missile",
+                "Storm Missile",
+            ],
+            [
+                "Phantom Cloak",
+                "Flash Shift",
+                "Pulse Radar",
+            ],
+            [
+                "Varia Suit",
+                "Gravity Suit",
+                "Progressive Suit",
+            ],
+            [
+                "Metroid DNA 1",
+                "Metroid DNA 2",
+                "Metroid DNA 3",
+                "Metroid DNA 4",
+                "Metroid DNA 5",
+                "Metroid DNA 6",
+                "Metroid DNA 7",
+                "Metroid DNA 8",
+                "Metroid DNA 9",
+                "Metroid DNA 10",
+                "Metroid DNA 11",
+                "Metroid DNA 12",
+            ],
+        ]
+        self.minor_items = [
+            "Energy Part",
+            "Energy Tank",
+            "Missile Tank",
+            "Missile+ Tank",
+            "Power Bomb Tank",
+            "Speed Booster Upgrade",
+            "Flash Shift Upgrade",
+            "Energy Transfer Module",
+        ]
+        self.nothing_item = "Energy Transfer Module"
+        self.special_configurations = []
+        self.victory_key = "Metroid DNA"
+
+
 class Prime1(Game):
     def __init__(self):
         super().__init__()
