@@ -22,6 +22,269 @@ class NotSupportedGame(Game):
         super().__init__()
 
 
+class AM2R(Game):
+    def __init__(self):
+        self.dock_connections = None
+        self.has_hints = False
+        self.major_items = [
+            [  # Beams
+                "Power Beam",
+                "Long Beam",
+                "Charge Beam",
+                "Spazer Beam",
+                "Wave Beam",
+                "Plasma Beam",
+                "Ice Beam",
+            ],
+            [  # Missile systems
+                "Missile Launcher",
+                "Super Missile Launcher",
+            ],
+            [  # Morph upgrades
+                "Morph Ball",
+                "Bombs",
+                "Spider Ball",
+                "Spring Ball",
+                "Power Bomb Launcher",
+            ],
+            [  # Misc
+                "Power Grip",
+                "Screw Attack",
+                "Speed Booster",
+                "Hi-Jump Boots",
+                "Space Jump",
+                "Progressive Jump",
+                "Infinite Bomb Propulsion",
+                "Walljump Boots",
+            ],
+            [  # Suits
+                "Varia Suit",
+                "Gravity Suit",
+                "Progressive Suit",
+            ],
+            [  # Keys
+                "Metroid DNA 1",
+                "Metroid DNA 2",
+                "Metroid DNA 3",
+                "Metroid DNA 4",
+                "Metroid DNA 5",
+                "Metroid DNA 6",
+                "Metroid DNA 7",
+                "Metroid DNA 8",
+                "Metroid DNA 9",
+                "Metroid DNA 10",
+                "Metroid DNA 11",
+                "Metroid DNA 12",
+                "Metroid DNA 13",
+                "Metroid DNA 14",
+                "Metroid DNA 15",
+                "Metroid DNA 16",
+                "Metroid DNA 17",
+                "Metroid DNA 18",
+                "Metroid DNA 19",
+                "Metroid DNA 20",
+                "Metroid DNA 21",
+                "Metroid DNA 22",
+                "Metroid DNA 23",
+                "Metroid DNA 24",
+                "Metroid DNA 25",
+                "Metroid DNA 26",
+                "Metroid DNA 27",
+                "Metroid DNA 28",
+                "Metroid DNA 29",
+                "Metroid DNA 30",
+                "Metroid DNA 31",
+                "Metroid DNA 32",
+                "Metroid DNA 33",
+                "Metroid DNA 34",
+                "Metroid DNA 35",
+                "Metroid DNA 36",
+                "Metroid DNA 37",
+                "Metroid DNA 38",
+                "Metroid DNA 39",
+                "Metroid DNA 40",
+                "Metroid DNA 41",
+                "Metroid DNA 42",
+                "Metroid DNA 43",
+                "Metroid DNA 44",
+                "Metroid DNA 45",
+                "Metroid DNA 46",
+            ],
+        ]
+        self.minor_items = [
+            "Energy Tank",
+            "Missile Tank",
+            "Super Missile Tank",
+            "Power Bomb Tank",
+            "Small Health Drop",
+            "Big Health Drop",
+            "Missile Drop",
+            "Super Missile Drop",
+            "Power Bomb Drop",
+            "Speed Booster Upgrade",
+            "Flashlight",
+            "Blindfold",
+            "Energy Transfer Module",
+        ]
+        self.nothing_item = "Energy Transfer Module"
+        self.special_configurations = []
+        self.victory_key = "A default victory key"
+
+
+class Fusion(Game):
+    def __init__(self):
+        super().__init__()
+        self.dock_connections = None
+        self.has_hints = False
+        self.major_items = [
+            [
+                "Charge Beam",
+                "Wide Beam",
+                "Plasma Beam",
+                "Wave Beam",
+                "Ice Beam",
+            ],
+            [
+                "Missile Launcher Data",
+                "Super Missile Data",
+                "Ice Missile Data",
+                "Diffusion Missile Data",
+            ],
+            [
+                "Morph Ball",
+                "Morph Ball Bomb Data",
+                "Power Bomb Data",
+            ],
+            [
+                "Varia Suit",
+                "Gravity Suit",
+            ],
+            [
+                "Hi-Jump",
+                "Space Jump",
+                "Speed Booster",
+                "Screw Attack",
+            ],
+            [
+                "Level 1 Locks",
+                "Level 2 Locks",
+                "Level 3 Locks",
+                "Level 4 Locks",
+            ],
+            [
+                "Infant Metroid 1",
+                "Infant Metroid 2",
+                "Infant Metroid 3",
+                "Infant Metroid 4",
+                "Infant Metroid 5",
+                "Infant Metroid 6",
+                "Infant Metroid 7",
+                "Infant Metroid 8",
+                "Infant Metroid 9",
+                "Infant Metroid 10",
+                "Infant Metroid 11",
+                "Infant Metroid 12",
+                "Infant Metroid 13",
+                "Infant Metroid 14",
+                "Infant Metroid 15",
+                "Infant Metroid 16",
+                "Infant Metroid 17",
+                "Infant Metroid 18",
+                "Infant Metroid 19",
+                "Infant Metroid 20",
+            ],
+        ]
+        self.minor_items = [
+            "Energy Tank",
+            "Missile Tank",
+            "Power Bomb Tank",
+            "Energy Transfer Module",
+        ]
+        self.nothing_item = "Energy Transfer Module"
+        self.special_configurations = []
+        self.victory_key = "Infant Metroid"
+
+
+class Dread(Game):
+    def __init__(self):
+        self.dock_connections = None
+        self.has_hints = True
+        self.major_items = [
+            [
+                "Charge Beam",
+                "Diffusion Beam",
+                "Progressive Charge Beam",
+            ],
+            [
+                "Wide Beam",
+                "Plasma Beam",
+                "Wave Beam",
+                "Progressive Beam",
+                "Grapple Beam",
+            ],
+            [
+                "Morph Ball",
+                "Bomb",
+                "Cross Bomb",
+                "Progressive Bomb",
+                "Power Bomb",
+            ],
+            [
+                "Slide",
+                "Spider Magnet",
+                "Speed Booster",
+                "Spin Boost",
+                "Space Jump",
+                "Progressive Spin",
+                "Screw Attack",
+            ],
+            [
+                "Missile Launcher",
+                "Super Missile",
+                "Ice Missile",
+                "Progressive Missile",
+                "Storm Missile",
+            ],
+            [
+                "Phantom Cloak",
+                "Flash Shift",
+                "Pulse Radar",
+            ],
+            [
+                "Varia Suit",
+                "Gravity Suit",
+                "Progressive Suit",
+            ],
+            [
+                "Metroid DNA 1",
+                "Metroid DNA 2",
+                "Metroid DNA 3",
+                "Metroid DNA 4",
+                "Metroid DNA 5",
+                "Metroid DNA 6",
+                "Metroid DNA 7",
+                "Metroid DNA 8",
+                "Metroid DNA 9",
+                "Metroid DNA 10",
+                "Metroid DNA 11",
+                "Metroid DNA 12",
+            ],
+        ]
+        self.minor_items = [
+            "Energy Part",
+            "Energy Tank",
+            "Missile Tank",
+            "Missile+ Tank",
+            "Power Bomb Tank",
+            "Speed Booster Upgrade",
+            "Flash Shift Upgrade",
+            "Energy Transfer Module",
+        ]
+        self.nothing_item = "Energy Transfer Module"
+        self.special_configurations = []
+        self.victory_key = "Metroid DNA"
+
+
 class Prime1(Game):
     def __init__(self):
         super().__init__()
@@ -257,77 +520,3 @@ class Prime3(Game):
         self.nothing_item = "Energy Transfer Module"
         self.special_configurations = []
         self.victory_key = "Energy Cell"
-
-
-class Fusion(Game):
-    def __init__(self):
-        super().__init__()
-        self.dock_connections = None
-        self.has_hints = False
-        self.major_items = [
-            [
-                "Charge Beam",
-                "Wide Beam",
-                "Plasma Beam",
-                "Wave Beam",
-                "Ice Beam",
-            ],
-            [
-                "Missile Launcher Data",
-                "Super Missile Data",
-                "Ice Missile Data",
-                "Diffusion Missile Data",
-            ],
-            [
-                "Morph Ball",
-                "Morph Ball Bomb Data",
-                "Power Bomb Data",
-            ],
-            [
-                "Varia Suit",
-                "Gravity Suit",
-            ],
-            [
-                "Hi-Jump",
-                "Space Jump",
-                "Speed Booster",
-                "Screw Attack",
-            ],
-            [
-                "Level 1 Locks",
-                "Level 2 Locks",
-                "Level 3 Locks",
-                "Level 4 Locks",
-            ],
-            [
-                "Infant Metroid 1",
-                "Infant Metroid 2",
-                "Infant Metroid 3",
-                "Infant Metroid 4",
-                "Infant Metroid 5",
-                "Infant Metroid 6",
-                "Infant Metroid 7",
-                "Infant Metroid 8",
-                "Infant Metroid 9",
-                "Infant Metroid 10",
-                "Infant Metroid 11",
-                "Infant Metroid 12",
-                "Infant Metroid 13",
-                "Infant Metroid 14",
-                "Infant Metroid 15",
-                "Infant Metroid 16",
-                "Infant Metroid 17",
-                "Infant Metroid 18",
-                "Infant Metroid 19",
-                "Infant Metroid 20",
-            ],
-        ]
-        self.minor_items = [
-            "Energy Tank",
-            "Missile Tank",
-            "Power Bomb Tank",
-            "Energy Transfer Module",
-        ]
-        self.nothing_item = "Energy Transfer Module"
-        self.special_configurations = []
-        self.victory_key = "Infant Metroid"

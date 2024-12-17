@@ -16,14 +16,18 @@ class GameLayout(QtWidgets.QWidget):
         unsupported_game = False
 
         match self.world.game_id:
+            case "am2r":
+                self.game_style = styles.AM2RStyle()
+            case "fusion":
+                self.game_style = styles.FusionStyle()
+            case "dread":
+                self.game_style = styles.DreadStyle()
             case "prime1":
                 self.game_style = styles.Prime1Style()
             case "prime2":
                 self.game_style = styles.Prime2Style()
             case "prime3":
                 self.game_style = styles.Prime3Style()
-            case "fusion":
-                self.game_style = styles.FusionStyle()
             case _:
                 unsupported_game = True
 

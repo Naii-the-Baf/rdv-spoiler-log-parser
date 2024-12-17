@@ -10,7 +10,35 @@ class BaseStyle:
         self.foreground = {}
         self.fallback_background = "black"
         self.fallback_foreground = "white"
-        self.victory_background = "green"
+        self.victory_background = "#0ce561"
+
+
+class AM2RStyle(BaseStyle):
+    def __init__(self):
+        super().__init__()
+
+        self.background = {
+            "Distribution Center": "#9fc5e8",
+            "GFS Thoth": "#f9944a",
+            "Golden Temple": "#ffe599",
+            "Hydro Station": "#b6d7a8",
+            "Industrial Complex": "#b4a7d6",
+            "Main Caves": "#b05900",
+            "The Depths": "#38761d",
+            "The Tower": "#dd7e6b",
+        }
+        self.foreground = {
+            "Distribution Center": "black",
+            "GFS Thoth": "black",
+            "Golden Temple": "black",
+            "Hydro Station": "black",
+            "Industrial Complex": "black",
+            "Main Caves": "white",
+            "The Depths": "white",
+            "The Tower": "black",
+        }
+
+        self.victory_background = "#0ce561"
 
 
 class FusionStyle(BaseStyle):
@@ -35,6 +63,35 @@ class FusionStyle(BaseStyle):
             "Sector 4 (AQA)": "black",
             "Sector 5 (ARC)": "black",
             "Sector 6 (NOC)": "black",
+        }
+
+        self.victory_background = "#0ce561"
+
+
+class DreadStyle(BaseStyle):
+    def __init__(self):
+        super().__init__()
+
+        self.background = {
+            "Artaria": "#ffe599",
+            "Burenia": "#72bddd",
+            "Cataris": "#dd7e6b",
+            "Dairon": "#eb9aca",
+            "Elun": "#b4a7d6",
+            "Ferenia": "#6d9eeb",
+            "Ghavoran": "#b6d7a8",
+            "Hanubia": "#a88160",
+        }
+
+        self.foreground = {
+            "Artaria": "black",
+            "Burenia": "black",
+            "Cataris": "black",
+            "Dairon": "black",
+            "Elun": "black",
+            "Ferenia": "black",
+            "Ghavoran": "black",
+            "Hanubia": "black",
         }
 
         self.victory_background = "#0ce561"

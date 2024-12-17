@@ -14,14 +14,18 @@ class World:
             self.starting = world["starting_equipment"]["pickups"]
 
         match self.game_id:
+            case "am2r":
+                self.game = game.AM2R()
+            case "fusion":
+                self.game = game.Fusion()
+            case "dread":
+                self.game = game.Dread()
             case "prime1":
                 self.game = game.Prime1()
             case "prime2":
                 self.game = game.Prime2()
             case "prime3":
                 self.game = game.Prime3()
-            case "fusion":
-                self.game = game.Fusion()
             case _:
                 pass
 
