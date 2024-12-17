@@ -1,35 +1,29 @@
 from PySide6 import QtCore, QtWidgets
 from world import World
 from gui.notification_dialog import NotificationDialog
-
-# TODO: Import layouts as a module
-from gui.layouts.base_layout import BaseLayout
-from gui.layouts.prime1_style import Prime1Style
-from gui.layouts.prime2_style import Prime2Style
-from gui.layouts.prime3_style import Prime3Style
-from gui.layouts.fusion_style import FusionStyle
+import gui.styles as styles
 
 
 class GameLayout(QtWidgets.QWidget):
-    game_style: BaseLayout
+    game_style: styles.BaseStyle
     world: World
     layout_obj: QtWidgets.QGridLayout
 
     def __init__(self, world: World):
         super().__init__()
-        self.game_style = BaseLayout()
+        self.game_style = styles.BaseStyle()
         self.world = world
         unsupported_game = False
 
         match self.world.game_id:
             case "prime1":
-                self.game_style = Prime1Style()
+                self.game_style = styles.Prime1Style()
             case "prime2":
-                self.game_style = Prime2Style()
+                self.game_style = styles.Prime2Style()
             case "prime3":
-                self.game_style = Prime3Style()
+                self.game_style = styles.Prime3Style()
             case "fusion":
-                self.game_style = FusionStyle()
+                self.game_style = styles.FusionStyle()
             case _:
                 unsupported_game = True
 

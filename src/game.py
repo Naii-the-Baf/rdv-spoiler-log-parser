@@ -8,7 +8,7 @@ class Game:
     victory_key: str
 
     def __init__(self):
-        self.dock_connections = None  # Meant for elevator rando; currently unsupported
+        self.dock_connections = None
         self.has_hints = False
         self.major_items = []
         self.minor_items = []
