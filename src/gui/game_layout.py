@@ -16,6 +16,8 @@ class GameLayout(QtWidgets.QWidget):
         unsupported_game = False
 
         match self.world.game_id:
+            case "am2r":
+                self.game_style = styles.AM2RStyle()
             case "fusion":
                 self.game_style = styles.FusionStyle()
             case "dread":

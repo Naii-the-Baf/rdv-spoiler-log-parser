@@ -14,6 +14,8 @@ class World:
             self.starting = world["starting_equipment"]["pickups"]
 
         match self.game_id:
+            case "am2r":
+                self.game = game.AM2R()
             case "fusion":
                 self.game = game.Fusion()
             case "dread":
