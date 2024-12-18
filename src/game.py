@@ -1,6 +1,5 @@
 class Game:
     dock_connections: list
-    has_hints: bool
     major_items: list
     minor_items: list
     nothing_item: str
@@ -9,7 +8,6 @@ class Game:
 
     def __init__(self):
         self.dock_connections = None
-        self.has_hints = False
         self.major_items = []
         self.minor_items = []
         self.nothing_item = "Energy Transfer Module"
@@ -25,7 +23,6 @@ class NotSupportedGame(Game):
 class AM2R(Game):
     def __init__(self):
         self.dock_connections = None
-        self.has_hints = False
         self.major_items = [
             [  # Beams
                 "Power Beam",
@@ -87,7 +84,6 @@ class Fusion(Game):
     def __init__(self):
         super().__init__()
         self.dock_connections = None
-        self.has_hints = True
         self.major_items = [
             [  # Beams
                 "Charge Beam",
@@ -138,7 +134,6 @@ class Fusion(Game):
 class Dread(Game):
     def __init__(self):
         self.dock_connections = None
-        self.has_hints = True
         self.major_items = [
             [  # Charge Beam
                 "Charge Beam",
@@ -205,7 +200,6 @@ class Prime1(Game):
     def __init__(self):
         super().__init__()
         self.dock_connections = None
-        self.has_hints = False
         self.major_items = [
             [  # Beams
                 "Power Beam",
@@ -259,7 +253,6 @@ class Prime2(Game):
     def __init__(self):
         super().__init__()
         self.dock_connections = None
-        self.has_hints = True
         self.major_items = [
             [  # Beams
                 "Power Beam",
@@ -343,7 +336,6 @@ class Prime3(Game):
     def __init__(self):
         super().__init__()
         self.dock_connections = None
-        self.has_hints = False
         self.major_items = [
             [  # Beams
                 "Power Beam",
