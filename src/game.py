@@ -1,6 +1,5 @@
 class Game:
     dock_connections: list
-    has_hints: bool
     major_items: list
     minor_items: list
     nothing_item: str
@@ -9,7 +8,6 @@ class Game:
 
     def __init__(self):
         self.dock_connections = None
-        self.has_hints = False
         self.major_items = []
         self.minor_items = []
         self.nothing_item = "Energy Transfer Module"
@@ -25,7 +23,6 @@ class NotSupportedGame(Game):
 class AM2R(Game):
     def __init__(self):
         self.dock_connections = None
-        self.has_hints = False
         self.major_items = [
             [  # Beams
                 "Power Beam",
@@ -36,18 +33,18 @@ class AM2R(Game):
                 "Plasma Beam",
                 "Ice Beam",
             ],
-            [  # Missile systems
+            [  # Missiles
                 "Missile Launcher",
                 "Super Missile Launcher",
             ],
-            [  # Morph upgrades
+            [  # Morph Ball
                 "Morph Ball",
                 "Bombs",
                 "Spider Ball",
                 "Spring Ball",
                 "Power Bomb Launcher",
             ],
-            [  # Misc
+            [  # Movement
                 "Power Grip",
                 "Screw Attack",
                 "Speed Booster",
@@ -87,41 +84,40 @@ class Fusion(Game):
     def __init__(self):
         super().__init__()
         self.dock_connections = None
-        self.has_hints = False
         self.major_items = [
-            [
+            [  # Beams
                 "Charge Beam",
                 "Wide Beam",
                 "Plasma Beam",
                 "Wave Beam",
                 "Ice Beam",
             ],
-            [
+            [  # Missile systems
                 "Missile Launcher Data",
                 "Super Missile Data",
                 "Ice Missile Data",
                 "Diffusion Missile Data",
             ],
-            [
+            [  # Morph upgrades
                 "Morph Ball",
                 "Morph Ball Bomb Data",
                 "Power Bomb Data",
             ],
-            [
+            [  # Suits
                 "Varia Suit",
                 "Gravity Suit",
             ],
-            [
+            [  # Misc
                 "Hi-Jump",
                 "Space Jump",
                 "Speed Booster",
                 "Screw Attack",
             ],
-            [
-                "Level 1 Locks",
-                "Level 2 Locks",
-                "Level 3 Locks",
-                "Level 4 Locks",
+            [  # Keycards
+                "Level 1 Keycard",
+                "Level 2 Keycard",
+                "Level 3 Keycard",
+                "Level 4 Keycard",
             ],
         ]
         self.minor_items = [
@@ -138,28 +134,27 @@ class Fusion(Game):
 class Dread(Game):
     def __init__(self):
         self.dock_connections = None
-        self.has_hints = True
         self.major_items = [
-            [
+            [  # Charge Beam
                 "Charge Beam",
                 "Diffusion Beam",
                 "Progressive Charge Beam",
             ],
-            [
+            [  # Beams
                 "Wide Beam",
                 "Plasma Beam",
                 "Wave Beam",
                 "Progressive Beam",
                 "Grapple Beam",
             ],
-            [
+            [  # Morph upgrades
                 "Morph Ball",
                 "Bomb",
                 "Cross Bomb",
                 "Progressive Bomb",
                 "Power Bomb",
             ],
-            [
+            [  # Movement systems
                 "Slide",
                 "Spider Magnet",
                 "Speed Booster",
@@ -168,19 +163,19 @@ class Dread(Game):
                 "Progressive Spin",
                 "Screw Attack",
             ],
-            [
+            [  # Missile systems
                 "Missile Launcher",
                 "Super Missile",
                 "Ice Missile",
                 "Progressive Missile",
                 "Storm Missile",
             ],
-            [
+            [  # Aeion upgrades
                 "Phantom Cloak",
                 "Flash Shift",
                 "Pulse Radar",
             ],
-            [
+            [  # Suits
                 "Varia Suit",
                 "Gravity Suit",
                 "Progressive Suit",
@@ -205,41 +200,40 @@ class Prime1(Game):
     def __init__(self):
         super().__init__()
         self.dock_connections = None
-        self.has_hints = False
         self.major_items = [
-            [
+            [  # Beams
                 "Power Beam",
                 "Wave Beam",
                 "Ice Beam",
                 "Plasma Beam",
                 "Charge Beam",
             ],
-            [
+            [  # Missiles + Beam combos
                 "Super Missile",
                 "Wavebuster",
                 "Ice Spreader",
                 "Flamethrower",
                 "Missile Launcher",
             ],
-            [
+            [  # Visors
                 "Combat Visor",
                 "Scan Visor",
                 "Thermal Visor",
                 "X-Ray Visor",
             ],
-            [
+            [  # Morph upgrades
                 "Morph Ball",
                 "Boost Ball",
                 "Spider Ball",
                 "Morph Ball Bomb",
                 "Power Bomb",
             ],
-            [
+            [  # Suits
                 "Varia Suit",
                 "Gravity Suit",
                 "Phazon Suit",
             ],
-            [
+            [  # Movement systems
                 "Space Jump Boots",
                 "Grapple Beam",
             ],
@@ -259,55 +253,60 @@ class Prime2(Game):
     def __init__(self):
         super().__init__()
         self.dock_connections = None
-        self.has_hints = True
         self.major_items = [
-            [
+            [  # Beams
                 "Power Beam",
                 "Dark Beam",
                 "Light Beam",
                 "Annihilator Beam",
                 "Charge Beam",
+                "Unlimited Beam Ammo",
             ],
-            [
+            [  # Missile systems
+                "Missile Launcher",
+                "Seeker Launcher",
+                "Unlimited Missiles",
+            ],
+            [  # Beam combos
                 "Super Missile",
                 "Darkburst",
                 "Sunburst",
                 "Sonic Boom",
-                "Missile Launcher",
-                "Seeker Launcher",
             ],
-            [
+            [  # Visors
                 "Combat Visor",
                 "Scan Visor",
                 "Dark Visor",
                 "Echo Visor",
             ],
-            [
+            [  # Morph upgrades
                 "Morph Ball",
                 "Boost Ball",
                 "Spider Ball",
                 "Morph Ball Bomb",
                 "Power Bomb",
+                "Cannon Ball",
             ],
-            [
+            [  # Suits
                 "Dark Suit",
                 "Light Suit",
                 "Progressive Suit",
+                "Double Damage",
             ],
-            [
+            [  # Movement systems
                 "Space Jump Boots",
                 "Gravity Boost",
                 "Grapple Beam",
                 "Screw Attack",
                 "Progressive Grapple",
             ],
-            [
+            [  # Translators
                 "Violet Translator",
                 "Amber Translator",
                 "Emerald Translator",
                 "Cobalt Translator",
             ],
-            [
+            [  # Temple keys
                 "Dark Agon Key 1",
                 "Dark Agon Key 2",
                 "Dark Agon Key 3",
@@ -317,12 +316,6 @@ class Prime2(Game):
                 "Ing Hive Key 1",
                 "Ing Hive Key 2",
                 "Ing Hive Key 3",
-            ],
-            [
-                "Unlimited Missiles",
-                "Unlimited Beam Ammo",
-                "Double Damage",
-                "Cannon Ball",
             ],
         ]
         self.minor_items = [
@@ -343,50 +336,51 @@ class Prime3(Game):
     def __init__(self):
         super().__init__()
         self.dock_connections = None
-        self.has_hints = False
         self.major_items = [
-            [
+            [  # Beams
                 "Power Beam",
                 "Plasma Beam",
                 "Nova Beam",
                 "Progressive Beam",
                 "Charge Beam",
             ],
-            [
+            [  # Missile systems
                 "Missile Launcher",
                 "Ice Missile",
                 "Seeker Missile",
                 "Progressive Missile",
             ],
-            [
+            [  # Visors
                 "Combat Visor",
                 "Scan Visor",
                 "Command Visor",
                 "X-Ray Visor",
             ],
-            [
+            [  # Morph upgrades
                 "Morph Ball",
                 "Boost Ball",
                 "Spider Ball",
                 "Morph Ball Bombs",
             ],
-            [
+            [  # Suits
                 "Hazard Shield",
+            ],
+            [  # Movement systems
                 "Space Jump Boots",
                 "Screw Attack",
             ],
-            [
+            [  # Hypermode upgrades
                 "Hypermode",
                 "Hyper Ball",
                 "Hyper Missile",
                 "Hyper Grapple",
             ],
-            [
+            [  # Grapple upgrades
                 "Grapple Lasso",
                 "Grapple Swing",
                 "Grapple Voltage",
             ],
-            [
+            [  # Ship upgrades
                 "Ship Missile",
                 "Ship Grapple",
             ],
