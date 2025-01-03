@@ -242,6 +242,9 @@ class Prime1(Game):
             "Energy Tank",
             "Missile Expansion",
             "Power Bomb Expansion",
+            "Energy Refill",
+            "Missile Refill",
+            "Power Bomb Refill",
             "Energy Transfer Module",
         ]
         self.nothing_item = "Energy Transfer Module"
