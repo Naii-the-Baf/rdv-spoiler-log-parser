@@ -2,6 +2,9 @@ import re
 from collections import defaultdict
 
 import game
+from gui.notification_dialog import NotificationDialog
+from PySide6 import QtWidgets
+import re
 
 
 class World:
@@ -34,7 +37,9 @@ class World:
             case _:
                 pass
 
-    def get_item_locations(self) -> tuple[dict, dict, list[str]]:
+    def get_item_locations(
+        self, parent: QtWidgets.QWidget
+    ) -> tuple[dict, dict, list[str]]:
         # If we're on a not supported game, handle things extra
         if isinstance(self.game, game.NotSupportedGame):
             return self.get_non_supported_game_locations()
@@ -42,6 +47,7 @@ class World:
         major_items = defaultdict(list)  # Name: [(region, room, reference)]
         minor_items = defaultdict(list)
         victory = defaultdict(list)
+        invalid: list = []
 
         for region, locations in self.items.items():
             for location, pickup in locations.items():
@@ -58,9 +64,20 @@ class World:
                     # Victory key
                     victory[pickup].append((region, room, descriptor))
                 else:
-                    raise ValueError(f"Error while reading spoiler: Invalid pickup: {location} {pickup}")
+                    # Add unknown, but valid items to minor items
+                    minor_items[pickup].append((region, room, descriptor))
+                    self.game.minor_items.append(pickup)
+                    invalid.append(pickup)
+                    print(f"Invalid pickup: {location} {pickup}")
         major_items.update(victory)
         self.game.major_items.append(victory)
+
+        if len(invalid) > 0:
+            message = "The following pickups were present in the spoiler file, but are not supported:<br>"
+            for pickup in invalid:
+                message = f"{message}{pickup}<br>"
+            NotificationDialog.show(parent, "Error while importing", message)
+
         return (major_items, minor_items, self.starting)
 
     def get_non_supported_game_locations(self) -> tuple[dict, dict, list[str]]:

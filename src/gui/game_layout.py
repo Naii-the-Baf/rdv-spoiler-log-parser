@@ -33,7 +33,7 @@ class GameLayout(QtWidgets.QWidget):
                 unsupported_game = True
 
         try:
-            item_locations = self.world.get_item_locations()
+            item_locations = self.world.get_item_locations(self)
         except ValueError as e:
             NotificationDialog.show(self, "Error", str(e))
             return
