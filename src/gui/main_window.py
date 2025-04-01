@@ -75,7 +75,8 @@ class MainWindow(QtWidgets.QMainWindow):
         file_dialog = QtWidgets.QFileDialog(self)
         file_dialog.setFileMode(QtWidgets.QFileDialog.FileMode.ExistingFiles)
         file_dialog.setNameFilter("Randovania Game (*.rdvgame)")
-        file_dialog.exec()
+        if file_dialog.exec() == QtWidgets.QDialog.DialogCode.Rejected:
+            return
         files = file_dialog.selectedFiles()
         if len(files) == 0:
             return
