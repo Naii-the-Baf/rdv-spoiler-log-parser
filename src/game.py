@@ -10,7 +10,7 @@ class Game:
         self.dock_connections = None
         self.major_items = []
         self.minor_items = []
-        self.nothing_item = "Energy Transfer Module"
+        self.nothing_item = "Nothing"
         self.special_configurations = []
         self.victory_key = "A default victory key"
 
@@ -73,9 +73,9 @@ class AM2R(Game):
             "Speed Booster Upgrade",
             "Flashlight",
             "Blindfold",
-            "Energy Transfer Module",
+            "Nothing",
         ]
-        self.nothing_item = "Energy Transfer Module"
+        self.nothing_item = "Nothing"
         self.special_configurations = []
         self.victory_key = "Metroid DNA"
 
@@ -124,9 +124,9 @@ class Fusion(Game):
             "Energy Tank",
             "Missile Tank",
             "Power Bomb Tank",
-            "Energy Transfer Module",
+            "Nothing",
         ]
-        self.nothing_item = "Energy Transfer Module"
+        self.nothing_item = "Nothing"
         self.special_configurations = []
         self.victory_key = "Infant Metroid"
 
@@ -189,9 +189,9 @@ class Dread(Game):
             "Power Bomb Tank",
             "Speed Booster Upgrade",
             "Flash Shift Upgrade",
-            "Energy Transfer Module",
+            "Nothing",
         ]
-        self.nothing_item = "Energy Transfer Module"
+        self.nothing_item = "Nothing"
         self.special_configurations = []
         self.victory_key = "Metroid DNA"
 
@@ -245,9 +245,9 @@ class Prime1(Game):
             "Energy Refill",
             "Missile Refill",
             "Power Bomb Refill",
-            "Energy Transfer Module",
+            "Nothing",
         ]
-        self.nothing_item = "Energy Transfer Module"
+        self.nothing_item = "Nothing"
         self.special_configurations = []
         self.victory_key = "Artifact of"
 
@@ -328,9 +328,9 @@ class Prime2(Game):
             "Beam Ammo Expansion",
             "Dark Ammo Expansion",
             "Light Ammo Expansion",
-            "Energy Transfer Module",
+            "Nothing",
         ]
-        self.nothing_item = "Energy Transfer Module"
+        self.nothing_item = "Nothing"
         self.special_configurations = []
         self.victory_key = "Sky Temple Key"
 
@@ -392,8 +392,8 @@ class Prime3(Game):
             "Energy Tank",
             "Missile Expansion",
             "Ship Missile Expansion",
-            "Energy Transfer Module",
+            "Nothing",
         ]
-        self.nothing_item = "Energy Transfer Module"
+        self.nothing_item = "Nothing"
         self.special_configurations = []
         self.victory_key = "Energy Cell"
