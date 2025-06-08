@@ -47,7 +47,7 @@ class Settings:
 
     def save_options_to_file(self):
         if not os.path.isdir(self.settings_dir):
-            Path.mkdir(self.settings_dir)
+            Path.mkdir(self.settings_dir, parents=True)
 
         with self.full_path.open(mode="w") as file:
             json.dump(self.options, file)
