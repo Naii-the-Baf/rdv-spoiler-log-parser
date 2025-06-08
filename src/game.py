@@ -73,6 +73,7 @@ class AM2R(Game):
             "Speed Booster Upgrade",
             "Flashlight",
             "Blindfold",
+            "Energy Transfer Module",
             "Nothing",
         ]
         self.nothing_item = "Nothing"
@@ -124,6 +125,7 @@ class Fusion(Game):
             "Energy Tank",
             "Missile Tank",
             "Power Bomb Tank",
+            "Energy Transfer Module",
             "Nothing",
         ]
         self.nothing_item = "Nothing"
@@ -189,6 +191,7 @@ class Dread(Game):
             "Power Bomb Tank",
             "Speed Booster Upgrade",
             "Flash Shift Upgrade",
+            "Energy Transfer Module",
             "Nothing",
         ]
         self.nothing_item = "Nothing"
@@ -245,6 +248,7 @@ class Prime1(Game):
             "Energy Refill",
             "Missile Refill",
             "Power Bomb Refill",
+            "Energy Transfer Module",
             "Nothing",
         ]
         self.nothing_item = "Nothing"
@@ -328,6 +332,7 @@ class Prime2(Game):
             "Beam Ammo Expansion",
             "Dark Ammo Expansion",
             "Light Ammo Expansion",
+            "Energy Transfer Module",
             "Nothing",
         ]
         self.nothing_item = "Nothing"
@@ -392,6 +397,7 @@ class Prime3(Game):
             "Energy Tank",
             "Missile Expansion",
             "Ship Missile Expansion",
+            "Energy Transfer Module",
             "Nothing",
         ]
         self.nothing_item = "Nothing"
