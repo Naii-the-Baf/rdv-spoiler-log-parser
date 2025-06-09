@@ -1,6 +1,7 @@
-from collections import defaultdict
-import game
 import re
+from collections import defaultdict
+
+import game
 
 
 class World:
@@ -42,9 +43,7 @@ class World:
             for location, pickup in locations.items():
                 room, descriptor = re.split(r"\/Pickup \d?", location)
                 if room is None or descriptor is None:
-                    raise ValueError(
-                        f"Error while reading spoiler: Invalid item location: {location} {pickup}"
-                    )
+                    raise ValueError(f"Error while reading spoiler: Invalid item location: {location} {pickup}")
                 if pickup in self.game.minor_items:
                     # Minor
                     minor_items[pickup].append((region, room, descriptor))
@@ -55,9 +54,7 @@ class World:
                     # Victory key
                     victory[pickup].append((region, room, descriptor))
                 else:
-                    raise ValueError(
-                        f"Error while reading spoiler: Invalid pickup: {location} {pickup}"
-                    )
+                    raise ValueError(f"Error while reading spoiler: Invalid pickup: {location} {pickup}")
         major_items.update(victory)
         self.game.major_items.append(victory)
         return (major_items, minor_items, self.starting)
@@ -69,9 +66,7 @@ class World:
             for location, pickup in locations.items():
                 room, ref_item = re.split(r"\/Pickup \d?", location)
                 if room is None or ref_item is None:
-                    raise ValueError(
-                        f"Error while reading spoiler: Invalid item location: {location} {pickup}"
-                    )
+                    raise ValueError(f"Error while reading spoiler: Invalid item location: {location} {pickup}")
                 major_items[pickup].append((region, room, ref_item))
 
         return (major_items, {}, self.starting)

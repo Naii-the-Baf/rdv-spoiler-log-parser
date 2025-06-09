@@ -1,8 +1,9 @@
 import json
 import os
-import platformdirs
 from pathlib import Path
 from typing import Any
+
+import platformdirs
 
 
 # TODO: Define an schema with default values
@@ -13,9 +14,7 @@ class Settings:
     options: dict
 
     def __init__(self):
-        self.settings_dir = Path(
-            platformdirs.user_config_dir(appname="RDVSpoilerLogParser")
-        )
+        self.settings_dir = Path(platformdirs.user_config_dir(appname="RDVSpoilerLogParser"))
         self.settings_file_path = Path("rdvslp-settings.json")
         self.full_path = None
         self.options = {}

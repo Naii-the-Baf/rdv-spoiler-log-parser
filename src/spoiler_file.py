@@ -1,7 +1,9 @@
 from __future__ import annotations
+
 import json
-from world import World
 from enum import Enum
+
+from world import World
 
 
 class SpoilerFile:

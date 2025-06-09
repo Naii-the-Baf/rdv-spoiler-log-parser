@@ -1,8 +1,10 @@
-import sys
 import signal
+import sys
+
 from PySide6 import QtWidgets
-from gui.main_window import MainWindow
+
 from arg_parser import ArgParser
+from gui.main_window import MainWindow
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
