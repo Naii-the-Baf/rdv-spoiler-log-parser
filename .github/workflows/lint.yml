@@ -1,0 +1,22 @@
+name: Linter
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ruff (no execution yet)
+        uses: astral-sh/ruff-action@v3
+        with:
+          version: "latest"
+          args: "--version"
+
+      - run: ruff check --no-fix --diff .
+      - run: ruff format --check --diff .
