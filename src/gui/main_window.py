@@ -1,9 +1,11 @@
-from PySide6 import QtCore, QtWidgets, QtGui
-from spoiler_file import SpoilerFile, SpoilerStatusEnum
+import platform
+
+from PySide6 import QtCore, QtGui, QtWidgets
+
 from gui.game_layout import GameLayout
 from gui.notification_dialog import NotificationDialog
 from settings import Settings
-import platform
+from spoiler_file import SpoilerFile, SpoilerStatusEnum
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -30,19 +32,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.scroll_area = QtWidgets.QScrollArea()
         self.scroll_area.setGeometry(QtCore.QRect(0, 0, 800, 600))
-        self.scroll_area.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded
-        )
-        self.scroll_area.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded
-        )
+        self.scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.scroll_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setObjectName("scrollArea")
         self.scroll_area.setEnabled(True)
         self.setCentralWidget(self.scroll_area)
-        self.scroll_area.setStyleSheet(
-            f"background:#333333;color:white;font-size:{self.text_size}px;"
-        )
+        self.scroll_area.setStyleSheet(f"background:#333333;color:white;font-size:{self.text_size}px;")
 
         menu = self.menuBar()
         file_menu = menu.addMenu("File")
@@ -111,17 +107,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def set_light_mode(self):
         self.scroll_area.setStyleSheet(
-            self.scroll_area.styleSheet().replace(
-                "background:#333333;color:white;", "background:#DDDDDD;color:black;"
-            )
+            self.scroll_area.styleSheet().replace("background:#333333;color:white;", "background:#DDDDDD;color:black;")
         )
         self.dark_mode = False
 
     def set_dark_mode(self):
         self.scroll_area.setStyleSheet(
-            self.scroll_area.styleSheet().replace(
-                "background:#DDDDDD;color:black;", "background:#333333;color:white;"
-            )
+            self.scroll_area.styleSheet().replace("background:#DDDDDD;color:black;", "background:#333333;color:white;")
         )
         self.dark_mode = True
 
@@ -135,16 +127,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
         text_edit_area = QtWidgets.QLineEdit(str(self.text_size), dialog)
         text_edit_area.setValidator(QtGui.QIntValidator(10, 24, text_edit_area))
-        text_edit_area.returnPressed.connect(
-            lambda: self.change_text_size(text_edit_area.text(), dialog)
-        )
+        text_edit_area.returnPressed.connect(lambda: self.change_text_size(text_edit_area.text(), dialog))
         dialog_layout.addWidget(text_edit_area)
 
         button_values = QtWidgets.QDialogButtonBox.Apply
         button_box = QtWidgets.QDialogButtonBox(button_values)
-        button_box.clicked.connect(
-            lambda: self.change_text_size(text_edit_area.text(), dialog)
-        )
+        button_box.clicked.connect(lambda: self.change_text_size(text_edit_area.text(), dialog))
         dialog_layout.addWidget(button_box)
 
         dialog.setLayout(dialog_layout)
@@ -163,9 +151,7 @@ class MainWindow(QtWidgets.QMainWindow):
             return
 
         self.scroll_area.setStyleSheet(
-            self.scroll_area.styleSheet().replace(
-                f"font-size:{self.text_size}px;", f"font-size:{value}px;"
-            )
+            self.scroll_area.styleSheet().replace(f"font-size:{self.text_size}px;", f"font-size:{value}px;")
         )
         self.text_size = value
         print(f"Font size changed: {self.text_size}")
