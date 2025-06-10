@@ -63,6 +63,9 @@ class GameLayout(QtWidgets.QWidget):
         starting_location_label.setWordWrap(True)
         self.layout_obj.addWidget(starting_location_label, 1, 1, 1, 2)
 
+        separator = QtWidgets.QLabel("")
+        self.layout_obj.addWidget(separator, 2, 0, 1, 3)
+
         row_pos = 3
         if unsupported_game:
             NotificationDialog.show(self, "Warning", f"Game {self.world.game_id} is not supported")
