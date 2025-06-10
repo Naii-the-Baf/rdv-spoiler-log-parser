@@ -4,6 +4,6 @@ repos:
     rev: v0.11.13
     hooks:
     -   id: ruff-check
-        args: [ --no-fix, --diff ]
+        args: [ --fix ]
     -   id: ruff-format 
-        args: [ --check, --diff ]
+        args: [ --check ]
