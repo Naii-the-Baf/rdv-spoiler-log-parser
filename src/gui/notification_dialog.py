@@ -6,8 +6,8 @@ class NotificationDialog:
         pass
 
     @staticmethod
-    def show(parent: QtWidgets.QWidget, caption: str, message: str):
-        dialog = QtWidgets.QDialog(parent)
+    def show(caption: str, message: str):
+        dialog = QtWidgets.QDialog()
         dialog.setWindowTitle(caption)
 
         dialog_layout = QtWidgets.QVBoxLayout()

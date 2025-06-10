@@ -33,9 +33,9 @@ class GameLayout(QtWidgets.QWidget):
                 unsupported_game = True
 
         try:
-            item_locations = self.world.get_item_locations(self)
+            item_locations = self.world.get_item_locations()
         except ValueError as e:
-            NotificationDialog.show(self, "Error", str(e))
+            NotificationDialog.show("Error", str(e))
             return
 
         self.layout_obj = QtWidgets.QGridLayout(self)
@@ -68,7 +68,7 @@ class GameLayout(QtWidgets.QWidget):
 
         row_pos = 3
         if unsupported_game:
-            NotificationDialog.show(self, "Warning", f"Game {self.world.game_id} is not supported")
+            NotificationDialog.show("Warning", f"Game {self.world.game_id} is not supported")
             print(f"Game {self.world.game_id} is not supported")
             self.build_items_display(list(item_locations[0].keys()), item_locations[0], row_pos)
 

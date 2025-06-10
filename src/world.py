@@ -3,8 +3,6 @@ from collections import defaultdict
 
 import game
 from gui.notification_dialog import NotificationDialog
-from PySide6 import QtWidgets
-import re
 
 
 class World:
@@ -37,9 +35,7 @@ class World:
             case _:
                 pass
 
-    def get_item_locations(
-        self, parent: QtWidgets.QWidget
-    ) -> tuple[dict, dict, list[str]]:
+    def get_item_locations(self) -> tuple[dict, dict, list[str]]:
         # If we're on a not supported game, handle things extra
         if isinstance(self.game, game.NotSupportedGame):
             return self.get_non_supported_game_locations()
@@ -76,7 +72,7 @@ class World:
             message = "The following pickups were present in the spoiler file, but are not supported:<br>"
             for pickup in invalid:
                 message = f"{message}{pickup}<br>"
-            NotificationDialog.show(parent, "Error while importing", message)
+            NotificationDialog.show("Error while importing", message)
 
         return (major_items, minor_items, self.starting)
 
