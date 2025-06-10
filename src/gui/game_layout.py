@@ -50,7 +50,20 @@ class GameLayout(QtWidgets.QWidget):
         starting_label.setWordWrap(True)
         self.layout_obj.addWidget(starting_label, 0, 0, 1, 3)
 
-        row_pos = 1
+        style = self.game_style
+        self.layout_obj.addWidget(QtWidgets.QLabel("Starting location:"), 1, 0, 1, 1)
+        starting_region, starting_room = world.starting_location
+        starting_location_label = QtWidgets.QLabel(f"{starting_region}/{starting_room}")
+        starting_location_label.setStyleSheet(
+            (
+                f"background:{style.background.get(starting_region, style.fallback_background)};"
+                f"color:{style.foreground.get(starting_region, style.fallback_foreground)};"
+            )
+        )
+        starting_location_label.setWordWrap(True)
+        self.layout_obj.addWidget(starting_location_label, 1, 1, 1, 2)
+
+        row_pos = 3
         if unsupported_game:
             NotificationDialog.show(self, "Warning", f"Game {self.world.game_id} is not supported")
             print(f"Game {self.world.game_id} is not supported")

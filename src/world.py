@@ -10,9 +10,13 @@ class World:
         self.game: game.Game = game.NotSupportedGame()
         self.items: dict = world["locations"]
         self.starting: list[str] = ["Unknown"]
+        self.starting_location: tuple[str, str] = "Unknown"
 
         if "starting_equipment" in world:
             self.starting = world["starting_equipment"]["pickups"]
+
+        if "starting_location" in world:
+            self.starting_location = re.split(r"\/", world["starting_location"])[:2]
 
         match self.game_id:
             case "am2r":
