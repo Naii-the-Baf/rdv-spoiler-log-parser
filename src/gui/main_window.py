@@ -82,14 +82,13 @@ class MainWindow(QtWidgets.QMainWindow):
         spoiler = SpoilerFile()
         r = spoiler.read(file)
         if r != SpoilerStatusEnum.OK:
-            NotificationDialog.show(self, "Error", r.message)
+            NotificationDialog.show("Error", r.message)
             return
         seed_details = spoiler.get_seed_details()
         print(seed_details)
 
         if not seed_details["has_spoiler"]:
             NotificationDialog.show(
-                self,
                 "Error",
                 "The rdvgame file does not contain a spoiler; did you try loading a race file?",
             )
@@ -142,7 +141,6 @@ class MainWindow(QtWidgets.QMainWindow):
         value = int(value)
         if value < 10 or value > 24:
             NotificationDialog.show(
-                parent,
                 "Error",
                 "Invalid text size; only allowed sizes are between 10px and 24px.",
             )
