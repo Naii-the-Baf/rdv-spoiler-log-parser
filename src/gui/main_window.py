@@ -95,6 +95,9 @@ class MainWindow(QtWidgets.QMainWindow):
             return
 
         worlds = spoiler.get_worlds()
+        if len(worlds) > 1:
+            NotificationDialog.show("Error", "Multiworlds are not supported.")
+            return
         self.scroll_area.setWidget(GameLayout(worlds[0]))
 
     def toggle_mode(self):
