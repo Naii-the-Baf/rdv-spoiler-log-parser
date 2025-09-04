@@ -14,7 +14,7 @@ class World:
         self.starting_location: tuple[str, str] = "Unknown"
 
         if "starting_equipment" in world:
-            print(world["starting_equipment"])
+            # print(world["starting_equipment"])
             try:
                 # At some point, this changed and now there's two places where our starting items can be
                 self.starting = world["starting_equipment"]["items"]
