@@ -9,12 +9,17 @@ class World:
     def __init__(self, world: dict):
         self.game_id: str = world["game"]
         self.game: game.Game = game.NotSupportedGame()
-        self.items: dict = world["locations"]
+        self.items: list[dict] = world["locations"]
         self.starting: list[str] = ["Unknown"]
         self.starting_location: tuple[str, str] = "Unknown"
 
         if "starting_equipment" in world:
-            self.starting = world["starting_equipment"]["pickups"]
+            # print(world["starting_equipment"])
+            try:
+                # At some point, this changed and now there's two places where our starting items can be
+                self.starting = world["starting_equipment"]["items"]
+            except KeyError:
+                self.starting = world["starting_equipment"]["pickups"]
 
         if "starting_location" in world:
             self.starting_location = re.split(r"\/", world["starting_location"])[:2]
@@ -45,26 +50,33 @@ class World:
         victory = defaultdict(list)
         invalid: list = []
 
-        for region, locations in self.items.items():
-            for location, pickup in locations.items():
-                room, descriptor = re.split(r"\/Pickup \d?", location)
-                if room is None or descriptor is None:
-                    raise ValueError(f"Error while reading spoiler: Invalid item location: {location} {pickup}")
-                if pickup in self.game.minor_items:
-                    # Minor
-                    minor_items[pickup].append((region, room, descriptor))
-                elif any(pickup in category for category in self.game.major_items):
-                    # Major
-                    major_items[pickup].append((region, room, descriptor))
-                elif self.game.victory_key in pickup:
-                    # Victory key
-                    victory[pickup].append((region, room, descriptor))
-                else:
-                    # Add unknown, but valid items to minor items
-                    minor_items[pickup].append((region, room, descriptor))
-                    self.game.minor_items.append(pickup)
-                    invalid.append(pickup)
-                    print(f"Invalid pickup: {location} {pickup}")
+        for item in self.items:
+            identifier = item["node_identifier"]
+            # index = item["index"]
+            pickup = item["pickup"]
+            # owner = item["owner"]
+
+            region = identifier["region"]
+            area = identifier["area"]
+            node = identifier["node"]
+
+            if area is None or node is None:
+                raise ValueError(f"Error while reading spoiler: Invalid item location: {area}/{node} {pickup}")
+            if pickup in self.game.minor_items:
+                # Minor
+                minor_items[pickup].append((region, area, node))
+            elif any(pickup in category for category in self.game.major_items):
+                # Major
+                major_items[pickup].append((region, area, node))
+            elif self.game.victory_key in pickup:
+                # Victory key
+                victory[pickup].append((region, area, node))
+            else:
+                # Add unknown, but valid items to minor items
+                minor_items[pickup].append((region, area, node))
+                self.game.minor_items.append(pickup)
+                invalid.append(pickup)
+                print(f"Invalid pickup: {area}/{node} {pickup}")
         major_items.update(victory)
         self.game.major_items.append(victory)
 
@@ -79,11 +91,18 @@ class World:
     def get_non_supported_game_locations(self) -> tuple[dict, dict, list[str]]:
         # Treat everything as major
         major_items = defaultdict(list)
-        for region, locations in self.items.items():
-            for location, pickup in locations.items():
-                room, ref_item = re.split(r"\/Pickup \d?", location)
-                if room is None or ref_item is None:
-                    raise ValueError(f"Error while reading spoiler: Invalid item location: {location} {pickup}")
-                major_items[pickup].append((region, room, ref_item))
+        for item in self.items:
+            identifier = item["node_identifier"]
+            # index = item["index"]
+            pickup = item["pickup"]
+            # owner = item["owner"]
+
+            region = identifier["region"]
+            area = identifier["area"]
+            node = identifier["node"]
+
+            if area is None or node is None:
+                raise ValueError(f"Error while reading spoiler: Invalid item location: {area}/{node} {pickup}")
+            major_items[pickup].append((region, area, node))
 
         return (major_items, {}, self.starting)
