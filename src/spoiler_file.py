@@ -2,41 +2,45 @@ from __future__ import annotations
 
 import json
 from enum import Enum
+from pathlib import Path
+
+from randovania.layout.layout_description import InvalidLayoutDescription, LayoutDescription
 
 from world import World
 
 
 class SpoilerFile:
-    json: dict
+    layout: LayoutDescription
     world_names: list | None
 
     def __init__(self):
-        self.json = {}
         self.world_names = None
 
     def read(self, filename) -> SpoilerStatusEnum:
         try:
-            with open(filename, "r") as file:
-                self.json = json.load(file)
-                file.close()
+            self.layout = LayoutDescription.from_file(Path(filename))
+            # print(self.layout._serialized_patches)
+        except InvalidLayoutDescription:
+            return SpoilerStatusEnum.INVALID_LAYOUT
         except (json.JSONDecodeError, UnicodeDecodeError):
             return SpoilerStatusEnum.JSON_READ_ERROR
-        except Exception:
+        except Exception as e:
+            print(e)
             return SpoilerStatusEnum.FILE_READ_ERROR
         return SpoilerStatusEnum.OK
 
     def get_seed_details(self) -> dict:
         details = dict()
-        details["permalink"] = self.json["info"]["permalink"]
-        details["hash"] = self.json["info"]["hash"]
-        details["word_hash"] = self.json["info"]["word_hash"]
-        details["has_spoiler"] = self.json["info"]["has_spoiler"]
+        details["permalink"] = self.layout.permalink.as_base64_str
+        details["hash"] = self.layout.shareable_hash
+        details["word_hash"] = self.layout.shareable_word_hash
+        details["has_spoiler"] = self.layout.has_spoiler
         return details
 
     def set_world_names(self, names=None):
         if names is None:
             self.world_names = list()
-            for i in range(len(self.json["info"]["presets"])):
+            for i in range(len(self.layout.all_presets)):
                 self.world_names.append(f"Player {i}")
             return
         self.world_names = names
@@ -46,7 +50,7 @@ class SpoilerFile:
             self.set_world_names()
 
         worlds = list()
-        for world in self.json["game_modifications"]:
+        for world in self.layout._serialized_patches:
             worlds.append(World(world))
         return worlds
 
@@ -64,3 +68,4 @@ class SpoilerStatusEnum(str, Enum):
     OK = (0, "")
     JSON_READ_ERROR = (1, "Invalid rdvgame")
     FILE_READ_ERROR = (2, "File could not be read")
+    INVALID_LAYOUT = (3, "The rdvgame file does not contain a spoiler; did you try loading a race file?")
