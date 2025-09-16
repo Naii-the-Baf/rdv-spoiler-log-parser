@@ -23,14 +23,22 @@ class Settings:
 
         if not self.full_path.exists():
             # The file doesn't exist, so we create a default one
-            print("Creating default settings")
             self.create_default_settings()
 
-        with self.full_path.open(mode="r") as file:
-            self.options = json.load(file)
+        try:
+            with self.full_path.open(mode="r") as file:
+                self.options = json.load(file)
+        except json.JSONDecodeError:
+            # The file is invalid, so we regenerate it
+            self.create_default_settings()
+            with self.full_path.open(mode="r") as file:
+                self.options = json.load(file)
+        finally:
             file.close()
 
-    def create_default_settings(self):
+    def create_default_settings(self) -> None:
+        print("Creating default settings")
+
         self.options = {
             "dark_mode": True,
             "text_size": 12,
