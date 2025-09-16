@@ -29,17 +29,15 @@ class Settings:
         if not self.full_path.exists():
             # The file doesn't exist, so we create a default one
             self.create_default_settings()
+            return
 
         try:
             with self.full_path.open(mode="r") as file:
                 self.options = json.load(file)
-        except json.JSONDecodeError:
-            # The file is invalid, so we regenerate it
-            self.create_default_settings()
-            with self.full_path.open(mode="r") as file:
-                self.options = json.load(file)
-        finally:
             file.close()
+        except json.JSONDecodeError:
+            # The file is invalid, so we replace it with defaults
+            self.create_default_settings()
 
     def create_default_settings(self) -> None:
         print("Creating default settings")
