@@ -10,7 +10,6 @@ from spoiler_file import SpoilerFile, SpoilerStatusEnum
 
 class MainWindow(QtWidgets.QMainWindow):
     settings: Settings
-    options: dict
     dark_mode: bool
     text_size: int
     scroll_area: QtWidgets.QScrollArea
@@ -19,9 +18,8 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__()
 
         self.settings = Settings()
-        self.options = self.settings.get_options()
-        self.dark_mode = self.options["dark_mode"]
-        self.text_size = self.options["text_size"]
+        self.dark_mode = self.settings.get_option("dark_mode")  # type: ignore
+        self.text_size = self.settings.get_option("text_size")  # type: ignore
 
         # Validate text size in case it was modified externally
         if self.text_size < 10 or self.text_size > 24:
