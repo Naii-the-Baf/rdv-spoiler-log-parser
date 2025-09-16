@@ -18,8 +18,8 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__()
 
         self.settings = Settings()
-        self.dark_mode = self.settings.get_option("dark_mode") #type: ignore
-        self.text_size = self.settings.get_option("text_size") #type: ignore
+        self.dark_mode = self.settings.get_option("dark_mode")  # type: ignore
+        self.text_size = self.settings.get_option("text_size")  # type: ignore
 
         # Validate text size in case it was modified externally
         if self.text_size < 10 or self.text_size > 24:

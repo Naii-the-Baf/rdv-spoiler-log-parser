@@ -1,4 +1,5 @@
 import json
+from copy import copy
 from pathlib import Path
 from typing import Final
 
@@ -10,6 +11,7 @@ DEFAULT_SETTINGS: Final[dict[str, OptionType]] = {
     "dark_mode": True,
     "text_size": 12,
 }
+
 
 class Settings:
     settings_dir: Path
@@ -41,14 +43,14 @@ class Settings:
 
     def create_default_settings(self) -> None:
         print("Creating default settings")
-        self.options = DEFAULT_SETTINGS
+        self.options = copy(DEFAULT_SETTINGS)
         self.save_options_to_file()
 
     def get_option(self, name: str) -> OptionType:
         if name not in self.options:
             if name not in DEFAULT_SETTINGS:
                 raise KeyError(f"{name} is not a valid option")
-            self.options[name] = DEFAULT_SETTINGS[name]
+            self.write_option(name, DEFAULT_SETTINGS[name])
         return self.options[name]
 
     def write_option(self, option: str, value: OptionType) -> None:
