@@ -58,7 +58,7 @@ class World:
 
             region = identifier["region"]
             area = identifier["area"]
-            node = identifier["node"]
+            node = re.search(r"\(.+\)", identifier["node"])[0]
 
             if area is None or node is None:
                 raise ValueError(f"Error while reading spoiler: Invalid item location: {area}/{node} {pickup}")
@@ -99,7 +99,7 @@ class World:
 
             region = identifier["region"]
             area = identifier["area"]
-            node = identifier["node"]
+            node = re.search(r"\(.+\)", identifier["node"])[0]
 
             if area is None or node is None:
                 raise ValueError(f"Error while reading spoiler: Invalid item location: {area}/{node} {pickup}")
