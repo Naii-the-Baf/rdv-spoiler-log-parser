@@ -1,12 +1,10 @@
 import json
-import os
 from pathlib import Path
 from typing import Any
 
 import platformdirs
 
 
-# TODO: Define an schema with default values
 class Settings:
     settings_dir: Path
     settings_file_path: Path
@@ -53,7 +51,7 @@ class Settings:
         self.options[option] = value
 
     def save_options_to_file(self):
-        if not os.path.isdir(self.settings_dir):
+        if not self.settings_dir.exists():
             Path.mkdir(self.settings_dir, parents=True)
 
         with self.full_path.open(mode="w") as file:
