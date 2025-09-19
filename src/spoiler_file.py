@@ -4,7 +4,7 @@ import json
 from enum import Enum
 from pathlib import Path
 
-from randovania.layout.layout_description import InvalidLayoutDescription, LayoutDescription
+from randovania.layout.layout_description import InvalidLayoutDescription, LayoutDescription  # type: ignore
 
 from world import World
 

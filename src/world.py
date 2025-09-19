@@ -11,7 +11,7 @@ class World:
         self.game: game.Game = game.NotSupportedGame()
         self.items: list[dict] = world["locations"]
         self.starting: list[str] = ["Unknown"]
-        self.starting_location: tuple[str, str] = "Unknown"
+        self.starting_location: tuple[str, str] = ("Unknown", "")
 
         if "starting_equipment" in world:
             # print(world["starting_equipment"])
@@ -22,7 +22,7 @@ class World:
                 self.starting = world["starting_equipment"]["pickups"]
 
         if "starting_location" in world:
-            self.starting_location = re.split(r"\/", world["starting_location"])[:2]
+            self.starting_location = re.split(r"\/", world["starting_location"])[:2]  # type: ignore
 
         match self.game_id:
             case "am2r":
@@ -58,7 +58,7 @@ class World:
 
             region = identifier["region"]
             area = identifier["area"]
-            node = re.search(r"\(.+\)", identifier["node"])[0]
+            node = re.search(r"\(.+\)", identifier["node"])[0]  # type: ignore
 
             if area is None or node is None:
                 raise ValueError(f"Error while reading spoiler: Invalid item location: {area}/{node} {pickup}")
@@ -99,7 +99,7 @@ class World:
 
             region = identifier["region"]
             area = identifier["area"]
-            node = re.search(r"\(.+\)", identifier["node"])[0]
+            node = re.search(r"\(.+\)", identifier["node"])[0]  # type: ignore
 
             if area is None or node is None:
                 raise ValueError(f"Error while reading spoiler: Invalid item location: {area}/{node} {pickup}")
