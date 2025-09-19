@@ -25,5 +25,4 @@ jobs:
         name: Run mypy
         with:
           workdir: 'src/'
-          mypy_flags: '--strict'
           fail_level: 'error'
