@@ -17,9 +17,9 @@ jobs:
         run: |
           python3 -m pip install --upgrade -r requirements.txt
 
-      - name: Install mypy
+      - name: Install mypy and stubs
         run: |
-          python3 -m pip install --upgrade mypy
+          python3 -m pip install --upgrade mypy types-pyinstaller PySide6-stubs
 
       - uses: tsuyoshicho/action-mypy@v5.1.1
         name: Run mypy
