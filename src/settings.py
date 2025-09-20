@@ -5,6 +5,8 @@ from typing import Final
 
 import platformdirs
 
+from gui.notification_dialog import NotificationDialog
+
 type OptionType = bool | int | str
 
 DEFAULT_SETTINGS: Final[dict[str, OptionType]] = {
@@ -55,9 +57,14 @@ class Settings:
         self.options[option] = value
 
     def save_options_to_file(self) -> None:
-        if not self.settings_dir.exists():
-            Path.mkdir(self.settings_dir, parents=True)
+        try:
+            if not self.settings_dir.exists():
+                Path.mkdir(self.settings_dir, parents=True)
 
-        with self.full_path.open(mode="w") as file:
-            json.dump(self.options, file)
-            file.close()
+            with self.full_path.open(mode="w") as file:
+                json.dump(self.options, file)
+                file.close()
+        except Exception:
+            NotificationDialog.show("Error", "Could not save settings")
+            if "file" in locals():
+                file.close()
