@@ -2,7 +2,7 @@ from PySide6 import QtCore, QtWidgets
 
 from gui.notification_dialog import NotificationDialog
 from gui.styles import get_style_for_game
-from gui.styles.base_style import BaseStyle
+from gui.styles.base_style import BaseStyle, NotSupportedStyle
 from world import World
 
 
@@ -15,7 +15,7 @@ class GameLayout(QtWidgets.QWidget):
         super().__init__()
         self.world = world
         self.game_style = get_style_for_game(self.world.game_id)
-        unsupported_game = False
+        unsupported_game = isinstance(self.game_style, NotSupportedStyle)
 
         try:
             item_locations = self.world.get_item_locations()

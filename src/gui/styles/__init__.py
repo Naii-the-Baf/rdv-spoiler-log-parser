@@ -16,4 +16,4 @@ def get_style_for_game(game_id: str) -> base_style.BaseStyle:
         case "prime3":
             return prime3_style.Prime3Style()
         case _:
-            return base_style.BaseStyle()
+            return base_style.NotSupportedStyle()

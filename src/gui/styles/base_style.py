@@ -4,3 +4,7 @@ class BaseStyle:
     fallback_background: str = "black"
     fallback_foreground: str = "white"
     victory_background: str = "#0ce561"
+
+
+class NotSupportedStyle(BaseStyle):
+    pass
