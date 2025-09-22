@@ -1,14 +1,15 @@
 import re
 from collections import defaultdict
 
-import game
+from games import get_game_by_id
+from games.game import Game, NotSupportedGame
 from gui.notification_dialog import NotificationDialog
 
 
 class World:
     def __init__(self, world: dict):
         self.game_id: str = world["game"]
-        self.game: game.Game = game.NotSupportedGame()
+        self.game: Game = NotSupportedGame()
         self.items: list[dict] = world["locations"]
         self.starting: list[str] = ["Unknown"]
         self.starting_location: tuple[str, str] = ("Unknown", "")
@@ -24,25 +25,11 @@ class World:
         if "starting_location" in world:
             self.starting_location = re.split(r"\/", world["starting_location"])[:2]  # type: ignore
 
-        match self.game_id:
-            case "am2r":
-                self.game = game.AM2R()
-            case "fusion":
-                self.game = game.Fusion()
-            case "dread":
-                self.game = game.Dread()
-            case "prime1":
-                self.game = game.Prime1()
-            case "prime2":
-                self.game = game.Prime2()
-            case "prime3":
-                self.game = game.Prime3()
-            case _:
-                pass
+        self.game = get_game_by_id(self.game_id)
 
     def get_item_locations(self) -> tuple[dict, dict, list[str]]:
         # If we're on a not supported game, handle things extra
-        if isinstance(self.game, game.NotSupportedGame):
+        if isinstance(self.game, NotSupportedGame):
             return self.get_non_supported_game_locations()
 
         major_items = defaultdict(list)  # Name: [(region, room, reference)]

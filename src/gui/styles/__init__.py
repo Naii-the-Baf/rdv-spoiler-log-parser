@@ -5,10 +5,10 @@ def get_style_for_game(game_id: str) -> base_style.BaseStyle:
     match game_id:
         case "am2r":
             return am2r_style.AM2RStyle()
-        case "fusion":
-            return fusion_style.FusionStyle()
         case "dread":
             return dread_style.DreadStyle()
+        case "fusion":
+            return fusion_style.FusionStyle()
         case "prime1":
             return prime1_style.Prime1Style()
         case "prime2":
