@@ -76,6 +76,5 @@ class Prime2Game(Game):
         "Light Ammo Expansion",
         "Nothing",
     ]
-    nothing_item = "Nothing"
     special_configurations = []
     victory_key = "Sky Temple Key"

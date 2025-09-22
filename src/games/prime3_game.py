@@ -57,6 +57,5 @@ class Prime3Game(Game):
         "Ship Missile Expansion",
         "Nothing",
     ]
-    nothing_item = "Nothing"
     special_configurations = []
     victory_key = "Energy Cell"

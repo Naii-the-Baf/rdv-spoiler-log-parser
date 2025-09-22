@@ -49,6 +49,5 @@ class Prime1Game(Game):
         "Power Bomb Refill",
         "Nothing",
     ]
-    nothing_item = "Nothing"
     special_configurations = []
     victory_key = "Artifact of"

@@ -54,6 +54,5 @@ class AM2RGame(Game):
         "Blindfold",
         "Nothing",
     ]
-    nothing_item = "Nothing"
     special_configurations = []
     victory_key = "Metroid DNA"

@@ -44,6 +44,5 @@ class FusionGame(Game):
         "Power Bomb Tank",
         "Nothing",
     ]
-    nothing_item = "Nothing"
     special_configurations = []
     victory_key = "Infant Metroid"

@@ -59,6 +59,5 @@ class DreadGame(Game):
         "Flash Shift Upgrade",
         "Nothing",
     ]
-    nothing_item = "Nothing"
     special_configurations = []
     victory_key = "Metroid DNA"
