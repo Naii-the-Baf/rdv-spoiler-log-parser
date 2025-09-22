@@ -28,7 +28,7 @@ python-engineio==4.12.2
 python-slugify==8.0.4
 python-socketio==5.13.0
 randovania==10.1.0
-sentry-sdk==2.37.1
+sentry-sdk==2.38.0
 shiboken6==6.9.2
 simple-websocket==1.1.0
 tenacity==9.1.2
