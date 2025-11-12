@@ -1,36 +1,21 @@
 from PySide6 import QtCore, QtWidgets
 
-import gui.styles as styles
 from gui.notification_dialog import NotificationDialog
+from gui.styles import get_style_for_game
+from gui.styles.base_style import BaseStyle, NotSupportedStyle
 from world import World
 
 
 class GameLayout(QtWidgets.QWidget):
-    game_style: styles.BaseStyle
+    game_style: BaseStyle
     world: World
     layout_obj: QtWidgets.QGridLayout
 
     def __init__(self, world: World):
         super().__init__()
-        self.game_style = styles.BaseStyle()
         self.world = world
-        unsupported_game = False
-
-        match self.world.game_id:
-            case "am2r":
-                self.game_style = styles.AM2RStyle()
-            case "fusion":
-                self.game_style = styles.FusionStyle()
-            case "dread":
-                self.game_style = styles.DreadStyle()
-            case "prime1":
-                self.game_style = styles.Prime1Style()
-            case "prime2":
-                self.game_style = styles.Prime2Style()
-            case "prime3":
-                self.game_style = styles.Prime3Style()
-            case _:
-                unsupported_game = True
+        self.game_style = get_style_for_game(self.world.game_id)
+        unsupported_game = isinstance(self.game_style, NotSupportedStyle)
 
         try:
             item_locations = self.world.get_item_locations()
@@ -50,14 +35,13 @@ class GameLayout(QtWidgets.QWidget):
         starting_label.setWordWrap(True)
         self.layout_obj.addWidget(starting_label, 0, 0, 1, 3)
 
-        style = self.game_style
         self.layout_obj.addWidget(QtWidgets.QLabel("Starting location:"), 1, 0, 1, 1)
         starting_region, starting_room = world.starting_location
         starting_location_label = QtWidgets.QLabel(f"{starting_region}/{starting_room}")
         starting_location_label.setStyleSheet(
             (
-                f"background:{style.background.get(starting_region, style.fallback_background)};"
-                f"color:{style.foreground.get(starting_region, style.fallback_foreground)};"
+                f"background:{self.game_style.background.get(starting_region, self.game_style.fallback_background)};"
+                f"color:{self.game_style.foreground.get(starting_region, self.game_style.fallback_foreground)};"
             )
         )
         starting_location_label.setWordWrap(True)
