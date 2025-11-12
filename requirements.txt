@@ -27,7 +27,7 @@ PySide6_Essentials==6.9.2
 python-engineio==4.12.3
 python-slugify==8.0.4
 python-socketio==5.13.0
-randovania==10.1.0
+randovania==10.3.2
 sentry-sdk==2.42.1
 shiboken6==6.9.2
 simple-websocket==1.1.0
@@ -37,3 +37,4 @@ typing_extensions==4.15.0
 urllib3==2.5.0
 wsproto==1.2.0
 yarl==1.20.1
+zstandard==0.25.0
