@@ -1,0 +1,53 @@
+{
+    "Temple Grounds North": {
+        "map": "tg-north-light.png",
+        "region": "Temple Grounds",
+        "locations": {
+            "Communication Area (Missile)": {
+                "x": 755,
+                "y": 470
+            },
+            "Dynamo Chamber (Power Bomb)": {
+                "x": 790,
+                "y": 570
+            },
+            "Fortress Transport Access (Energy Tank)": {
+                "x": 416,
+                "y": 52
+            },
+            "GFMC Compound (Missile Launcher)": {
+                "x": 570,
+                "y": 160
+            },
+            "GFMC Compound (Missile On Ship)": {
+                "x": 600,
+                "y": 80
+            },
+            "Grand Windchamber (Sunburst)": {
+                "x": 351,
+                "y": 322
+            },
+            "Hall of Honored Dead (Seeker Launcher)": {
+                "x": 498,
+                "y": 564
+            },
+            "Storage Cavern B (Energy Tank)": {
+                "x": 782,
+                "y": 770
+            },
+            "Temple Assembly Site (Missile)": {
+                "x": 802,
+                "y": 644
+            },
+            "Windchamber Gateway (Energy Tank)": {
+                "x": 204,
+                "y": 292
+            }
+        }
+    },
+    "Temple Grounds South": {
+        "map": "tg-hive-light.png",
+        "region": "Temple Grounds",
+        "locations": {}
+    }
+}
