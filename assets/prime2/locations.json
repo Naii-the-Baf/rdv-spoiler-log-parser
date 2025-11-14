@@ -1,5 +1,343 @@
 {
-    "Temple Grounds North": {
+    "Agon Wastes - Temple": {
+        "map": "agon_wastes_temple.png",
+        "region": "Agon Wastes",
+        "locations": {
+            "Agon Energy Controller (Amber Translator)": {
+                "x": 610,
+                "y": 60
+            },
+            "Agon Temple (Morph Ball Bomb)": {
+                "x": 630,
+                "y": 550
+            },
+            "Mine Shaft (Energy Tank)": {
+                "x": 440,
+                "y": 555
+            },
+            "Mining Station B (Darkburst)": {
+                "x": 225,
+                "y": 525
+            },
+            "Sandcanyon (Power Bomb)": {
+                "x": 990,
+                "y": 585
+            },
+            "Storage A (Missile)": {
+                "x": 280,
+                "y": 655
+            }
+        }
+    },
+    "Agon Wastes - Main": {
+        "map": "agon_wastes_mines.png",
+        "region": "Agon Wastes",
+        "locations": {
+            "Central Mining Station (Dark Ammo)": {
+                "x": 1010,
+                "y": 315
+            },
+            "Mining Plaza (Energy Tank)": {
+                "x": 255,
+                "y": 225
+            },
+            "Mining Station Access (Energy Tank)": {
+                "x": 572,
+                "y": 280
+            },
+            "Mining Station A (Missile)": {
+                "x": 770,
+                "y": 380
+            },
+            "Portal Access A (Missile)": {
+                "x": 685,
+                "y": 455
+            },
+            "Transport Center (Missile)": {
+                "x": 550,
+                "y": 520
+            }
+        }
+    },
+    "Agon Wastes - Pirate Labs": {
+        "map": "agon_wastes_command_center.png",
+        "region": "Agon Wastes",
+        "locations": {
+            "Bioenergy Production (Energy Tank)": {
+                "x": 370,
+                "y": 680
+            },
+            "Command Center (Missile)": {
+                "x": 180,
+                "y": 560
+            },
+            "Main Reactor (Missile)": {
+                "x": 280,
+                "y": 220
+            },
+            "Sand Processing (Missile)": {
+                "x": 390,
+                "y": 300
+            },
+            "Storage B (Missile)": {
+                "x": 100,
+                "y": 820
+            },
+            "Storage C (Missile)": {
+                "x": 465,
+                "y": 591
+            },
+            "Storage D (Dark Beam)": {
+                "x": 170,
+                "y": 275
+            },
+            "Ventilation Area A (Missile)": {
+                "x": 108,
+                "y": 220
+            }
+        }
+    },
+    "Dark Agon Wastes - Dark Labs": {
+        "map": "dark_agon_east.png",
+        "region": "Dark Agon Wastes",
+        "locations": {
+            "Battleground (Dark Agon Key 3)": {
+                "x": 275,
+                "y": 450
+            },
+            "Battleground (Sky Temple Key 1)": {
+                "x": 334,
+                "y": 441
+            },
+            "Dark Oasis (Sky Temple Key 2)": {
+                "x": 745,
+                "y": 65
+            },
+            "Doomed Entry (Dark Agon Key 2)": {
+                "x": 630,
+                "y": 430
+            },
+            "Feeding Pit (Power Bomb)": {
+                "x": 630,
+                "y": 760
+            },
+            "Ing Cache 1 (Light Beam)": {
+                "x": 555,
+                "y": 815
+            },
+            "Ing Cache 2 (Sonic Boom)": {
+                "x": 1015,
+                "y": 530
+            },
+            "Warrior's Walk (Missile)": {
+                "x": 206,
+                "y": 430
+            }
+        }
+    },
+    "Dark Agon Wastes - Main": {
+        "map": "dark_agon_west.png",
+        "region": "Dark Agon Wastes",
+        "locations": {
+            "Crossroads (Missile)": {
+                "x": 455,
+                "y": 815
+            },
+            "Dark Agon Temple (Dark Suit)": {
+                "x": 607,
+                "y": 405
+            },
+            "Ing Cache 4 (Missile)": {
+                "x": 129,
+                "y": 566
+            },
+            "Judgment Pit (Space Jump Boots)": {
+                "x": 590,
+                "y": 685
+            },
+            "Junction Site (Missile)": {
+                "x": 445,
+                "y": 645
+            },
+            "Trial Tunnel (Dark Agon Key 1)": {
+                "x": 495,
+                "y": 370
+            }
+        }
+    },
+    "Dark Torvus Bog - Lower": {
+        "map": "dark_torvus_lower.png",
+        "region": "Dark Torvus Bog",
+        "locations": {
+            "Dungeon (Sky Temple Key 4)": {
+                "x": 1065,
+                "y": 835
+            },
+            "Sacrificial Chamber (Grapple Beam)": {
+                "x": 770,
+                "y": 150
+            },
+            "Undertemple (Missile)": {
+                "x": 85,
+                "y": 570
+            },
+            "Undertemple (Power Bomb)": {
+                "x": 115,
+                "y": 720
+            },
+            "Undertemple Access (Dark Torvus Key 2)": {
+                "x": 230,
+                "y": 370
+            },
+            "Undertransit One (Missile)": {
+                "x": 420,
+                "y": 375
+            }
+        }
+    },
+    "Dark Torvus Bog - Upper": {
+        "map": "dark_torvus_upper.png",
+        "region": "Dark Torvus Bog",
+        "locations": {
+            "Cache A (Dark Ammo)": {
+                "x": 830,
+                "y": 720
+            },
+            "Cache B (Energy Tank)": {
+                "x": 270,
+                "y": 735
+            },
+            "Dark Torvus Arena (Boost Ball)": {
+                "x": 630,
+                "y": 55
+            },
+            "Dark Torvus Arena (Dark Torvus Key 1)": {
+                "x": 645,
+                "y": 180
+            },
+            "Dark Torvus Temple (Dark Visor)": {
+                "x": 388,
+                "y": 722
+            },
+            "Poisoned Bog (Sky Temple Key 3)": {
+                "x": 885,
+                "y": 670
+            },
+            "Putrid Alcove (Power Bomb)": {
+                "x": 777,
+                "y": 600
+            },
+            "Venomous Pond (Dark Torvus Key 3)": {
+                "x": 630,
+                "y": 715
+            }
+        }
+    },
+    "Great Temple": {
+        "map": "great-temple.png",
+        "region": "Great Temple",
+        "locations": {
+            "Main Energy Controller (Light Suit)": {
+                "x": 545,
+                "y": 500
+            },
+            "Main Energy Controller (Violet Translator)": {
+                "x": 585,
+                "y": 470
+            },
+            "Temple Sanctuary (Energy Transfer Module)": {
+                "x": 670,
+                "y": 680
+            },
+            "Transport A Access (Missile)": {
+                "x": 621,
+                "y": 285
+            },
+            "Transport B Access (Missile)": {
+                "x": 760,
+                "y": 530
+            }
+        }
+    },
+    "Ing Hive - Lower": {
+        "map": "ing_hive_lower.png",
+        "region": "Ing Hive",
+        "locations": {
+            "Culling Chamber (Ing Hive Key 1)": {
+                "x": 935,
+                "y": 180
+            },
+            "Hazing Cliff (Missile)": {
+                "x": 1230,
+                "y": 245
+            },
+            "Hive Entrance (Sky Temple Key 5)": {
+                "x": 550,
+                "y": 835
+            }
+        }
+    },
+    "Ing Hive - Upper": {
+        "map": "ing_hive_upper.png",
+        "region": "Ing Hive",
+        "locations": {
+            "Aerial Training Site (Ing Hive Key 3)": {
+                "x": 430,
+                "y": 440
+            },
+            "Aerial Training Site (Missile)": {
+                "x": 470,
+                "y": 340
+            },
+            "Hive Gyro Chamber (Ing Hive Key 2)": {
+                "x": 655,
+                "y": 285
+            },
+            "Hive Dynamo Works (Sky Temple Key 6)": {
+                "x": 815,
+                "y": 380
+            },
+            "Hive Temple (Annihilator Beam)": {
+                "x": 660,
+                "y": 615
+            }
+        }
+    },
+    "Sky Temple Grounds": {
+        "map": "sky_temple_grounds.png",
+        "region": "Sky Temple Grounds",
+        "locations": {
+            "Accursed Lake (Sky Temple Key 9)": {
+                "x": 645,
+                "y": 835
+            },
+            "Defiled Shrine (Sky Temple Key 8)": {
+                "x": 235,
+                "y": 810
+            },
+            "Ing Reliquary (Sky Temple Key 7)": {
+                "x": 575,
+                "y": 460
+            },
+            "Phazon Grounds (Missile)": {
+                "x": 420,
+                "y": 5
+            },
+            "Plain of Dark Worship (Missile)": {
+                "x": 550,
+                "y": 575
+            },
+            "Profane Path (Dark Ammo)": {
+                "x": 395,
+                "y": 330
+            },
+            "War Ritual Grounds (Missile)": {
+                "x": 245,
+                "y": 575
+            }
+        }
+    },
+    "Temple Grounds - North": {
         "map": "tg-north-light.png",
         "region": "Temple Grounds",
         "locations": {
@@ -45,9 +383,194 @@
             }
         }
     },
-    "Temple Grounds South": {
+    "Temple Grounds - Hive": {
         "map": "tg-hive-light.png",
         "region": "Temple Grounds",
-        "locations": {}
+        "locations": {
+            "Hive Chamber A (Missile)": {
+                "x": 410,
+                "y": 335
+            },
+            "Hive Chamber B (Missile)": {
+                "x": 650,
+                "y": 250
+            },
+            "Transport to Agon Wastes (Missile)": {
+                "x": 990,
+                "y": 420
+            }
+        }
+    },
+    "Sanctuary Fortress - Lower": {
+        "map": "sanctuary_lower.png",
+        "region": "Sanctuary Fortress",
+        "locations": {
+            "Central Area Transport West (Missile)": {
+                "x": 210,
+                "y": 235
+            },
+            "Hall of Combat Mastery (Missile)": {
+                "x": 850,
+                "y": 115
+            },
+            "Main Research (Missile)": {
+                "x": 330,
+                "y": 215
+            },
+            "Reactor Core (Energy Tank)": {
+                "x": 530,
+                "y": 230
+            },
+            "Sanctuary Entrance (Power Bomb)": {
+                "x": 930,
+                "y": 615
+            },
+            "Sanctuary Map Station (Missile)": {
+                "x": 505,
+                "y": 154
+            },
+            "Transit Station (Power Bomb)": {
+                "x": 440,
+                "y": 240
+            }
+        }
+    },
+    "Sanctuary Fortress - Upper": {
+        "map": "sanctuary_upper.png",
+        "region": "Sanctuary Fortress",
+        "locations": {
+            "Aerie (Echo Visor)": {
+                "x": 550,
+                "y": 95
+            },
+            "Dynamo Works (Missile)": {
+                "x": 880,
+                "y": 370
+            },
+            "Dynamo Works (Spider Ball)": {
+                "x": 940,
+                "y": 400
+            },
+            "Main Gyro Chamber (Power Bomb)": {
+                "x": 667,
+                "y": 286
+            },
+            "Temple Access (Missile)": {
+                "x": 675,
+                "y": 460
+            },
+            "Sanctuary Energy Controller (Cobalt Translator)": {
+                "x": 695,
+                "y": 820
+            },
+            "Sentinel's Path (Missile)": {
+                "x": 535,
+                "y": 555
+            },
+            "Vault (Screw Attack)": {
+                "x": 122,
+                "y": 258
+            },
+            "Watch Station (Dark Ammo)": {
+                "x": 473,
+                "y": 305
+            },
+            "Watch Station Access (Energy Tank)": {
+                "x": 530,
+                "y": 365
+            }
+        }
+    },
+    "Torvus Bog - Lower": {
+        "map": "torvus_lower.png",
+        "region": "Torvus Bog",
+        "locations": {
+            "Gathering Hall (Missile)": {
+                "x": 267,
+                "y": 790
+            },
+            "Hydrodynamo Station (Missile)": {
+                "x": 526,
+                "y": 586
+            },
+            "Hydrochamber Storage (Gravity Boost)": {
+                "x": 90,
+                "y": 835
+            },
+            "Training Chamber (Missile)": {
+                "x": 525,
+                "y": 275
+            },
+            "Transit Tunnel East (Energy Tank)": {
+                "x": 740,
+                "y": 420
+            },
+            "Transit Tunnel South (Missile)": {
+                "x": 500,
+                "y": 910
+            }
+        }
+    },
+    "Torvus Bog - Upper": {
+        "map": "torvus_upper.png",
+        "region": "Torvus Bog",
+        "locations": {
+            "Abandoned Worksite (Missile)": {
+                "x": 763,
+                "y": 601
+            },
+            "Forgotten Bridge (Missile)": {
+                "x": 745,
+                "y": 540
+            },
+            "Great Bridge (Power Bomb)": {
+                "x": 802,
+                "y": 695
+            },
+            "Meditation Vista (Energy Tank)": {
+                "x": 470,
+                "y": 245
+            },
+            "Path of Roots (Missile)": {
+                "x": 885,
+                "y": 730
+            },
+            "Plaza Access (Missile)": {
+                "x": 774,
+                "y": 228
+            },
+            "Portal Chamber (Light) (Missile)": {
+                "x": 830,
+                "y": 660
+            },
+            "Temple Access (Energy Tank)": {
+                "x": 620,
+                "y": 715
+            },
+            "Torvus Energy Controller (Emerald Translator)": {
+                "x": 85,
+                "y": 740
+            },
+            "Torvus Grove (Missile)": {
+                "x": 370,
+                "y": 370
+            },
+            "Torvus Lagoon (Missile)": {
+                "x": 1010,
+                "y": 666
+            },
+            "Torvus Plaza (Energy Tank)": {
+                "x": 718,
+                "y": 29
+            },
+            "Torvus Temple (Super Missile)": {
+                "x": 370,
+                "y": 715
+            },
+            "Underground Tunnel (Missile)": {
+                "x": 85,
+                "y": 740
+            }
+        }
     }
 }

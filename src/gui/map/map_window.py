@@ -29,12 +29,11 @@ class MapWindow(QtWidgets.QMainWindow):
         self.setCentralWidget(self.scroll_area)
 
         menu = self.menuBar()
-        map_menu = menu.addMenu("Map")
 
         change_map_action = QtGui.QAction("Change Map", self)
         change_map_action.setStatusTip("Change the current map.")
         change_map_action.triggered.connect(self.change_map_dialog)
-        map_menu.addAction(change_map_action)
+        menu.addAction(change_map_action)
 
     def draw_pickup_to_map(self, map_name: str, pickup_image: QtGui.QPixmap, x: int, y: int) -> None:
         painter = QtGui.QPainter(self.maps[map_name])
@@ -83,10 +82,8 @@ class MapWindow(QtWidgets.QMainWindow):
             for area_node, offset in region_map["locations"].items():
                 pickup = locations[region_map["region"]][area_node]
                 if pickup in pickup_images.keys():
-                    print(f"Drawing {pickup} at {region_map['region']}/{area_node}")
                     self.draw_pickup_to_map(map_name, pickup_images[pickup], offset["x"], offset["y"])
                 else:
-                    print(f"Drawing Default at {region_map['region']}/{area_node}")
                     self.draw_pickup_to_map(map_name, pickup_images["Default"], offset["x"], offset["y"])
 
         self.draw_map(next(iter(self.maps.keys())))
@@ -106,7 +103,6 @@ class MapWindow(QtWidgets.QMainWindow):
 
         button_values = QtWidgets.QDialogButtonBox.StandardButton.Apply
         button_box = QtWidgets.QDialogButtonBox(button_values)
-        button_box.clicked.connect(lambda: dialog.close())
         button_box.clicked.connect(lambda: self.draw_map(combo_box.currentText()))
         dialog_layout.addWidget(button_box)
 
