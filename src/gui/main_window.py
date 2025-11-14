@@ -3,6 +3,7 @@ import platform
 from PySide6 import QtCore, QtGui, QtWidgets
 
 from gui.game_layout import GameLayout
+from gui.map import is_game_map_supported
 from gui.map.map_window import MapWindow
 from gui.notification_dialog import NotificationDialog
 from settings import Settings
@@ -166,12 +167,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.settings.write_option("text_size", self.text_size)
 
     def open_map_window(self):
+        if not self.is_spoiler_loaded:
+            NotificationDialog.show("Error", "You must load an rdvgame before opening a map.")
+            return
+
+        if not is_game_map_supported(self.current_world.game_id):
+            NotificationDialog.show("Error", f"Maps not supported for game {self.current_world.game_id}")
+            return
+
         self.map_window = MapWindow()
         self.map_window.resize(800, 800)
         self.map_window.show()
-
-        if self.is_spoiler_loaded:
-            self.map_window.load_maps(self.current_world)
+        self.map_window.load_maps(self.current_world)
 
     # Override
     def dragEnterEvent(self, event: QtGui.QDragEnterEvent):
