@@ -15,7 +15,7 @@ class MainWindow(QtWidgets.QMainWindow):
     settings: Settings
     dark_mode: bool
     text_size: int
-    map_window: QtWidgets.QWidget | None
+    map_window: MapWindow | None
     scroll_area: QtWidgets.QScrollArea
     current_world: World
     is_spoiler_loaded: bool
