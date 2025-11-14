@@ -139,7 +139,7 @@ class MainWindow(QtWidgets.QMainWindow):
         text_edit_area.returnPressed.connect(lambda: self.change_text_size(text_edit_area.text(), dialog))
         dialog_layout.addWidget(text_edit_area)
 
-        button_values = QtWidgets.QDialogButtonBox.Apply
+        button_values = QtWidgets.QDialogButtonBox.StandardButton.Apply
         button_box = QtWidgets.QDialogButtonBox(button_values)
         button_box.clicked.connect(lambda: self.change_text_size(text_edit_area.text(), dialog))
         dialog_layout.addWidget(button_box)

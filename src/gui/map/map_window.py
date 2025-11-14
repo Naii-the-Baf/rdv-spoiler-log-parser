@@ -5,6 +5,7 @@ from pathlib import Path
 
 from PySide6 import QtCore, QtGui, QtWidgets
 
+from gui.notification_dialog import NotificationDialog
 from world import World
 
 
@@ -15,6 +16,7 @@ class MapWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         self.maps = dict()
+        self.current_map = None
 
         self.setWindowTitle("Map")
 
@@ -25,6 +27,14 @@ class MapWindow(QtWidgets.QMainWindow):
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setEnabled(True)
         self.setCentralWidget(self.scroll_area)
+
+        menu = self.menuBar()
+        map_menu = menu.addMenu("Map")
+
+        change_map_action = QtGui.QAction("Change Map", self)
+        change_map_action.setStatusTip("Change the current map.")
+        change_map_action.triggered.connect(self.change_map_dialog)
+        map_menu.addAction(change_map_action)
 
     def draw_pickup_to_map(self, map_name: str, pickup_image: QtGui.QPixmap, x: int, y: int) -> None:
         painter = QtGui.QPainter(self.maps[map_name])
@@ -38,9 +48,13 @@ class MapWindow(QtWidgets.QMainWindow):
 
         map_size = self.maps[map_key].size()
         self.resize(map_size.width() + 10, map_size.height() + 10)
+        self.current_map = map_key
 
     def load_maps(self, world: World) -> None:
         game_assets_path = Path(f"assets/{world.game_id}")
+        if not game_assets_path.exists():
+            NotificationDialog.show("Error", f"Maps not supported for game {world.game_id}")
+            return
 
         with game_assets_path.joinpath("locations.json").open(mode="r") as file:
             region_maps: dict = json.load(file)
@@ -76,3 +90,25 @@ class MapWindow(QtWidgets.QMainWindow):
                     self.draw_pickup_to_map(map_name, pickup_images["Default"], offset["x"], offset["y"])
 
         self.draw_map(next(iter(self.maps.keys())))
+
+    def change_map_dialog(self):
+        dialog = QtWidgets.QDialog(self)
+        dialog.setWindowTitle("Select Map")
+        dialog_layout = QtWidgets.QVBoxLayout()
+
+        label = QtWidgets.QLabel("Select a map:")
+        dialog_layout.addWidget(label)
+
+        combo_box = QtWidgets.QComboBox()
+        combo_box.addItems(self.maps.keys())
+        combo_box.setCurrentText(self.current_map)
+        dialog_layout.addWidget(combo_box)
+
+        button_values = QtWidgets.QDialogButtonBox.StandardButton.Apply
+        button_box = QtWidgets.QDialogButtonBox(button_values)
+        button_box.clicked.connect(lambda: dialog.close())
+        button_box.clicked.connect(lambda: self.draw_map(combo_box.currentText()))
+        dialog_layout.addWidget(button_box)
+
+        dialog.setLayout(dialog_layout)
+        dialog.exec()
