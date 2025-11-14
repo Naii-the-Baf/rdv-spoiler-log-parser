@@ -1,11 +1,11 @@
 import json
 import re
 from collections import defaultdict
-from pathlib import Path
 
 from PySide6 import QtCore, QtGui, QtWidgets
 
 from gui.notification_dialog import NotificationDialog
+from util import get_assets_path
 from world import World
 
 
@@ -50,7 +50,8 @@ class MapWindow(QtWidgets.QMainWindow):
         self.current_map = map_key
 
     def load_maps(self, world: World) -> None:
-        game_assets_path = Path(f"assets/{world.game_id}")
+        game_assets_path = get_assets_path().joinpath(world.game_id)
+        print(game_assets_path.absolute())
         if not game_assets_path.exists():
             NotificationDialog.show("Error", f"Maps not supported for game {world.game_id}")
             return
