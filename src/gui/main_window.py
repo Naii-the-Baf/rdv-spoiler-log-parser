@@ -193,6 +193,9 @@ class MainWindow(QtWidgets.QMainWindow):
         label = QtWidgets.QLabel("RDV Spoiler Log Parser v3.0.0", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         dialog_layout.addWidget(label)
 
+        label = QtWidgets.QLabel("randovania version 10.3.2 stable", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
+        dialog_layout.addWidget(label)
+
         label = QtWidgets.QLabel(
             "Metroid Prime 2: Echoes maps sourced from <a href="
             '"https://metroid.retropixel.net/games/mprime2/maps.php">retropixel.net</a>, edited by loohhoo.',
