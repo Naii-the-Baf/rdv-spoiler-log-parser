@@ -74,6 +74,10 @@ class MainWindow(QtWidgets.QMainWindow):
         map_action.triggered.connect(self.open_map_window)
         map_menu.addAction(map_action)
 
+        about_action = QtGui.QAction("About", self)
+        about_action.triggered.connect(self.about_dialog)
+        menu.addAction(about_action)
+
         if not self.dark_mode:
             self.set_light_mode()
 
@@ -179,6 +183,38 @@ class MainWindow(QtWidgets.QMainWindow):
         self.map_window.resize(800, 800)
         self.map_window.show()
         self.map_window.load_maps(self.current_world)
+
+    def about_dialog(self):
+        dialog = QtWidgets.QDialog(self)
+        dialog.setWindowTitle("About")
+        dialog.setStyleSheet(self.scroll_area.styleSheet())
+        dialog_layout = QtWidgets.QVBoxLayout()
+
+        label = QtWidgets.QLabel("RDV Spoiler Log Parser v3.0.0", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
+        dialog_layout.addWidget(label)
+
+        label = QtWidgets.QLabel(
+            "Metroid Prime 2: Echoes maps sourced from <a href="
+            '"https://metroid.retropixel.net/games/mprime2/maps.php">retropixel.net</a>, edited by loohhoo.',
+            textFormat=QtCore.Qt.TextFormat.RichText,
+            alignment=QtCore.Qt.AlignmentFlag.AlignCenter,
+            openExternalLinks=True,
+            textInteractionFlags=QtCore.Qt.TextInteractionFlag.TextBrowserInteraction,
+        )
+        dialog_layout.addWidget(label)
+
+        label = QtWidgets.QLabel(
+            "Metroid Prime 2: Echoes item icons sourced from <a href="
+            '"https://www.spriters-resource.com/custom_edited/metroidcustoms/sheet/23198/">Spriter\'s Resource</a>.',
+            textFormat=QtCore.Qt.TextFormat.RichText,
+            alignment=QtCore.Qt.AlignmentFlag.AlignCenter,
+            openExternalLinks=True,
+            textInteractionFlags=QtCore.Qt.TextInteractionFlag.TextBrowserInteraction,
+        )
+        dialog_layout.addWidget(label)
+
+        dialog.setLayout(dialog_layout)
+        dialog.exec()
 
     # Override
     def dragEnterEvent(self, event: QtGui.QDragEnterEvent):
