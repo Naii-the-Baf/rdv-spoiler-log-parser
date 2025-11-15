@@ -2,8 +2,8 @@ from games.game import Game
 
 
 class AM2RGame(Game):
-    major_items = [
-        [  # Beams
+    major_items = {
+        "Beams": [
             "Power Beam",
             "Long Beam",
             "Charge Beam",
@@ -12,18 +12,18 @@ class AM2RGame(Game):
             "Plasma Beam",
             "Ice Beam",
         ],
-        [  # Missiles
+        "Missiles": [
             "Missile Launcher",
             "Super Missile Launcher",
         ],
-        [  # Morph Ball
+        "Morph Ball": [
             "Morph Ball",
             "Bombs",
             "Spider Ball",
             "Spring Ball",
             "Power Bomb Launcher",
         ],
-        [  # Movement
+        "Movement": [
             "Power Grip",
             "Screw Attack",
             "Speed Booster",
@@ -33,12 +33,12 @@ class AM2RGame(Game):
             "Infinite Bomb Propulsion",
             "Walljump Boots",
         ],
-        [  # Suits
+        "Suits": [
             "Varia Suit",
             "Gravity Suit",
             "Progressive Suit",
         ],
-    ]
+    }
     minor_items = [
         "Energy Tank",
         "Missile Tank",

@@ -54,7 +54,7 @@ class World:
             if pickup in self.game.minor_items:
                 # Minor
                 minor_items[pickup].append((region, area, node))
-            elif any(pickup in category for category in self.game.major_items):
+            elif any(pickup in category for category in self.game.major_items.values()):
                 # Major
                 major_items[pickup].append((region, area, node))
             elif self.game.victory_key in pickup:
@@ -67,7 +67,7 @@ class World:
                 invalid.append(pickup)
                 print(f"Invalid pickup: {area}/{node} {pickup}")
         major_items.update(victory)
-        self.game.major_items.append(victory)
+        self.game.major_items[self.game.victory_key] = victory.keys()  # type: ignore
 
         if len(invalid) > 0:
             message = "The following pickups were present in the spoiler file, but are not supported:<br>"

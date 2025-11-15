@@ -2,55 +2,55 @@ from games.game import Game
 
 
 class Prime3Game(Game):
-    major_items = [
-        [  # Beams
+    major_items = {
+        "Beams": [
             "Power Beam",
             "Plasma Beam",
             "Nova Beam",
             "Progressive Beam",
             "Charge Beam",
         ],
-        [  # Missile systems
+        "Missile Systems": [
             "Missile Launcher",
             "Ice Missile",
             "Seeker Missile",
             "Progressive Missile",
         ],
-        [  # Visors
+        "Visors": [
             "Combat Visor",
             "Scan Visor",
             "Command Visor",
             "X-Ray Visor",
         ],
-        [  # Morph upgrades
+        "Morph Upgrades": [
             "Morph Ball",
             "Boost Ball",
             "Spider Ball",
             "Morph Ball Bombs",
         ],
-        [  # Suits
+        "Suits": [
             "Hazard Shield",
         ],
-        [  # Movement systems
+        "Movement Systems": [
             "Space Jump Boots",
             "Screw Attack",
         ],
-        [  # Hypermode upgrades
+        "Hypermode Upgrades": [
             "Hypermode",
             "Hyper Ball",
             "Hyper Missile",
             "Hyper Grapple",
         ],
-        [  # Grapple upgrades
+        "Grapple Upgrades": [
             "Grapple Lasso",
             "Grapple Swing",
             "Grapple Voltage",
         ],
-        [  # Ship upgrades
+        "Ship Upgrades": [
             "Ship Missile",
             "Ship Grapple",
         ],
-    ]
+    }
     minor_items = [
         "Energy Tank",
         "Missile Expansion",

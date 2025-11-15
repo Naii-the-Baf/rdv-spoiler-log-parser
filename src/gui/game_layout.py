@@ -56,7 +56,14 @@ class GameLayout(QtWidgets.QWidget):
             print(f"Game {self.world.game_id} is not supported")
             self.build_items_display(list(item_locations[0].keys()), item_locations[0], row_pos)
 
-        for item_category in self.world.game.major_items:
+        for category_name, item_category in self.world.game.major_items.items():
+            name_label = QtWidgets.QLabel(category_name)
+            name_label.setStyleSheet(
+                name_label.styleSheet().join("border-bottom-width:1px;border-bottom-style:solid;border-radius:0px;")
+            )
+            self.layout_obj.addWidget(name_label, row_pos, 0, 1, 3)
+            row_pos += 1
+
             row_pos = self.build_items_display(item_category, item_locations[0], row_pos)
 
             separator = QtWidgets.QLabel("")
