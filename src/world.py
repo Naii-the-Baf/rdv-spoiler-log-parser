@@ -29,15 +29,15 @@ class World:
 
         self.game = get_game_by_id(self.game_id)
 
-    def get_item_locations(self) -> tuple[dict, dict, list[str]]:
+    def get_item_locations(self) -> dict[str, dict]:
         # If we're on a not supported game, handle things extra
         if isinstance(self.game, NotSupportedGame):
             return self.get_non_supported_game_locations()
 
         major_items = defaultdict(list)  # Name: [(region, room, reference)]
         minor_items = defaultdict(list)
+        unknown = defaultdict(list)
         victory = defaultdict(list)
-        invalid: list = []
 
         for item in self.items:
             identifier = item["node_identifier"]
@@ -61,23 +61,25 @@ class World:
                 # Victory key
                 victory[pickup].append((region, area, node))
             else:
-                # Add unknown, but valid items to minor items
-                minor_items[pickup].append((region, area, node))
-                self.game.minor_items.append(pickup)
-                invalid.append(pickup)
+                # Add unknown, but valid items to unknown
+                unknown[pickup].append((region, area, node))
                 print(f"Invalid pickup: {area}/{node} {pickup}")
         major_items.update(victory)
-        self.game.major_items[self.game.victory_key] = victory.keys()  # type: ignore
 
-        if len(invalid) > 0:
+        if len(unknown) > 0:
             message = "The following pickups were present in the spoiler file, but are not supported:<br>"
-            for pickup in invalid:
+            for pickup in unknown.keys():
                 message = f"{message}{pickup}<br>"
             NotificationDialog.show("Error while importing", message)
 
-        return (major_items, minor_items, self.starting)
+        return {
+            "major": major_items,
+            "victory": victory,
+            "minor": minor_items,
+            "unknown": unknown,
+        }
 
-    def get_non_supported_game_locations(self) -> tuple[dict, dict, list[str]]:
+    def get_non_supported_game_locations(self) -> dict[str, dict]:
         # Treat everything as major
         major_items = defaultdict(list)
         for item in self.items:
@@ -94,4 +96,11 @@ class World:
                 raise ValueError(f"Error while reading spoiler: Invalid item location: {area}/{node} {pickup}")
             major_items[pickup].append((region, area, node))
 
-        return (major_items, {}, self.starting)
+        return {
+            "major": major_items,
+            "victory": {},
+            "minor": {},
+        }
+
+    def get_starting_items(self) -> list[str]:
+        return self.starting
