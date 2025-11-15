@@ -192,7 +192,6 @@ class MainWindow(QtWidgets.QMainWindow):
     def about_dialog(self):
         dialog = QtWidgets.QDialog(self)
         dialog.setWindowTitle("About")
-        dialog.setStyleSheet(self.styleSheet())
         dialog_layout = QtWidgets.QVBoxLayout()
 
         label = QtWidgets.QLabel("RDV Spoiler Log Parser v3.0.0", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
