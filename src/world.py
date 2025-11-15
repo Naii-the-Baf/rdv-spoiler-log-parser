@@ -100,6 +100,7 @@ class World:
             "major": major_items,
             "victory": {},
             "minor": {},
+            "unknown": {},
         }
 
     def get_starting_items(self) -> list[str]:
