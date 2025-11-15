@@ -144,12 +144,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
         text_edit_area = QtWidgets.QLineEdit(str(self.text_size), dialog)
         text_edit_area.setValidator(QtGui.QIntValidator(10, 24, text_edit_area))
-        text_edit_area.returnPressed.connect(lambda: self.change_text_size(text_edit_area.text(), dialog))
+        text_edit_area.returnPressed.connect(lambda: self.change_text_size(text_edit_area.text()))
         dialog_layout.addWidget(text_edit_area)
 
         button_values = QtWidgets.QDialogButtonBox.StandardButton.Apply
         button_box = QtWidgets.QDialogButtonBox(button_values)
-        button_box.clicked.connect(lambda: self.change_text_size(text_edit_area.text(), dialog))
+        button_box.clicked.connect(lambda: self.change_text_size(text_edit_area.text()))
         dialog_layout.addWidget(button_box)
 
         dialog.setLayout(dialog_layout)
