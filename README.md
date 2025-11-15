@@ -19,3 +19,9 @@ Unix: `source .venv/bin/activate`
 
 4. Run the application:
 `python src/main.py`
+
+## Asset Credits
+
+Metroid Prime 2: Echoes maps sourced from [retropixel.net](https://metroid.retropixel.net/games/mprime2/maps.php), edited by loohhoo.
+
+Metroid Prime 2: Echoes item icons sourced from [Spriter's Resource](https://www.spriters-resource.com/custom_edited/metroidcustoms/sheet/23198/).

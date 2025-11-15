@@ -3,16 +3,22 @@ import platform
 from PySide6 import QtCore, QtGui, QtWidgets
 
 from gui.game_layout import GameLayout
+from gui.map import is_game_map_supported
+from gui.map.map_window import MapWindow
 from gui.notification_dialog import NotificationDialog
 from settings import Settings
 from spoiler_file import SpoilerFile, SpoilerStatusEnum
+from world import World
 
 
 class MainWindow(QtWidgets.QMainWindow):
     settings: Settings
     dark_mode: bool
     text_size: int
+    map_window: MapWindow | None
     scroll_area: QtWidgets.QScrollArea
+    current_world: World
+    is_spoiler_loaded: bool
 
     def __init__(self, file: str | None = None):
         super().__init__()
@@ -25,6 +31,9 @@ class MainWindow(QtWidgets.QMainWindow):
         if self.text_size < 10 or self.text_size > 24:
             self.text_size = 12
             self.settings.write_option("text_size", 12)
+
+        self.map_window = None
+        self.is_spoiler_loaded = False
 
         self.setWindowTitle("Spoiler Log Parser")
 
@@ -41,6 +50,7 @@ class MainWindow(QtWidgets.QMainWindow):
         menu = self.menuBar()
         file_menu = menu.addMenu("File")
         preferences_menu = menu.addMenu("Preferences")
+        map_menu = menu.addMenu("Map")
 
         load_action = QtGui.QAction("Load", self)
         load_action.setStatusTip("Load an rdvgame file")
@@ -58,6 +68,15 @@ class MainWindow(QtWidgets.QMainWindow):
         text_action.setStatusTip("Change the text size.")
         text_action.triggered.connect(self.change_text_size_dialog)
         preferences_menu.addAction(text_action)
+
+        map_action = QtGui.QAction("Open Map", self)
+        map_action.setStatusTip("Open a map with item locations.")
+        map_action.triggered.connect(self.open_map_window)
+        map_menu.addAction(map_action)
+
+        about_action = QtGui.QAction("About", self)
+        about_action.triggered.connect(self.about_dialog)
+        menu.addAction(about_action)
 
         if not self.dark_mode:
             self.set_light_mode()
@@ -89,7 +108,9 @@ class MainWindow(QtWidgets.QMainWindow):
         if len(worlds) > 1:
             NotificationDialog.show("Error", "Multiworlds are not supported.")
             return
-        self.scroll_area.setWidget(GameLayout(worlds[0]))
+        self.current_world = worlds[0]
+        self.scroll_area.setWidget(GameLayout(self.current_world))
+        self.is_spoiler_loaded = True
 
     def toggle_mode(self):
         if self.dark_mode:
@@ -123,7 +144,7 @@ class MainWindow(QtWidgets.QMainWindow):
         text_edit_area.returnPressed.connect(lambda: self.change_text_size(text_edit_area.text(), dialog))
         dialog_layout.addWidget(text_edit_area)
 
-        button_values = QtWidgets.QDialogButtonBox.Apply
+        button_values = QtWidgets.QDialogButtonBox.StandardButton.Apply
         button_box = QtWidgets.QDialogButtonBox(button_values)
         button_box.clicked.connect(lambda: self.change_text_size(text_edit_area.text(), dialog))
         dialog_layout.addWidget(button_box)
@@ -148,6 +169,55 @@ class MainWindow(QtWidgets.QMainWindow):
         self.text_size = value
         print(f"Font size changed: {self.text_size}")
         self.settings.write_option("text_size", self.text_size)
+
+    def open_map_window(self):
+        if not self.is_spoiler_loaded:
+            NotificationDialog.show("Error", "You must load an rdvgame before opening a map.")
+            return
+
+        if not is_game_map_supported(self.current_world.game_id):
+            NotificationDialog.show("Error", f"Maps not supported for game {self.current_world.game_id}")
+            return
+
+        self.map_window = MapWindow()
+        self.map_window.resize(800, 800)
+        self.map_window.show()
+        self.map_window.load_maps(self.current_world)
+
+    def about_dialog(self):
+        dialog = QtWidgets.QDialog(self)
+        dialog.setWindowTitle("About")
+        dialog.setStyleSheet(self.scroll_area.styleSheet())
+        dialog_layout = QtWidgets.QVBoxLayout()
+
+        label = QtWidgets.QLabel("RDV Spoiler Log Parser v3.0.0", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
+        dialog_layout.addWidget(label)
+
+        label = QtWidgets.QLabel("randovania version 10.3.2 stable", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
+        dialog_layout.addWidget(label)
+
+        label = QtWidgets.QLabel(
+            "Metroid Prime 2: Echoes maps sourced from <a href="
+            '"https://metroid.retropixel.net/games/mprime2/maps.php">retropixel.net</a>, edited by loohhoo.',
+            textFormat=QtCore.Qt.TextFormat.RichText,
+            alignment=QtCore.Qt.AlignmentFlag.AlignCenter,
+            openExternalLinks=True,
+            textInteractionFlags=QtCore.Qt.TextInteractionFlag.TextBrowserInteraction,
+        )
+        dialog_layout.addWidget(label)
+
+        label = QtWidgets.QLabel(
+            "Metroid Prime 2: Echoes item icons sourced from <a href="
+            '"https://www.spriters-resource.com/custom_edited/metroidcustoms/sheet/23198/">Spriter\'s Resource</a>.',
+            textFormat=QtCore.Qt.TextFormat.RichText,
+            alignment=QtCore.Qt.AlignmentFlag.AlignCenter,
+            openExternalLinks=True,
+            textInteractionFlags=QtCore.Qt.TextInteractionFlag.TextBrowserInteraction,
+        )
+        dialog_layout.addWidget(label)
+
+        dialog.setLayout(dialog_layout)
+        dialog.exec()
 
     # Override
     def dragEnterEvent(self, event: QtGui.QDragEnterEvent):

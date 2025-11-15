@@ -7,10 +7,12 @@ from gui.notification_dialog import NotificationDialog
 
 
 class World:
+    items: list[dict]
+
     def __init__(self, world: dict):
         self.game_id: str = world["game"]
         self.game: Game = NotSupportedGame()
-        self.items: list[dict] = world["locations"]
+        self.items = world["locations"]
         self.starting: list[str] = ["Unknown"]
         self.starting_location: tuple[str, str] = ("Unknown", "")
 
