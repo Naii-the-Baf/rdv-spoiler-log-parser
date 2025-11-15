@@ -2,27 +2,27 @@ from games.game import Game
 
 
 class DreadGame(Game):
-    major_items = [
-        [  # Charge Beam
+    major_items = {
+        "Charge Beam": [
             "Charge Beam",
             "Diffusion Beam",
             "Progressive Charge Beam",
         ],
-        [  # Beams
+        "Beams": [
             "Wide Beam",
             "Plasma Beam",
             "Wave Beam",
             "Progressive Beam",
             "Grapple Beam",
         ],
-        [  # Morph upgrades
+        "Morph Upgrades": [
             "Morph Ball",
             "Bomb",
             "Cross Bomb",
             "Progressive Bomb",
             "Power Bomb",
         ],
-        [  # Movement systems
+        "Movement Systems": [
             "Slide",
             "Spider Magnet",
             "Speed Booster",
@@ -31,24 +31,24 @@ class DreadGame(Game):
             "Progressive Spin",
             "Screw Attack",
         ],
-        [  # Missile systems
+        "Missile Systems": [
             "Missile Launcher",
             "Super Missile",
             "Ice Missile",
             "Progressive Missile",
             "Storm Missile",
         ],
-        [  # Aeion upgrades
+        "Aeion Upgrades": [
             "Phantom Cloak",
             "Flash Shift",
             "Pulse Radar",
         ],
-        [  # Suits
+        "Suits": [
             "Varia Suit",
             "Gravity Suit",
             "Progressive Suit",
         ],
-    ]
+    }
     minor_items = [
         "Energy Part",
         "Energy Tank",

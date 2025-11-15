@@ -45,7 +45,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.scroll_area.setObjectName("scrollArea")
         self.scroll_area.setEnabled(True)
         self.setCentralWidget(self.scroll_area)
-        self.setStyleSheet(f"background:#333333;color:white;font-size:{self.text_size}px;")
+        self.setStyleSheet(f"background:#333333;color:white;border-color:white;font-size:{self.text_size}px;")
 
         menu = self.menuBar()
         file_menu = menu.addMenu("File")
@@ -124,13 +124,19 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def set_light_mode(self):
         self.setStyleSheet(
-            self.styleSheet().replace("background:#333333;color:white;", "background:#DDDDDD;color:black;")
+            self.styleSheet().replace(
+                "background:#333333;color:white;border-color:white;",
+                "background:#DDDDDD;color:black;border-color:black;",
+            )
         )
         self.dark_mode = False
 
     def set_dark_mode(self):
         self.setStyleSheet(
-            self.styleSheet().replace("background:#DDDDDD;color:black;", "background:#333333;color:white;")
+            self.styleSheet().replace(
+                "background:#DDDDDD;color:black;border-color:black;",
+                "background:#333333;color:white;border-color:white;",
+            )
         )
         self.dark_mode = True
 

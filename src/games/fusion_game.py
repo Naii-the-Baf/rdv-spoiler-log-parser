@@ -2,42 +2,42 @@ from games.game import Game
 
 
 class FusionGame(Game):
-    major_items = [
-        [  # Beams
+    major_items = {
+        "Beams": [
             "Charge Beam",
             "Wide Beam",
             "Plasma Beam",
             "Wave Beam",
             "Ice Beam",
         ],
-        [  # Missile systems
+        "Missile Systems": [
             "Missile Launcher Data",
             "Super Missile Data",
             "Ice Missile Data",
             "Diffusion Missile Data",
         ],
-        [  # Morph upgrades
+        "Morph Upgrades": [
             "Morph Ball",
             "Morph Ball Bomb Data",
             "Power Bomb Data",
         ],
-        [  # Suits
+        "Suits": [
             "Varia Suit",
             "Gravity Suit",
         ],
-        [  # Misc
+        "Misc": [
             "Hi-Jump",
             "Space Jump",
             "Speed Booster",
             "Screw Attack",
         ],
-        [  # Keycards
+        "Keycards": [
             "Level 1 Keycard",
             "Level 2 Keycard",
             "Level 3 Keycard",
             "Level 4 Keycard",
         ],
-    ]
+    }
     minor_items = [
         "Energy Tank",
         "Missile Tank",
