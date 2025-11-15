@@ -49,7 +49,7 @@ class MapWindow(QtWidgets.QMainWindow):
 
     def draw_pickup_to_map(self, map_name: str, pickup_image: QtGui.QPixmap, x: int, y: int) -> None:
         painter = QtGui.QPainter(self.maps[map_name])
-        painter.drawPixmap(QtCore.QPoint(x, y), pickup_image)
+        painter.drawPixmap(x, y, pickup_image)
         painter.end()
 
     def draw_map(self, map_key: str) -> None:
@@ -73,7 +73,8 @@ class MapWindow(QtWidgets.QMainWindow):
         # Preload all known pickups' images
         pickup_images: dict[str, QtGui.QPixmap] = dict()
         for pickup_name, pickup_file in pickup_paths.items():
-            pickup_images[pickup_name] = QtGui.QPixmap(game_assets_path.joinpath(f"pickups/{pickup_file}"))
+            pickup_image = QtGui.QPixmap(game_assets_path.joinpath(f"pickups/{pickup_file}"))
+            pickup_images[pickup_name] = pickup_image.scaled(32, 32, QtCore.Qt.AspectRatioMode.KeepAspectRatio)
 
         # Set up items for faster iteration
         locations: defaultdict[str, dict[str, str]] = defaultdict(dict)
