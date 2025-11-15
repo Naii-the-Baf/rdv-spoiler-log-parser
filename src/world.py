@@ -36,8 +36,8 @@ class World:
 
         major_items = defaultdict(list)  # Name: [(region, room, reference)]
         minor_items = defaultdict(list)
+        unknown = defaultdict(list)
         victory = defaultdict(list)
-        invalid: list = []
 
         for item in self.items:
             identifier = item["node_identifier"]
@@ -61,16 +61,14 @@ class World:
                 # Victory key
                 victory[pickup].append((region, area, node))
             else:
-                # Add unknown, but valid items to minor items
-                minor_items[pickup].append((region, area, node))
-                self.game.minor_items.append(pickup)
-                invalid.append(pickup)
+                # Add unknown, but valid items to unknown
+                unknown[pickup].append((region, area, node))
                 print(f"Invalid pickup: {area}/{node} {pickup}")
         major_items.update(victory)
 
-        if len(invalid) > 0:
+        if len(unknown) > 0:
             message = "The following pickups were present in the spoiler file, but are not supported:<br>"
-            for pickup in invalid:
+            for pickup in unknown.keys():
                 message = f"{message}{pickup}<br>"
             NotificationDialog.show("Error while importing", message)
 
@@ -78,6 +76,7 @@ class World:
             "major": major_items,
             "victory": victory,
             "minor": minor_items,
+            "unknown": unknown,
         }
 
     def get_non_supported_game_locations(self) -> dict[str, dict]:

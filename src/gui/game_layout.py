@@ -82,7 +82,8 @@ class GameLayout(QtWidgets.QWidget):
         self.layout_obj.addWidget(separator, row_pos, 0, 1, 4)
         row_pos += 1
 
-        self.build_items_display(self.world.game.minor_items, item_locations["minor"], row_pos)
+        row_pos = self.build_items_display(self.world.game.minor_items, item_locations["minor"], row_pos)
+        row_pos = self.build_items_display(list(item_locations["unknown"].keys()), item_locations["unknown"], row_pos)
 
     def build_items_display(self, item_set: list, locations: dict, offset: int) -> int:
         for item in item_set:
