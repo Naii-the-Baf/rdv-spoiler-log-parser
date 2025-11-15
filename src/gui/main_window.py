@@ -198,7 +198,7 @@ class MainWindow(QtWidgets.QMainWindow):
         label = QtWidgets.QLabel("RDV Spoiler Log Parser v3.0.0", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         dialog_layout.addWidget(label)
 
-        label = QtWidgets.QLabel("randovania version 10.3.2 stable", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
+        label = QtWidgets.QLabel("Using randovania 10.3.2 stable", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         dialog_layout.addWidget(label)
 
         label = QtWidgets.QLabel(
@@ -211,14 +211,7 @@ class MainWindow(QtWidgets.QMainWindow):
         )
         dialog_layout.addWidget(label)
 
-        label = QtWidgets.QLabel(
-            "Metroid Prime 2: Echoes item icons sourced from <a href="
-            '"https://www.spriters-resource.com/custom_edited/metroidcustoms/sheet/23198/">Spriter\'s Resource</a>.',
-            textFormat=QtCore.Qt.TextFormat.RichText,
-            alignment=QtCore.Qt.AlignmentFlag.AlignCenter,
-            openExternalLinks=True,
-            textInteractionFlags=QtCore.Qt.TextInteractionFlag.TextBrowserInteraction,
-        )
+        label = QtWidgets.QLabel("Metroid Prime 2: Echoes item icons sourced from randovania.")
         dialog_layout.addWidget(label)
 
         dialog.setLayout(dialog_layout)
