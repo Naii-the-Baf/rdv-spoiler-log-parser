@@ -30,7 +30,7 @@ class GameLayout(QtWidgets.QWidget):
         self.layout_obj.setColumnStretch(1, 30)
         self.layout_obj.setColumnStretch(2, 50)
 
-        starting = ", ".join(item_locations[2])
+        starting = ", ".join(world.get_starting_items())
         starting_label = QtWidgets.QLabel(f"Starting items: {starting}")
         starting_label.setWordWrap(True)
         self.layout_obj.addWidget(starting_label, 0, 0, 1, 3)
@@ -54,9 +54,10 @@ class GameLayout(QtWidgets.QWidget):
         if unsupported_game:
             NotificationDialog.show("Warning", f"Game {self.world.game_id} is not supported")
             print(f"Game {self.world.game_id} is not supported")
-            self.build_items_display(list(item_locations[0].keys()), item_locations[0], row_pos)
+            self.build_items_display(list(item_locations["major"].keys()), item_locations["major"], row_pos)
+            return
 
-        for category_name, item_category in self.world.game.major_items.items():
+        for category_name, category_items in self.world.game.major_items.items():
             name_label = QtWidgets.QLabel(category_name)
             name_label.setStyleSheet(
                 name_label.styleSheet().join("border-bottom-width:1px;border-bottom-style:solid;border-radius:0px;")
@@ -64,13 +65,24 @@ class GameLayout(QtWidgets.QWidget):
             self.layout_obj.addWidget(name_label, row_pos, 0, 1, 3)
             row_pos += 1
 
-            row_pos = self.build_items_display(item_category, item_locations[0], row_pos)
+            row_pos = self.build_items_display(category_items, item_locations["major"], row_pos)
 
             separator = QtWidgets.QLabel("")
             self.layout_obj.addWidget(separator, row_pos, 0, 1, 3)
             row_pos += 1
 
-        self.build_items_display(self.world.game.minor_items, item_locations[1], row_pos)
+        name_label = QtWidgets.QLabel(self.world.game.victory_key)
+        name_label.setStyleSheet(
+            name_label.styleSheet().join("border-bottom-width:1px;border-bottom-style:solid;border-radius:0px;")
+        )
+        self.layout_obj.addWidget(name_label, row_pos, 0, 1, 4)
+        row_pos += 1
+        row_pos = self.build_items_display(list(item_locations["victory"].keys()), item_locations["victory"], row_pos)
+        separator = QtWidgets.QLabel("")
+        self.layout_obj.addWidget(separator, row_pos, 0, 1, 4)
+        row_pos += 1
+
+        self.build_items_display(self.world.game.minor_items, item_locations["minor"], row_pos)
 
     def build_items_display(self, item_set: list, locations: dict, offset: int) -> int:
         for item in item_set:
