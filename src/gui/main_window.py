@@ -45,7 +45,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.scroll_area.setObjectName("scrollArea")
         self.scroll_area.setEnabled(True)
         self.setCentralWidget(self.scroll_area)
-        self.scroll_area.setStyleSheet(f"background:#333333;color:white;font-size:{self.text_size}px;")
+        self.setStyleSheet(f"background:#333333;color:white;font-size:{self.text_size}px;")
 
         menu = self.menuBar()
         file_menu = menu.addMenu("File")
@@ -119,15 +119,18 @@ class MainWindow(QtWidgets.QMainWindow):
             self.set_dark_mode()
         self.settings.write_option("dark_mode", self.dark_mode)
 
+        if self.map_window:
+            self.map_window.setStyleSheet(self.styleSheet())
+
     def set_light_mode(self):
-        self.scroll_area.setStyleSheet(
-            self.scroll_area.styleSheet().replace("background:#333333;color:white;", "background:#DDDDDD;color:black;")
+        self.setStyleSheet(
+            self.styleSheet().replace("background:#333333;color:white;", "background:#DDDDDD;color:black;")
         )
         self.dark_mode = False
 
     def set_dark_mode(self):
-        self.scroll_area.setStyleSheet(
-            self.scroll_area.styleSheet().replace("background:#DDDDDD;color:black;", "background:#333333;color:white;")
+        self.setStyleSheet(
+            self.styleSheet().replace("background:#DDDDDD;color:black;", "background:#333333;color:white;")
         )
         self.dark_mode = True
 
@@ -163,12 +166,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.text_size = 12
             return
 
-        self.scroll_area.setStyleSheet(
-            self.scroll_area.styleSheet().replace(f"font-size:{self.text_size}px;", f"font-size:{value}px;")
-        )
+        self.setStyleSheet(self.styleSheet().replace(f"font-size:{self.text_size}px;", f"font-size:{value}px;"))
         self.text_size = value
         print(f"Font size changed: {self.text_size}")
         self.settings.write_option("text_size", self.text_size)
+
+        if self.map_window:
+            self.map_window.setStyleSheet(self.styleSheet())
 
     def open_map_window(self):
         if not self.is_spoiler_loaded:
@@ -181,13 +185,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.map_window = MapWindow()
         self.map_window.resize(800, 800)
+        self.map_window.setStyleSheet(self.styleSheet())
         self.map_window.show()
         self.map_window.load_maps(self.current_world)
 
     def about_dialog(self):
         dialog = QtWidgets.QDialog(self)
         dialog.setWindowTitle("About")
-        dialog.setStyleSheet(self.scroll_area.styleSheet())
+        dialog.setStyleSheet(self.styleSheet())
         dialog_layout = QtWidgets.QVBoxLayout()
 
         label = QtWidgets.QLabel("RDV Spoiler Log Parser v3.0.0", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
