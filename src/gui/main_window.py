@@ -155,7 +155,7 @@ class MainWindow(QtWidgets.QMainWindow):
         dialog.setLayout(dialog_layout)
         dialog.exec()
 
-    def change_text_size(self, value: int, parent: QtWidgets.QWidget):
+    def change_text_size(self, value: int):
         value = int(value)
         if value < 10 or value > 24:
             NotificationDialog.show(
