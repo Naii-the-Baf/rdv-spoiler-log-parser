@@ -100,6 +100,7 @@ class MapWindow(QtWidgets.QMainWindow):
 
     def change_map_dialog(self):
         dialog = QtWidgets.QDialog(self)
+        dialog.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         dialog.setWindowTitle("Select Map")
         dialog_layout = QtWidgets.QVBoxLayout()
 
