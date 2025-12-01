@@ -8,7 +8,7 @@ bitstruct==8.21.0
 certifi==2025.8.3
 cffi==2.0.0
 construct==2.10.70
-cryptography==46.0.1
+cryptography==46.0.3
 dulwich==0.24.7
 frozendict==2.4.6
 frozenlist==1.7.0
