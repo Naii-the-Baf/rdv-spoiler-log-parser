@@ -1,0 +1,548 @@
+{
+    "Main Deck": {
+        "map": "MainDeck.png",
+        "region": "Main Deck",
+        "locations": {
+            "Arachnus Arena (Energy Tank)": {
+                "x": 736,
+                "y": 224
+            },
+            "Arachnus Arena (Morph Ball)": {
+                "x": 736,
+                "y": 288
+            },
+            "Attic (Energy Tank)": {
+                "x": 768,
+                "y": 224
+            },
+            "Auxiliary Power Station (Reactor Control)": {
+                "x": 608,
+                "y": 640
+            },
+            "Cubby Hole (Missile Tank)": {
+                "x": 352,
+                "y": 320
+            },
+            "Genesis Speedway (Hidden Power Bomb Tank)": {
+                "x": 224,
+                "y": 384
+            },
+            "Habitation Deck (Missile Tank)": {
+                "x": 256,
+                "y": 160
+            },
+            "Habitation Deck (Save the Animals)": {
+                "x": 256,
+                "y": 96
+            },
+            "Main Elevator Cache (Missile Tank)": {
+                "x": 128,
+                "y": 288
+            },
+            "Nexus Storage (Power Bomb Tank)": {
+                "x": 416,
+                "y": 256
+            },
+            "Operations Deck Data Room (Missile Launcher)": {
+                "x": 448,
+                "y": 64
+            },
+            "Operations Ventilation Storage (Hidden Missile Tank)": {
+                "x": 576,
+                "y": 256
+            },
+            "Operations Ventilation (Missile Tank)": {
+                "x": 608,
+                "y": 256
+            },
+            "Quarantine Bay (Hornoad)": {
+                "x": 224,
+                "y": 320
+            },
+            "Restricted Airlock (Power Bomb Tank)": {
+                "x": 128,
+                "y": 736
+            },
+            "Silo Catwalk (Energy Tank)": {
+                "x": 640,
+                "y": 544
+            },
+            "Silo Scaffolding (Missile Tank)": {
+                "x": 672,
+                "y": 608
+            },
+            "Station Entrance (Hidden Missile Tank)": {
+                "x": 416,
+                "y": 384
+            },
+            "Sub-Zero Containment (Frozen Ridley)": {
+                "x": 256,
+                "y": 352
+            },
+            "Yakuza Arena (Space Jump)": {
+                "x": 640,
+                "y": 704
+            }
+        }
+    },
+    "Sector 1 (SRX)": {
+        "map": "Sector1.png",
+        "region": "Sector 1 (SRX)",
+        "locations": {
+            "Animorphs Cache (Power Bomb Tank)": {
+                "x": 256,
+                "y": 384
+            },
+            "Antechamber (Power Bomb Tank)": {
+                "x": 224,
+                "y": 32
+            },
+            "Atmospheric Stabilizer Northeast (NE Stabilizer)": {
+                "x": 512,
+                "y": 64
+            },
+            "Charge Core Arena (Charge Beam)": {
+                "x": 288,
+                "y": 160
+            },
+            "Charge Core Arena (Energy Tank)": {
+                "x": 288,
+                "y": 224
+            },
+            "Crab Rave (Missile Tank)": {
+                "x": 320,
+                "y": 160
+            },
+            "Hornoad Hole (Energy Tank)": {
+                "x": 416,
+                "y": 96
+            },
+            "Lava Lake (Missile Tank in Lava)": {
+                "x": 224,
+                "y": 160
+            },
+            "Lava Lake (Missile Tank on Cliffside)": {
+                "x": 160,
+                "y": 128
+            },
+            "Lava Lake (Missile Tank on Platform)": {
+                "x": 192,
+                "y": 128
+            },
+            "Ridley Arena (Screw Attack)": {
+                "x": 32,
+                "y": 320
+            },
+            "Ripper Maze (Hidden Energy Tank)": {
+                "x": 96,
+                "y": 352
+            },
+            "Stabilizer Storage (Missile Tank)": {
+                "x": 416,
+                "y": 288
+            },
+            "Watering Hole (Hidden Power Bomb Tank)": {
+                "x": 384,
+                "y": 256
+            },
+            "Wall Jump Tutorial (Missile Tank)": {
+                "x": 544,
+                "y": 96
+            }
+        }
+    },
+    "Sector 2 (TRO)": {
+        "map": "Sector2.png",
+        "region": "Sector 2 (TRO)",
+        "locations": {
+            "Crumble City (Energy Tank)": {
+                "x": 192,
+                "y": 32
+            },
+            "Crumble City (Power Bomb Tank)": {
+                "x": 192,
+                "y": 64
+            },
+            "Cultivation Station (Missile Tank)": {
+                "x": 96,
+                "y": 480
+            },
+            "Data Courtyard (Missile Tank)": {
+                "x": 160,
+                "y": 160
+            },
+            "Data Room (Morph Ball Bombs)": {
+                "x": 96,
+                "y": 160
+            },
+            "Dessgeega Dorm (Missile Tank)": {
+                "x": 320,
+                "y": 192
+            },
+            "Kago Room (Missile Tank)": {
+                "x": 160,
+                "y": 128
+            },
+            "Level 1 Security Room (L1 Locks)": {
+                "x": 320,
+                "y": 64
+            },
+            "Lobby Cache (Missile Tank)": {
+                "x": 320,
+                "y": 128
+            },
+            "Nettori Arena (Plasma Beam)": {
+                "x": 480,
+                "y": 224
+            },
+            "Oasis Storage (Missile Tank)": {
+                "x": 128,
+                "y": 416
+            },
+            "Oasis (Missile Tank)": {
+                "x": 160,
+                "y": 384
+            },
+            "Overgrown Cache (Hidden Energy Tank)": {
+                "x": 416,
+                "y": 160
+            },
+            "Puyo Palace (Power Bomb Tank)": {
+                "x": 288,
+                "y": 288
+            },
+            "Ripper Tower (Hidden Power Bomb Tank)": {
+                "x": 192,
+                "y": 352
+            },
+            "Ripper Tower (Power Bomb Tank)": {
+                "x": 128,
+                "y": 352
+            },
+            "Zazabi Arena Access (Energy Tank)": {
+                "x": 416,
+                "y": 384
+            },
+            "Zazabi Arena (High Jump)": {
+                "x": 480,
+                "y": 448
+            },
+            "Zazabi Speedway (Hidden Missile Tank)": {
+                "x": 544,
+                "y": 480
+            },
+            "Zazabi Speedway (Power Bomb Tank)": {
+                "x": 544,
+                "y": 416
+            },
+            "Zoro Zig-Zag (Missile Tank)": {
+                "x": 64,
+                "y": 192
+            }
+        }
+    },
+    "Sector 3 (PYR)": {
+        "map": "Sector3.png",
+        "region": "Sector 3 (PYR)",
+        "locations": {
+            "Alcove (Hidden Energy Tank)": {
+                "x": 384,
+                "y": 96
+            },
+            "Alcove (Power Bomb Tank)": {
+                "x": 352,
+                "y": 64
+            },
+            "Bob's Abode (Missile Tank)": {
+                "x": 384,
+                "y": 160
+            },
+            "Data Room (Super Missiles)": {
+                "x": 608,
+                "y": 128
+            },
+            "Deserted Runway (Missile Tank)": {
+                "x": 512,
+                "y": 32
+            },
+            "Fiery Storage (Energy Tank)": {
+                "x": 64,
+                "y": 96
+            },
+            "Fiery Storage (Missile Tank)": {
+                "x": 128,
+                "y": 160
+            },
+            "Garbage Chute (Power Bomb Tank in Cave)": {
+                "x": 672,
+                "y": 128
+            },
+            "Garbage Chute (Power Bomb Tank in Shaft)": {
+                "x": 672,
+                "y": 320
+            },
+            "Geron's Treasure (Missile Tank)": {
+                "x": 576,
+                "y": 160
+            },
+            "Glass Tube to Sector 5 (ARC) (Hidden Power Bomb Tank)": {
+                "x": 32,
+                "y": 192
+            },
+            "Lava Maze (Power Bomb Tank)": {
+                "x": 256,
+                "y": 384
+            },
+            "Level 2 Security Room (L2 Locks)": {
+                "x": 128,
+                "y": 192
+            },
+            "Main Boiler Control Room (Cooling Unit)": {
+                "x": 128,
+                "y": 288
+            },
+            "Main Boiler Control Room (Wide Beam)": {
+                "x": 128,
+                "y": 256
+            },
+            "Namihe's Lair (Power Bomb Tank)": {
+                "x": 384,
+                "y": 224
+            },
+            "Processing Access (Hidden Missile Tank)": {
+                "x": 480,
+                "y": 352
+            },
+            "Security Access (Hidden Missile Tank)": {
+                "x": 224,
+                "y": 224
+            },
+            "Sova Processing (Energy Tank)": {
+                "x": 608,
+                "y": 320
+            },
+            "Sova Processing (Missile Tank)": {
+                "x": 576,
+                "y": 352
+            }
+        }
+    },
+    "Sector 4 (AQA)": {
+        "map": "Sector4.png",
+        "region": "Sector 4 (AQA)",
+        "locations": {
+            "Aquarium Kago Storage (Missile Tank)": {
+                "x": 608,
+                "y": 256
+            },
+            "Aquarium Kago Storage (Power Bomb Tank)": {
+                "x": 640,
+                "y": 256
+            },
+            "Aquarium Pirate Tank (Missile Tank)": {
+                "x": 352,
+                "y": 416
+            },
+            "Broken Bridge (Energy Tank)": {
+                "x": 320,
+                "y": 96
+            },
+            "C-Cache (Underwater Missile Tank)": {
+                "x": 192,
+                "y": 128
+            },
+            "Cargo Hold to Sector 5 (ARC) (Power Bomb Tank)": {
+                "x": 256,
+                "y": 288
+            },
+            "Cheddar Bay (Power Bomb Tank)": {
+                "x": 256,
+                "y": 352
+            },
+            "Data Room (Diffusion Missiles)": {
+                "x": 640,
+                "y": 224
+            },
+            "Drain Pipe (Hidden Missile Tank)": {
+                "x": 512,
+                "y": 224
+            },
+            "Level 4 Security Room (L4 Locks)": {
+                "x": 128,
+                "y": 480
+            },
+            "Pump Control Unit (Missile Tank)": {
+                "x": 32,
+                "y": 224
+            },
+            "Reservoir East (Hidden Power Bomb Tank)": {
+                "x": 416,
+                "y": 224
+            },
+            "Reservoir Vault (Lower Missile Tank)": {
+                "x": 480,
+                "y": 96
+            },
+            "Reservoir Vault (Upper Missile Tank)": {
+                "x": 448,
+                "y": 64
+            },
+            "Sanctuary Cache (Hidden Energy Tank)": {
+                "x": 224,
+                "y": 480
+            },
+            "Serris Arena (Speed Booster)": {
+                "x": 352,
+                "y": 32
+            },
+            "Waterway (Underwater Missile Tank)": {
+                "x": 320,
+                "y": 224
+            },
+            "Yard Firing Range (Missile Tank)": {
+                "x": 384,
+                "y": 288
+            }
+        }
+    },
+    "Sector 5 (ARC)": {
+        "map": "Sector5.png",
+        "region": "Sector 5 (ARC)",
+        "locations": {
+            "Crow's Nest (Hidden Power Bomb Tank)": {
+                "x": 384,
+                "y": 32
+            },
+            "Data Room (Power Bomb Data)": {
+                "x": 416,
+                "y": 160
+            },
+            "E-Tank Mimic Den (Hidden Energy Tank)": {
+                "x": 416,
+                "y": 224
+            },
+            "Flooded Airlock to Sector 4 (AQA) (Power Bomb Tank)": {
+                "x": 672,
+                "y": 224
+            },
+            "Gerubus Gully (Hidden Missile Tank)": {
+                "x": 192,
+                "y": 128
+            },
+            "Level 3 Security Room (L3 Locks)": {
+                "x": 224,
+                "y": 320
+            },
+            "Magic Box (Missile Tank)": {
+                "x": 128,
+                "y": 128
+            },
+            "Mini-Fridge (Energy Tank)": {
+                "x": 512,
+                "y": 224
+            },
+            "Nightmare Arena (Gravity Suit)": {
+                "x": 736,
+                "y": 192
+            },
+            "Nightmare Hub (Hidden Power Bomb Tank)": {
+                "x": 608,
+                "y": 128
+            },
+            "Nightmare Nook (Energy Tank)": {
+                "x": 736,
+                "y": 128
+            },
+            "Ripper Road (Power Bomb Tank)": {
+                "x": 224,
+                "y": 160
+            },
+            "Ripper's Treasure (Power Bomb Tank)": {
+                "x": 288,
+                "y": 224
+            },
+            "Ruined Break Room (Hidden Power Bomb Tank)": {
+                "x": 576,
+                "y": 160
+            },
+            "Security Shaft East (Power Bomb Tank)": {
+                "x": 256,
+                "y": 352
+            },
+            "Training Aerie (Missile Tank)": {
+                "x": 192,
+                "y": 32
+            },
+            "Training Aerie (Power Bomb Tank)": {
+                "x": 160,
+                "y": 32
+            },
+            "Transmutation Trial (Hidden Missile Tank)": {
+                "x": 480,
+                "y": 256
+            }
+        }
+    },
+    "Sector 6 (NOC)": {
+        "map": "Sector6.png",
+        "region": "Sector 6 (NOC)",
+        "locations": {
+            "Catacombs (Energy Tank)": {
+                "x": 224,
+                "y": 256
+            },
+            "Entrance Lobby (Missile Tank)": {
+                "x": 192,
+                "y": 96
+            },
+            "Missile Mimic Lodge (Missile Tank)": {
+                "x": 480,
+                "y": 96
+            },
+            "Pillar Highway (Energy Tank)": {
+                "x": 480,
+                "y": 128
+            },
+            "Spaceboost Alley (Power Bomb Tank 2)": {
+                "x": 64,
+                "y": 192
+            },
+            "Spaceboost Alley (Power Bomb Tank)": {
+                "x": 128,
+                "y": 128
+            },
+            "Twin Caverns West (Hidden Missile Tank)": {
+                "x": 352,
+                "y": 288
+            },
+            "Twin Caverns West (Missile Tank)": {
+                "x": 384,
+                "y": 320
+            },
+            "Varia Core-X Arena (Varia Suit)": {
+                "x": 384,
+                "y": 352
+            },
+            "Vault (Energy Tank)": {
+                "x": 256,
+                "y": 96
+            },
+            "X-B.O.X. Arena (Wave Beam)": {
+                "x": 288,
+                "y": 192
+            },
+            "X-B.O.X. Garage (Hidden Power Bomb Tank)": {
+                "x": 320,
+                "y": 160
+            },
+            "X-B.O.X. Garage (Missile Tank)": {
+                "x": 352,
+                "y": 192
+            },
+            "Zozoro Wine Cellar (Hidden Missile Tank)": {
+                "x": 192,
+                "y": 352
+            }
+        }
+    }
+}

@@ -5,7 +5,7 @@ def is_game_map_supported(game_id: str) -> bool:
         case "dread":
             return False
         case "fusion":
-            return False
+            return True
         case "prime1":
             return False
         case "prime2":
