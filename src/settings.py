@@ -13,6 +13,7 @@ DEFAULT_SETTINGS: Final[dict[str, OptionType]] = {
     "dark_mode": True,
     "text_size": 12,
     "confirm_map_change": True,
+    "resize_on_map_change": True,
 }
 
 
