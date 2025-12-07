@@ -13,6 +13,7 @@ class MapWindow(QtWidgets.QMainWindow):
     scroll_area: QtWidgets.QScrollArea
     maps: dict[str, QtGui.QPixmap]
     confirm_change: bool
+    auto_resize: bool
 
     def __init__(self):
         super().__init__()
@@ -21,6 +22,7 @@ class MapWindow(QtWidgets.QMainWindow):
 
         self.settings = Settings()
         self.confirm_change = self.settings.get_option("confirm_map_change")
+        self.auto_resize = self.settings.get_option("resize_on_map_change")
 
         self.setWindowTitle("Map")
 
@@ -47,6 +49,13 @@ class MapWindow(QtWidgets.QMainWindow):
         confirm_change_action.triggered.connect(self.toggle_confirm)
         options_menu.addAction(confirm_change_action)
 
+        auto_resize_action = QtGui.QAction("Auto Resize Window", self)
+        auto_resize_action.setStatusTip("Resizes the window whenever a map is selected.")
+        auto_resize_action.setCheckable(True)
+        auto_resize_action.setChecked(self.auto_resize)
+        auto_resize_action.triggered.connect(self.toggle_auto_resize)
+        options_menu.addAction(auto_resize_action)
+
     def draw_pickup_to_map(self, map_name: str, pickup_image: QtGui.QPixmap, x: int, y: int) -> None:
         painter = QtGui.QPainter(self.maps[map_name])
         painter.drawPixmap(x, y, pickup_image)
@@ -58,7 +67,8 @@ class MapWindow(QtWidgets.QMainWindow):
         self.scroll_area.setWidget(image_label)
 
         map_size = self.maps[map_key].size()
-        self.resize(map_size.width() + 10, map_size.height() + 10)
+        if self.auto_resize:
+            self.resize(map_size.width() + 10, map_size.height() + 10)
         self.current_map = map_key
 
     def load_maps(self, world: World) -> None:
@@ -126,6 +136,10 @@ class MapWindow(QtWidgets.QMainWindow):
     def toggle_confirm(self):
         self.confirm_change = not self.confirm_change
         self.settings.write_option("confirm_map_change", self.confirm_change)
+
+    def toggle_auto_resize(self):
+        self.auto_resize = not self.auto_resize
+        self.settings.write_option("resize_on_map_change", self.auto_resize)
 
     # Override
     def closeEvent(self, event: QtGui.QCloseEvent):
