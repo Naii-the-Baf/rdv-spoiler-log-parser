@@ -25,3 +25,5 @@ Unix: `source .venv/bin/activate`
 Metroid Prime 2: Echoes maps sourced from [retropixel.net](https://metroid.retropixel.net/games/mprime2/maps.php), edited by loohhoo.
 
 Metroid Prime 2: Echoes item icons sourced from Randovania.
+
+Metroid Fusion item icons by bariasu, AbyssalCreature, jakoliath and Raddley Vance, licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
