@@ -219,6 +219,16 @@ class MainWindow(QtWidgets.QMainWindow):
         label = QtWidgets.QLabel("Metroid Prime 2: Echoes item icons sourced from randovania.")
         dialog_layout.addWidget(label)
 
+        label = QtWidgets.QLabel(
+            "Metroid Fusion item icons by bariasu, AbyssalCreature, jakoliath and Raddley Vance, licensed under"
+            '<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>',
+            textFormat=QtCore.Qt.TextFormat.RichText,
+            alignment=QtCore.Qt.AlignmentFlag.AlignCenter,
+            openExternalLinks=True,
+            textInteractionFlags=QtCore.Qt.TextInteractionFlag.TextBrowserInteraction,
+        )
+        dialog_layout.addWidget(label)
+
         dialog.setLayout(dialog_layout)
         dialog.exec()
 
