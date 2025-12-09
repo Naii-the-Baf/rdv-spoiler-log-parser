@@ -4,6 +4,7 @@ from collections import defaultdict
 
 from PySide6 import QtCore, QtGui, QtWidgets
 
+from gui.notification_dialog import NotificationDialog
 from settings import Settings
 from util import get_assets_path
 from world import World
@@ -14,6 +15,7 @@ class MapWindow(QtWidgets.QMainWindow):
     maps: dict[str, QtGui.QPixmap]
     confirm_change: bool
     auto_resize: bool
+    scale: float
 
     def __init__(self):
         super().__init__()
@@ -23,6 +25,7 @@ class MapWindow(QtWidgets.QMainWindow):
         self.settings = Settings()
         self.confirm_change = self.settings.get_option("confirm_map_change")
         self.auto_resize = self.settings.get_option("resize_on_map_change")
+        self.scale = self.settings.get_option("map_scale")
 
         self.setWindowTitle("Map")
 
@@ -56,19 +59,30 @@ class MapWindow(QtWidgets.QMainWindow):
         auto_resize_action.triggered.connect(self.toggle_auto_resize)
         options_menu.addAction(auto_resize_action)
 
+        scale_action = QtGui.QAction("Map Scale", self)
+        scale_action.setStatusTip("Rescale the map.")
+        scale_action.triggered.connect(self.change_map_scale_dialog)
+        options_menu.addAction(scale_action)
+
     def draw_pickup_to_map(self, map_name: str, pickup_image: QtGui.QPixmap, x: int, y: int) -> None:
         painter = QtGui.QPainter(self.maps[map_name])
         painter.drawPixmap(x, y, pickup_image)
         painter.end()
 
     def draw_map(self, map_key: str) -> None:
+        map_size = self.maps[map_key].size()
+        scaled_map = self.maps[map_key].scaled(
+            int(map_size.width() * self.scale),
+            int(map_size.height() * self.scale),
+            QtCore.Qt.AspectRatioMode.KeepAspectRatio,
+        )
+
         image_label = QtWidgets.QLabel()
-        image_label.setPixmap(self.maps[map_key])
+        image_label.setPixmap(scaled_map)
         self.scroll_area.setWidget(image_label)
 
-        map_size = self.maps[map_key].size()
         if self.auto_resize:
-            self.resize(map_size.width() + 10, map_size.height() + 10)
+            self.resize(scaled_map.width() + 20, scaled_map.height() + 20)
         self.current_map = map_key
 
     def load_maps(self, world: World) -> None:
@@ -133,6 +147,28 @@ class MapWindow(QtWidgets.QMainWindow):
         dialog.setLayout(dialog_layout)
         dialog.exec()
 
+    def change_map_scale_dialog(self):
+        dialog = QtWidgets.QDialog(self)
+        dialog.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
+        dialog.setWindowTitle("Map size")
+        dialog_layout = QtWidgets.QVBoxLayout()
+
+        label = QtWidgets.QLabel("Select a map scale.")
+        dialog_layout.addWidget(label)
+
+        text_edit_area = QtWidgets.QLineEdit(str(self.scale), dialog)
+        text_edit_area.setValidator(QtGui.QDoubleValidator(0.5, 3.0, 1, text_edit_area))
+        text_edit_area.returnPressed.connect(lambda: self.change_scale(float(text_edit_area.text())))
+        dialog_layout.addWidget(text_edit_area)
+
+        button_values = QtWidgets.QDialogButtonBox.StandardButton.Apply
+        button_box = QtWidgets.QDialogButtonBox(button_values)
+        button_box.clicked.connect(lambda: self.change_scale(float(text_edit_area.text())))
+        dialog_layout.addWidget(button_box)
+
+        dialog.setLayout(dialog_layout)
+        dialog.exec()
+
     def toggle_confirm(self):
         self.confirm_change = not self.confirm_change
         self.settings.write_option("confirm_map_change", self.confirm_change)
@@ -140,6 +176,18 @@ class MapWindow(QtWidgets.QMainWindow):
     def toggle_auto_resize(self):
         self.auto_resize = not self.auto_resize
         self.settings.write_option("resize_on_map_change", self.auto_resize)
+
+    def change_scale(self, scale: float):
+        if scale < 0.5 or scale > 3.0:
+            NotificationDialog.show(
+                "Error",
+                "Invalid map scale; allowed scales are between 0.5x and 3x.",
+            )
+            return
+
+        self.scale = scale
+        self.settings.write_option("map_scale", self.scale)
+        self.draw_map(self.current_map)
 
     # Override
     def closeEvent(self, event: QtGui.QCloseEvent):
