@@ -12,7 +12,7 @@ type OptionType = bool | int | float | str
 DEFAULT_SETTINGS: Final[dict[str, OptionType]] = {
     "dark_mode": True,
     "text_size": 12,
-    "confirm_map_change": True,
+    "confirm_map_change": False,
     "resize_on_map_change": True,
     "map_scale": 1.0,
 }
