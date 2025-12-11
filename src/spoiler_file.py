@@ -4,7 +4,8 @@ import json
 from enum import Enum
 from pathlib import Path
 
-from randovania.layout.layout_description import InvalidLayoutDescription, LayoutDescription  # type: ignore
+# from randovania.layout import game_patches_serializer
+from randovania.layout.layout_description import InvalidLayoutDescription, LayoutDescription
 
 from world import World
 
@@ -50,8 +51,9 @@ class SpoilerFile:
             self.set_world_names()
 
         worlds = list()
-        for world in self.layout._serialized_patches:
-            worlds.append(World(world))
+        for serialized, patches in zip(self.layout._serialized_patches, self.layout.all_patches.values()):
+            # serialized = game_patches_serializer.serialize_single(index, len(self.layout.all_patches), patches)
+            worlds.append(World(serialized, patches))
         return worlds
 
 
