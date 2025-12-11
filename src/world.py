@@ -1,6 +1,9 @@
 import re
 from collections import defaultdict
 
+from randovania.exporter import item_names  # type: ignore
+from randovania.game_description.game_patches import GamePatches  # type: ignore
+
 from games import get_game_by_id
 from games.game import Game, NotSupportedGame
 from gui.notification_dialog import NotificationDialog
@@ -9,25 +12,14 @@ from gui.notification_dialog import NotificationDialog
 class World:
     items: list[dict]
 
-    def __init__(self, world: dict):
-        self.game_id: str = world["game"]
-        self.game: Game = NotSupportedGame()
-        self.items = world["locations"]
-        self.starting: list[str] = ["Unknown"]
-        self.starting_location: tuple[str, str] = ("Unknown", "")
-
-        if "starting_equipment" in world:
-            # print(world["starting_equipment"])
-            try:
-                # At some point, this changed and now there's two places where our starting items can be
-                self.starting = world["starting_equipment"]["items"]
-            except KeyError:
-                self.starting = world["starting_equipment"]["pickups"]
-
-        if "starting_location" in world:
-            self.starting_location = re.split(r"\/", world["starting_location"])[:2]  # type: ignore
-
-        self.game = get_game_by_id(self.game_id)
+    def __init__(self, serialized: dict, patches: GamePatches):
+        self.game_id: str = patches.game.game.value
+        self.game: Game = get_game_by_id(self.game_id)
+        self.items = serialized["locations"]
+        self.starting: list[str] = item_names.additional_starting_equipment(
+            patches.configuration, patches.game, patches
+        )
+        self.starting_location: tuple[str, str] = (patches.starting_location.region, patches.starting_location.area)
 
     def get_item_locations(self) -> dict[str, dict]:
         # If we're on a not supported game, handle things extra
