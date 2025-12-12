@@ -5,7 +5,7 @@ from enum import Enum
 from pathlib import Path
 
 # from randovania.layout import game_patches_serializer
-from randovania.layout.layout_description import InvalidLayoutDescription, LayoutDescription
+from randovania.layout.layout_description import InvalidLayoutDescription, LayoutDescription  # type: ignore
 
 from world import World
 

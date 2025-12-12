@@ -1,8 +1,8 @@
 import re
 from collections import defaultdict
 
-from randovania.exporter import item_names
-from randovania.game_description.game_patches import GamePatches
+from randovania.exporter import item_names  # type: ignore
+from randovania.game_description.game_patches import GamePatches  # type: ignore
 
 from games import get_game_by_id
 from games.game import Game, NotSupportedGame
