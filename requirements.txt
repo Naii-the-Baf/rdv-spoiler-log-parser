@@ -11,7 +11,7 @@ construct==2.10.70
 cryptography==46.0.3
 dulwich==0.24.7
 frozendict==2.4.6
-frozenlist==1.7.0
+frozenlist==1.8.0
 h11==0.16.0
 idna==3.11
 json-delta==2.0.2
