@@ -203,7 +203,7 @@ class MainWindow(QtWidgets.QMainWindow):
         label = QtWidgets.QLabel("RDV Spoiler Log Parser v3.1.3", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         dialog_layout.addWidget(label)
 
-        label = QtWidgets.QLabel("Using randovania 10.9.0 stable", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
+        label = QtWidgets.QLabel("Using randovania 10.10.0 stable", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         dialog_layout.addWidget(label)
 
         label = QtWidgets.QLabel(

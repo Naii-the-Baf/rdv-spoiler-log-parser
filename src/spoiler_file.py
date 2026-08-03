@@ -51,7 +51,7 @@ class SpoilerFile:
             self.set_world_names()
 
         worlds = list()
-        for serialized, patches in zip(self.layout._serialized_patches, self.layout.all_patches.values()):
+        for serialized, patches in zip(self.layout._serialized_patches, self.layout.all_patches):
             # serialized = game_patches_serializer.serialize_single(index, len(self.layout.all_patches), patches)
             worlds.append(World(serialized, patches))
         return worlds
