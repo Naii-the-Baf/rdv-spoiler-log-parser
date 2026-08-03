@@ -200,10 +200,10 @@ class MainWindow(QtWidgets.QMainWindow):
         dialog.setWindowTitle("About")
         dialog_layout = QtWidgets.QVBoxLayout()
 
-        label = QtWidgets.QLabel("RDV Spoiler Log Parser v3.1.2", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
+        label = QtWidgets.QLabel("RDV Spoiler Log Parser v3.1.3", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         dialog_layout.addWidget(label)
 
-        label = QtWidgets.QLabel("Using randovania 10.3.2 stable", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
+        label = QtWidgets.QLabel("Using randovania 10.10.0 stable", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         dialog_layout.addWidget(label)
 
         label = QtWidgets.QLabel(
