@@ -10,7 +10,7 @@ bitstruct==8.22.1
 certifi==2026.7.22
 cffi==2.1.0
 construct==2.10.70
-cryptography==48.0.0
+cryptography==48.0.1
 Cython==3.2.9
 dulwich==1.2.12
 frozendict==2.4.7
